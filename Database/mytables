@@ -1,0 +1,27 @@
+create table Card
+(
+Id int not null,
+Value int not null
+primary key (id)
+)
+
+--table Trip has to be created first
+
+create table Passenger
+(
+Id int not null,
+Username varchar(50),
+Fname varchar(50),
+Mname varchar(50),
+Lname varchar(50),
+Address varchar(50),
+Gender char,
+Phone varchar(50),
+Password varchar(50),
+Tripid int ,
+Cardid int,
+primary key(id),
+Foreign key(Tripid) references Trip,  --take relation
+Foreign key (Cardid) references Card  --has relation
+)
+
