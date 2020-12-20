@@ -24,4 +24,4 @@ primary key(id),
 Foreign key(Tripid) references Trip,  --take relation
 Foreign key (Cardid) references Card  --has relation
 )
-
+--check
