@@ -24,4 +24,33 @@ primary key(id),
 Foreign key(Tripid) references Trip,  --take relation
 Foreign key (Cardid) references Card  --has relation
 )
+create table trip
+(
+destination varchar(50) not null,
+startingDate date,
+duration int not null,
+startingLocation varchar(50) not null,
+cost int not null,
+id int,
+stationId int,
+Foreign key (stationId) references station,
+primary key (id),
+)
+
+create table vehicle
+(
+	id int,
+	needToReapair BIT not null,
+	no_passengers int not null,
+	model varchar(50) not null,
+	no_currentPassengers int,
+	vehicleType archar(50) not null,
+	tripId int,
+	stationId int,
+	mechanicId int,
+	primary key (id),
+	Foreign key (tripId) references trip,
+	Foreign key (stationId) references station,
+	Foreign key (mechanicId) references mechanic,
+)
 
