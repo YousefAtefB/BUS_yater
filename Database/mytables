@@ -1,3 +1,36 @@
+create table station (
+id int NOT NULL,
+location varchar(50),
+no_vehicles int ,
+Primary key(id),
+)
+
+create table booking_employee (
+id int NOT NULL,
+name varchar(50) NOT NULL,
+salary int ,
+address varchar(50),
+username varchar(30) NOT NULL,
+password varchar(30) NOT NULL,
+Primary key(id),
+Foreign key (stationId) reference station (id)
+ON DELETE SET NULL 
+ON UPDATE CASCADE,
+)
+
+create table analyst (
+id int NOT NULL,
+name varchar(50) NOT NULL,
+salary int,
+address varchar(50),
+username varchar(30) NOT NULL,
+password varchar(30)NOT NULL,
+Primary key(id),
+Foreign key (stationId) reference station (id)
+ON DELETE CASCADE 
+ON UPDATE CASCADE,
+)
+
 create table Card
 (
 Id int not null,
