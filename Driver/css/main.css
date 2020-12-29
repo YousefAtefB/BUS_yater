@@ -1,0 +1,8 @@
+.album
+{
+    background-position: center;
+    background-size: cover;
+    height: 700px;
+}
+.row{overflow: auto;}
+#idspan,#tspan{color: #888785;}
