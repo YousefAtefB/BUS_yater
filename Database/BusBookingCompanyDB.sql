@@ -53,6 +53,7 @@ create table paymentCard
 create table trip
 (
 	id int,
+	source varchar(50) not null,
 	destination varchar(50) not null,
 	startingDate date,
 	duration int not null,

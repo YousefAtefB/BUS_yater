@@ -17,7 +17,7 @@ values
 	(322157, 100)
 insert into trip
 values
-	(601871, 'florida', '2020-10-10', 3, 100)
+	(601871,'tokyo', 'florida', '2020-10-10', 3, 100)
 insert into Passenger
 values
 	(540413, 'Stan', 'Kris', 'm', '+201109338669', 'effertzprice', 'fAI9P2ZE4h', 601871, 322157)
