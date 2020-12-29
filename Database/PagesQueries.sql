@@ -8,6 +8,13 @@ Select *
 From trip
 Where source = 'tokyo' and destination = 'florida'
 
+Update vehicle
+Set no_passengers = no_passengers + 1
+Where id = 725864
+
+Update vehicle
+Set no_passengers = no_passengers - 1
+Where id = 725864
 -----------------------------------
 --driver page
 
