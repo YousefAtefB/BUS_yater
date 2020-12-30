@@ -32,7 +32,7 @@ create table analyst
 	firstName varchar(50) NOT NULL,
 	lastName varchar(50) NOT NULL,
 	gender char NOT NULL,
-	homehomeAddress varchar(50),
+	homeAddress varchar(50),
 	salary int,
 	username varchar(30) NOT NULL,
 	userpassword varchar(30)NOT NULL,
@@ -53,10 +53,9 @@ create table paymentCard
 create table trip
 (
 	id int,
-	source varchar(50) not null,
 	destination varchar(50) not null,
 	startingDate date,
-	duration int not null,
+	duration float not null,
 	cost int not null,
 	primary key (id),
 )
