@@ -6,15 +6,15 @@ Go
 --get all possible trips
 Select *
 From trip As T , vehicle As V , station As S
-Where V.tripId=T.id And V.stationId = S.id And S.location = 'x'
+Where V.tripId=T.id And V.stationId = S.id And S.location = 'x' And T.destination = 'y'
 
 Update vehicle
 Set no_currentPassengers =no_currentPassengers +1
-Where id = 725864
+Where id = 0
 
 Update vehicle
 Set no_currentPassengers =no_currentPassengers -1
-Where id = 725864
+Where id = 0
 -----------------------------------
 --driver page
 
