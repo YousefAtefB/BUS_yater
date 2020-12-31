@@ -5,15 +5,15 @@ Go
 
 --get all possible trips
 Select *
-From trip
-Where source = 'tokyo' and destination = 'florida'
+From trip As T , vehicle As V , station As S
+Where V.tripId=T.id And V.stationId = S.id And S.location = 'x'
 
 Update vehicle
-Set no_passengers = no_passengers + 1
+Set no_currentPassengers =no_currentPassengers +1
 Where id = 725864
 
 Update vehicle
-Set no_passengers = no_passengers - 1
+Set no_currentPassengers =no_currentPassengers -1
 Where id = 725864
 -----------------------------------
 --driver page
@@ -21,13 +21,13 @@ Where id = 725864
 --get the details of the driver's vehicle using the username
 Select V.id,V.vehicleType
 From vehicle as V,driver as D
-Where V.driverId=D.id And D.username = 'cynthia12'
+Where V.driverId=D.id And D.username = '0'
 
 --update the driver's vehicle to needrepairing by mechanics
 Update vehicle
 Set needToReapair = 1
-From vehicle as V,driver as D
-Where V.driverId=D.id And D.username = 'cynthia12'
+From vehicle
+Where id=0
 
 --sign in page
 
