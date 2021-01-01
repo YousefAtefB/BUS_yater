@@ -25,23 +25,6 @@ var server = app.listen(8080, () => console.log('listening...'));
 
 var lastResult = [];
 
-app.get('/logIn', (request, response) => {
-	//this tamplate is for queries that doesn't have prameters you can replace logIn with appropiate name
-	(async (request, response) => {
-		try {
-			//your logic
-			let query = 'SELECT * from Employee'; //the query
-			let sqlServer = await sql.connect(config);
-			let queryResult = await sqlServer.request().query(query);
-			//----------------------------------
-			lastResult = queryResult.recordsets[0];
-			response.send(queryResult.recordsets[0]);
-		} catch (error) {
-			console.log(error);
-		}
-	})(request, response);
-});
-
 app.post('/CheckLogIn', (request, response) => {
 	//this tamplate is for queries that have prameters you can replace CheckLogIn with appropiate name
 	(async (request, response) => {
@@ -192,4 +175,106 @@ app.post('/SingUp', (request, response) => {
 	})(request, response);
 });
 
+app.post('/mechanicFixedTheVechile', (request, response) => {
+	(async (request, response) => {
+		let recivedData = request.body;
+		try {
+			let query = `
+				Update vehicle
+				Set needToReapair = 0
+				Where id = ${recivedData.id}`;
+			let sqlServer = await sql.connect(config);
+			let queryResult = await sqlServer.request().query(query);
+			query = `
+				Delete fix
+				from vehicle As V,mechanic As M,fix As F
+				where F.mechanicId = M.id And F.vechicleId =  V.id And V.needToReapair = 0`;
+			lqueryResult = await sqlServer.request().query(query);
+			lastResult = queryResult.recordsets[0];
+			response.send(queryResult.recordsets[0]);
+		} catch (error) {
+			console.log(error);
+		}
+	})(request, response);
+});
 
+app.post('/mechanicAssigendVechile', (request, response) => {
+	(async (request, response) => {
+		let recivedData = request.body;
+		try {
+			let query = `
+			Select V.id,V.vehicleType
+			From  vehicle As V,mechanic As M,fix As F
+			Where F.mechanicId = M.id And F.vechicleId =  V.id And V.needToReapair = 1 And M.id =${recivedData.id}`;
+			let sqlServer = await sql.connect(config);
+			let queryResult = await sqlServer.request().query(query);
+			lastResult = queryResult.recordsets[0];
+			response.send(queryResult.recordsets[0]);
+		} catch (error) {
+			console.log(error);
+		}
+	})(request, response);
+});
+
+app.post('/CheckLogIn', (request, response) => {
+	//this tamplate is for queries that have prameters you can replace CheckLogIn with appropiate name
+	(async (request, response) => {
+		let recivedData = request.body;
+		try {
+			let query = `SELECT * from Passenger 
+			where username='${recivedData.username}' and userpassword='${recivedData.userpassword}'`; //the query
+			let sqlServer = await sql.connect(config);
+			let queryResult = await sqlServer.request().query(query);
+			lastResult = queryResult.recordsets[0];
+			if (lastResult.length == 0) {
+				query = `SELECT * from bookingEmployee 
+				where username='${recivedData.username}' and userpassword='${recivedData.userpassword}'`; //the query
+				queryResult = await sqlServer.request().query(query);
+				lastResult = queryResult.recordsets[0];
+				if (lastResult.length == 0) {
+					query = `SELECT * from analyst 
+					where username='${recivedData.username}' and userpassword='${recivedData.userpassword}'`; //the query
+					queryResult = await sqlServer.request().query(query);
+					lastResult = queryResult.recordsets[0];
+					if (lastResult.length == 0) {
+						if (lastResult.length == 0) {
+							query = `SELECT * from driver 
+							where username='${recivedData.username}' and userpassword='${recivedData.userpassword}'`; //the query
+							queryResult = await sqlServer
+								.request()
+								.query(query);
+							lastResult = queryResult.recordsets[0];
+							if (lastResult.length == 0) {
+								query = `SELECT * from mechanic 
+								where username='${recivedData.username}' and userpassword='${recivedData.userpassword}'`; //the query
+								queryResult = await sqlServer
+									.request()
+									.query(query);
+								lastResult = queryResult.recordsets[0];
+								if (lastResult.length != 0) {
+									lastResult[1] = 'mechanic';
+								}
+								response.send(lastResult);
+								return;
+							}
+							lastResult[1] = 'driver';
+							response.send(lastResult);
+							return;
+						}
+					}
+					lastResult[1] = 'analyst';
+					response.send(lastResult);
+					return;
+				}
+				lastResult[1] = 'bookingEmployee';
+				response.send(lastResult);
+				return;
+			}
+			lastResult[1] = 'passenger';
+			response.send(lastResult);
+			return;
+		} catch (error) {
+			console.log(error);
+		}
+	})(request, response);
+});
