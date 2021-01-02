@@ -25,24 +25,6 @@ var server = app.listen(8080, () => console.log('listening...'));
 
 var lastResult = [];
 
-app.post('/CheckLogIn', (request, response) => {
-	//this tamplate is for queries that have prameters you can replace CheckLogIn with appropiate name
-	(async (request, response) => {
-		let recivedData = request.body;
-		try {
-			//your logic
-			let query = `SELECT * from Employee where SSN=${recivedData.SSN}`; //the query
-			let sqlServer = await sql.connect(config);
-			let queryResult = await sqlServer.request().query(query);
-			//----------------------------------
-			lastResult = queryResult.recordsets[0];
-			response.send(queryResult.recordsets[0]);
-		} catch (error) {
-			console.log(error);
-		}
-	})(request, response);
-});
-
 app.post('/BookingEmployeeSearch', (request, response) => {
 	//this tamplate is for queries that have prameters you can replace CheckLogIn with appropiate name
 	(async (request, response) => {
@@ -153,7 +135,7 @@ app.post('/DriverToBeRepaired', (request, response) => {
 	})(request, response);
 });
 
-app.post('/SingUp', (request, response) => {
+app.post('/SignUp', (request, response) => {
 	//this tamplate is for queries that have prameters you can replace CheckLogIn with appropiate name
 	(async (request, response) => {
 		let recivedData = request.body;
