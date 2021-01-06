@@ -202,4 +202,13 @@ async function vechilesThatMechanicFixes() {
 	//-------------------------------
 }
 
-
+async function lastSignedIn() {
+	//data to be sent
+	//nothing
+	//--------------------------------
+	let response = await fetch('http://127.0.0.1:8080/lastSignedIn');
+	let resivedData = await response.json();
+	//display the data
+	console.log(resivedData);
+	//------------------
+}
