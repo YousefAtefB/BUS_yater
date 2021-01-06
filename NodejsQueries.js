@@ -1,11 +1,12 @@
+//lt --port 9000 --subdomain saadsqlserver
 const sql = require('mssql');
 
 var config = {
 	server: '127.0.0.1',
 	database: 'BusBookingCompany',
-	user: 'sa',
-	password: '123456',
-	port: 55703,
+	user: 'medo',
+	password: '12345678',
+	port: 58737,
 	options: {
 		trustedconnection: true,
 		enableArithAbort: true,
@@ -19,9 +20,9 @@ var app = express();
 
 app.use(express.json({ limit: '1mb' }));
 
-app.use(express.static('./BUS_yater/Hazem'));
+app.use(express.static('./'));
 
-var server = app.listen(8080, () => console.log('listening...'));
+var server = app.listen(9000, () => console.log('listening...'));
 
 var lastResult = [];
 
@@ -255,6 +256,18 @@ app.post('/CheckLogIn', (request, response) => {
 			lastResult[1] = 'passenger';
 			response.send(lastResult);
 			return;
+		} catch (error) {
+			console.log(error);
+		}
+	})(request, response);
+});
+
+
+app.get('/lastSignedIn', (request, response) => {
+	(async (request, response) => {
+		try {
+			lastResult = queryResult.recordsets[0];
+			response.send(lastResult);
 		} catch (error) {
 			console.log(error);
 		}

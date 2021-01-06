@@ -177,3 +177,17 @@ async function vechilesThatMechanicFixes() {
   console.log(resivedData);
   //-------------------------------
 }
+<<<<<<< HEAD:MiddleLayer/htmlFetch.js
+=======
+
+async function lastSignedIn() {
+	//data to be sent
+	//nothing
+	//--------------------------------
+	let response = await fetch('http://127.0.0.1:8080/lastSignedIn');
+	let resivedData = await response.json();
+	//display the data
+	console.log(resivedData);
+	//------------------
+}
+>>>>>>> 385e5a6e557fc1b7c6fc0f4bcf59bf3790dc5df9:htmlFetch.js
