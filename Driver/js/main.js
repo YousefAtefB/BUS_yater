@@ -10,7 +10,7 @@ vehicleId.innerHTML=123456;
     console.log(id);
 }*/
 
-async function lastSignedIn() {
+window.onload=async function lastSignedIn() {
 	//data to be sent
 	//nothing
 	//--------------------------------
@@ -20,9 +20,9 @@ async function lastSignedIn() {
 	arr=resivedData;
 	//------------------
 }
-lastSignedIn();
 
-async function DriverVehicle() {
+
+window.onload=async function DriverVehicle() {
 	//data to be sent
 	let dataToSend = {
 		username: arr["username"]   //driver username
@@ -45,7 +45,7 @@ async function DriverVehicle() {
 	//-------------------------------
 }
 
-DriverVehicle();
+;
 
 BTN.onclick =async function DriverToBeRepaired() {
 	//data to be sent
@@ -65,6 +65,6 @@ BTN.onclick =async function DriverToBeRepaired() {
 	);
 	let resivedData = await response.json();
 	//display the data
-	console.log(resivedData);
+
 	//-------------------------------
 }*/
