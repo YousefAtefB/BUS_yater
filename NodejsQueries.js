@@ -100,7 +100,7 @@ app.post('/DriverVehicle', (request, response) => {
 			let query = `
 			Select V.id,V.vehicleType
 			From vehicle as V,driver as D
-			Where V.driverId=D.id And D.username = ${recivedData.username}
+			Where V.driverId=D.id And D.username = '${recivedData.username}'
 			`; //the query
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
@@ -136,16 +136,41 @@ app.post('/DriverToBeRepaired', (request, response) => {
 	})(request, response);
 });
 
+function getRandomInt(min, max) {
+	//including min not including max
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min) + min);
+}
+function getRandomId() {
+	//9 digits
+	temp = '';
+	i = 0;
+	while (i < 9) {
+		temp += getRandomInt(0, 10);
+		i++;
+	}
+	return parseInt(temp);
+}
 app.post('/SignUp', (request, response) => {
 	//this tamplate is for queries that have prameters you can replace CheckLogIn with appropiate name
 	(async (request, response) => {
 		let recivedData = request.body;
 		try {
 			//your logic
+			tripid='NULL';
+			cardid=getRandomId();
+			let query = `
+			Insert Into paymentCard
+			Values (${cardid},0)			
+			`; //the query
+			let sqlServer = await sql.connect(config);
+			let queryResult = await sqlServer.request().query(query);
+
 			let query = `
 			Insert Into Passenger
 			Values (${recivedData.id},'${recivedData.firstName}','${recivedData.lastName}', '${recivedData.gender}'
-			,'${recivedData.phone}','${recivedData.username}','${recivedData.userpassword}',${recivedData.tripid},${recivedData.cardid})			
+			,'${recivedData.phone}','${recivedData.username}','${recivedData.userpassword}',${tripid},${cardid})			
 			`; //the query
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
@@ -157,6 +182,7 @@ app.post('/SignUp', (request, response) => {
 		}
 	})(request, response);
 });
+
 
 app.post('/mechanicFixedTheVechile', (request, response) => {
 	(async (request, response) => {
@@ -266,7 +292,6 @@ app.post('/CheckLogIn', (request, response) => {
 app.get('/lastSignedIn', (request, response) => {
 	(async (request, response) => {
 		try {
-			lastResult = queryResult.recordsets[0];
 			response.send(lastResult);
 		} catch (error) {
 			console.log(error);
