@@ -83,14 +83,7 @@
           placeholder="Gender"
           required
         />
-        <label for="inputCardId" class="visually-hidden">CardId</label>
-        <input
-          type="text"
-          id="inputCardId"
-          class="form-control"
-          placeholder="CardId"
-          required
-        />
+
         <label for="inputUsername" class="visually-hidden">Username</label>
         <input
           type="text"
@@ -156,9 +149,9 @@
       let Gender = document.getElementById("Gender");
       let userName = document.getElementById("inputusername");
       let Password = document.getElementById("inputPassword");
-      let CardId = document.getElementById("inputCardId");
+
       let sumbit = document.getElementById("SumbitButton");
-      let fn, ln, ad, ph, g, un, pass, ci;
+      let fn, ln, ad, ph, g, un, pass;
       sumbit.addEventListener("click", () => {
         fn = inputfirstname.value;
         ln = inputlastname.value;
@@ -167,7 +160,7 @@
         g = Gender.value;
         un = userName.value;
         pass = Password.value;
-        ci = CardId.value;
+
         SignUp();
       });
 
