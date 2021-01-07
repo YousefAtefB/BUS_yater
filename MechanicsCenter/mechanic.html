@@ -16,9 +16,6 @@
     />
     <title>MechanicsCenter</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" />
-
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -44,7 +41,7 @@
     </style>
   </head>
 
-  <body onload="lastSignedIn">
+  <body onload="lastSignedIn()">
     <header>
       <div class="navbar navbar-dark bg-dark shadow-sm">
         <div class="container">
@@ -74,37 +71,10 @@
     <main>
       <div class="album py-5 bg-light">
         <div class="container">
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <div class="col">
-              <div class="card shadow-sm">
-                <img
-                  src="Alexandria_red_double_decker_bus.jpg"
-                  alt=""
-                  width="100%"
-                  height="225"
-                />
-                <div class="card-body">
-                  <p class="card-text">
-                    Vehicle ID: <br />
-                    Vehicle type: <br />
-                    Driver ID:
-                  </p>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <div class="btn-group">
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        Checked
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <div
+            class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"
+            id="ID"
+          ></div>
         </div>
       </div>
     </main>
@@ -122,104 +92,121 @@
     </footer>
 
     <script>
-            let id;
-            async function lastSignedIn() {
-              //data to be sent
-              //nothing
-              //--------------------------------
-              let response = await fetch("http://127.0.0.1:8080/lastSignedIn");
-              let resivedData = await response.json();
-              //display the data
-              console.log(resivedData);
-              id = resivedData[0].id;
-              //------------------
-              vechilesThatMechanicFixes();
-            }
-
-            async function vechilesThatMechanicFixes() {
-              //data to be sent
-              let dataToSend = {
-                id: id, //id of the mechani
-              };
-              //--------------------------------
-              let response = await fetch(
-                "http://127.0.0.1:8080/mechanicAssigendVechile",
-                {
-                  method: "POST",
-                  body: JSON.stringify(dataToSend),
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                }
-              );
-              let resivedData = await response.json();
-              //display the data
-              console.log(resivedData);
-              //-------------------------------
-              let i;
-              let i_d;
-              for (i = 0; i < resivedData.length; i++) {
-                //---------------------------CraeteMainDivs------------------------------------------------
-                let col = document.createElement("div");
-                col.className = "col";
-                let cardSh = document.createElement("div");
-                cardSh.className = "card shadow-sm";
-                let cardb = document.createElement("div");
-                cardb.className = "card-body";
-                let d = document.createElement("div");
-                d.className = "d-flex justify-content-between align-items-center";
-                let button = document.createElement("div");
-                button.className = " btn-group";
-                button.onclick="mechanicFixedTheVechile()";
-                 i_d=button.id=resivedData[i][0];
-                //----------------------------------setChildren--------------------------------------------
-                document.body.appendChild(col);
-                col.appendChild(cardSh);
-                cardSh.appendChild(cardb);
-                cardb.appendChild(d);
-                d.appendChild(button);
-                //---------------------------------Put html inside divs-----------------------------------
-                let im = document.createElement("img");
-                img.setAttribute("src", "55976.jpg");
-                img.setAttribute("width","100%");
-                img.setAttribute("height", "225");
-                img.setAttribute("alt", "");
-                cardSh.appendChild(im);
-
-                //-------------------------------------------
-                let txt=document.createElement("p");
-                txt.className="card-text";
-                txt.innerHTML="Vehicle ID: "+ resivedData[i][1] +"<br /> Vehicle type:" + resivedData[i][2] +"<br /> Driver ID: "+ resivedData[i][8];
-                cardb.appendChild(txt);
-                //--------------------------------------------
-                let bt=document.createElement("button");
-                bt.type="button";
-                bt.className="btn btn-sm btn-outline-secondary";
-                bt.innerHTML="Checked";
-                d.appendChild(bt);
-              }
-            }
-          }
-      async function mechanicFixedTheVechile() {
+      let idA;
+      async function lastSignedIn() {
+        //data to be sent
+        //nothing
+        //--------------------------------
+        let response = await fetch(
+          "http://saadsqlserver.loca.lt//lastSignedIn"
+        );
+        let resivedData = await response.json();
+        //display the data
+        console.log(resivedData);
+        idA = resivedData[0].id;
+        console.log(idA);
+        //------------------
+        vechilesThatMechanicFixes();
+      }
+      //---------------------------------------------------------------------------------------------------------
+      async function vechilesThatMechanicFixes() {
         //data to be sent
         let dataToSend = {
-          id: i_d, //id of the bus that fixed
+          id: idA, //id of the mechani
         };
         //--------------------------------
-        let response = await fetch("http://127.0.0.1:8080/mechanicFixedTheVechile", {
-          method: "POST",
-          body: JSON.stringify(dataToSend),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        let response = await fetch(
+          "http://saadsqlserver.loca.lt//mechanicAssigendVechile",
+          {
+            method: "POST",
+            body: JSON.stringify(dataToSend),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
         let resivedData = await response.json();
         //display the data
         console.log(resivedData);
         //-------------------------------
+        let i;
+        let i_d;
+        let temp = document.getElementById("ID");
+        for (i = 0; i < resivedData.length; i++) {
+          //---------------------------CraeteMainDivs------------------------------------------------
+          let col = document.createElement("div");
+          col.className = "col";
+          let cardSh = document.createElement("div");
+          cardSh.className = "card shadow-sm";
+          let cardb = document.createElement("div");
+          cardb.className = "card-body";
+          let d = document.createElement("div");
+          d.className = "d-flex justify-content-between align-items-center";
+          let button = document.createElement("div");
+          button.className = " btn-group";
+          button.onclick = "mechanicFixedTheVechile()";
+          i_d = button.id = resivedData[i].id;
+          //----------------------------------setChildren--------------------------------------------
+          temp.appendChild(col);
+
+          //---------------------------------Put html inside divs-----------------------------------
+          let im = document.createElement("img");
+          im.setAttribute("src", "55976.jpg");
+          im.setAttribute("width", "100%");
+          im.setAttribute("height", "225");
+          im.setAttribute("alt", "");
+          cardSh.appendChild(im);
+          col.appendChild(cardSh);
+          //-------------------------------------------
+          let txt = document.createElement("p");
+          txt.className = "card-text";
+          txt.innerHTML =
+            "Vehicle ID: " +
+            resivedData[i].id +
+            "<br /> Vehicle Type: " +
+            resivedData[i].vehicleType;
+          cardb.appendChild(txt);
+          cardSh.appendChild(cardb);
+          cardb.appendChild(d);
+          //--------------------------------------------
+          let bt = document.createElement("button");
+          bt.type = "button";
+          bt.className = "btn btn-sm btn-outline-secondary";
+          bt.innerHTML = "Checked";
+          bt.id = resivedData[i].id;
+          let Bus_Id = bt.id;
+          console.log(Bus_Id);
+          bt.onclick = async function mechanicFixedTheVechile() {
+            console.log(Bus_Id);
+            //data to be sent
+            let dataToSend = {
+              id: Bus_Id, //id of the bus that fixed
+            };
+            //--------------------------------
+            let response = await fetch(
+              "http://saadsqlserver.loca.lt//mechanicFixedTheVechile",
+              {
+                method: "POST",
+                body: JSON.stringify(dataToSend),
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              }
+            );
+            let resivedData = await response.json();
+            //display the data
+            console.log(resivedData);
+            //-------------------------------
+          };
+
+          button.appendChild(bt);
+          d.appendChild(button);
+          let butt = document.getElementsByClassName;
+        }
       }
+      //-------------------------------------------------------------------------------------------------------------------------
     </script>
-    <script></script>
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
