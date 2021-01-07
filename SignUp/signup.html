@@ -147,6 +147,7 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+
     <script>
       let inputfirstname = document.getElementById("inputfirstname");
       let inputlastname = document.getElementById("inputlastname");
@@ -184,7 +185,7 @@
           cardid: ci,
         };
         //--------------------------------
-        let response = await fetch("https://saadsqlserver.loca.lt/SignUp", {
+        let response = await fetch("http://saadsqlserver.loca.lt//SignUp", {
           method: "POST",
           body: JSON.stringify(dataToSend),
           headers: {
@@ -192,11 +193,15 @@
           },
         });
         let resivedData = await response.json();
+        console.log(fn);
+        console.log(ph);
+        console.log(pass);
+
         //display the data
         console.log(resivedData);
         //-------------------------------Emad Will Add This Page---------------------------------------
         //window.location.replace("..\\passenger\\passenger.html");
-        window.location.replace("..\\Driver\\Driver.html");
+        window.location.replace("..\\Booking Employee\\BE.html");
       }
     </script>
   </body>
