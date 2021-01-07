@@ -160,6 +160,7 @@ app.post('/SignUp', (request, response) => {
 			//your logic
 			tripid='NULL';
 			cardid=getRandomId();
+			id=getRandomId();
 			let query = `
 			Insert Into paymentCard
 			Values (${cardid},0)			
@@ -169,7 +170,7 @@ app.post('/SignUp', (request, response) => {
 
 			query = `
 			Insert Into Passenger
-			Values (${recivedData.id},'${recivedData.firstName}','${recivedData.lastName}', '${recivedData.gender}'
+			Values (${id},'${recivedData.firstName}','${recivedData.lastName}', '${recivedData.gender}'
 			,'${recivedData.phone}','${recivedData.username}','${recivedData.userpassword}',${tripid},${cardid})			
 			`; //the query
 			sqlServer = await sql.connect(config);
