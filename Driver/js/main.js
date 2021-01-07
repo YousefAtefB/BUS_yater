@@ -1,8 +1,7 @@
-var vehicleId=document.getElementById("idspan"),
-    BTN=document.getElementById("btn"),
+var vehicleId = document.getElementById('idspan'),
+	BTN = document.getElementById('btn'),
 	arr;
-vehicleId.innerHTML=123456;
-
+vehicleId.innerHTML = 123456;
 
 /*BTN.onclick = function() {
     "use strict";
@@ -10,61 +9,56 @@ vehicleId.innerHTML=123456;
     console.log(id);
 }*/
 
-window.onload=async function lastSignedIn() {
+async function lastSignedIn() {
 	//data to be sent
 	//nothing
 	//--------------------------------
 	let response = await fetch('http://127.0.0.1:8080/lastSignedIn');
 	let resivedData = await response.json();
 	//display the data
-	arr=resivedData;
+	arr = resivedData;
+	arr = arr[0];
+	console.log(resivedData);
 	//------------------
 }
 
-
-window.onload=async function DriverVehicle() {
+window.onload = async function DriverVehicle() {
 	//data to be sent
+	await lastSignedIn();
 	let dataToSend = {
-		username: arr["username"]   //driver username
+		username: arr['username'], //driver username
 	};
 	//--------------------------------
-	let response = await fetch(
-		'http://127.0.0.1:8080/DriverVehicle',
-		{
-			method: 'POST',
-			body: JSON.stringify(dataToSend),
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		}
-	);
+	let response = await fetch('http://127.0.0.1:8080/DriverVehicle', {
+		method: 'POST',
+		body: JSON.stringify(dataToSend),
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	});
 	let resivedData = await response.json();
-    //display the data
-    arr=resivedData;                      //EDITED
-	vehicleId.innerHTML=arr["id"];         //EDITED
+	//display the data
+	arr = resivedData; //EDITED
+	arr = arr[0];
+	vehicleId.innerHTML = arr['id']; //EDITED
 	//-------------------------------
-}
+};
 
-;
-
-BTN.onclick =async function DriverToBeRepaired() {
+BTN.onclick = async function DriverToBeRepaired() {
 	//data to be sent
 	let dataToSend = {
-		id : vehicleId.innerText  //bus id EDITED
+		id: vehicleId.innerText, //bus id EDITED
 	};
 	//--------------------------------
-	let response = await fetch(
-		'http://127.0.0.1:8080/DriverToBeRepaired',
-		{
-			method: 'POST',
-			body: JSON.stringify(dataToSend),
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		}
-	);
+	let response = await fetch('http://127.0.0.1:8080/DriverToBeRepaired', {
+		method: 'POST',
+		body: JSON.stringify(dataToSend),
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	});
 	let resivedData = await response.json();
 	//display the data
 
 	//-------------------------------
-}*/
+};
