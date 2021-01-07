@@ -55,7 +55,7 @@ app.post('/BookingEmployeeBook', (request, response) => {
 			//your logic
 			let query = `
 			Update vehicle
-			Set no_currentPassengers =no_currentPassengers +1
+			Set no_currentPassengers = no_currentPassengers + 1
 			Where id = ${recivedData.id}
 			`; //the query
 			let sqlServer = await sql.connect(config);
@@ -167,13 +167,13 @@ app.post('/SignUp', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 
-			let query = `
+			query = `
 			Insert Into Passenger
 			Values (${recivedData.id},'${recivedData.firstName}','${recivedData.lastName}', '${recivedData.gender}'
 			,'${recivedData.phone}','${recivedData.username}','${recivedData.userpassword}',${tripid},${cardid})			
 			`; //the query
-			let sqlServer = await sql.connect(config);
-			let queryResult = await sqlServer.request().query(query);
+			sqlServer = await sql.connect(config);
+			queryResult = await sqlServer.request().query(query);
 			//----------------------------------
 			lastResult = queryResult.recordsets[0];
 			response.send(queryResult.recordsets[0]);
@@ -293,6 +293,88 @@ app.get('/lastSignedIn', (request, response) => {
 	(async (request, response) => {
 		try {
 			response.send(lastResult);
+		} catch (error) {
+			console.log(error);
+		}
+	})(request, response);
+});
+
+app.get('/allStations', (request, response) => {
+	(async (request, response) => {
+		try {
+			let query = `
+			Select DISTINCT *
+			From station
+			`; //the query
+			let sqlServer = await sql.connect(config);
+			let queryResult = await sqlServer.request().query(query);
+			//----------------------------------
+			lastResult = queryResult.recordsets[0];
+			response.send(queryResult.recordsets[0]);
+		} catch (error) {
+			console.log(error);
+		}
+	})(request, response);
+});
+
+
+app.post('/allTripsOfStation', (request, response) => {
+	//this tamplate is for queries that have prameters you can replace CheckLogIn with appropiate name
+	(async (request, response) => {
+		let recivedData = request.body;
+		try {
+			//your logic
+			let query = `Select DISTINCT *
+			From trip As T , vehicle As V , station As S
+			Where V.tripId=T.id And V.stationId = S.id And S.id = ${recivedData.id}
+			`; //the query
+			let sqlServer = await sql.connect(config);
+			let queryResult = await sqlServer.request().query(query);
+			//----------------------------------
+			lastResult = queryResult.recordsets[0];
+			response.send(queryResult.recordsets[0]);
+		} catch (error) {
+			console.log(error);
+		}
+	})(request, response);
+});
+
+app.post('/allDriversOfStation', (request, response) => {
+	//this tamplate is for queries that have prameters you can replace CheckLogIn with appropiate name
+	(async (request, response) => {
+		let recivedData = request.body;
+		try {
+			//your logic
+			let query = `Select DISTINCT D.id, D.rate, D.salary
+			From driver As D , vehicle As V , station As S
+			Where D.id = V.driverId And V.stationId = S.id And S.id = ${recivedData.id}
+			`; //the query
+			let sqlServer = await sql.connect(config);
+			let queryResult = await sqlServer.request().query(query);
+			//----------------------------------
+			lastResult = queryResult.recordsets[0];
+			response.send(queryResult.recordsets[0]);
+		} catch (error) {
+			console.log(error);
+		}
+	})(request, response);
+});
+
+app.post('/updateDriverSalary', (request, response) => {
+	//this tamplate is for queries that have prameters you can replace CheckLogIn with appropiate name
+	(async (request, response) => {
+		let recivedData = request.body;
+		try {
+			//your logic
+			let query = `
+				Update vehicle
+				Set salary = ${recivedData.salary}
+				Where id = ${recivedData.id}`;//the query
+			let sqlServer = await sql.connect(config);
+			let queryResult = await sqlServer.request().query(query);
+			//----------------------------------
+			lastResult = queryResult.recordsets[0];
+			response.send(queryResult.recordsets[0]);
 		} catch (error) {
 			console.log(error);
 		}

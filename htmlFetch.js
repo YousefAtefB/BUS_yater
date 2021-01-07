@@ -177,3 +177,84 @@ async function vechilesThatMechanicFixes() {
   console.log(resivedData);
   //-------------------------------
 }
+
+async function lastSignedIn() {
+	//data to be sent
+	//nothing
+	//--------------------------------
+	let response = await fetch('http://127.0.0.1:8080/lastSignedIn');
+	let resivedData = await response.json();
+	//display the data
+	console.log(resivedData);
+	//------------------
+}
+
+async function allStations() {
+	//data to be sent
+	//nothing
+	//--------------------------------
+	let response = await fetch('http://127.0.0.1:8080/allStations');
+	let resivedData = await response.json();
+	//display the data
+	console.log(resivedData);
+	//------------------
+}
+
+
+async function allTripsOfStation() {
+  //data to be sent
+  let dataToSend = {
+    id: 121211241, //id of the station
+  };
+  //--------------------------------
+  let response = await fetch("http://127.0.0.1:8080/allTripsOfStation", {
+    method: "POST",
+    body: JSON.stringify(dataToSend),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  let resivedData = await response.json();
+  //display the data
+  console.log(resivedData);
+  //-------------------------------
+}
+
+async function allDriversOfStation() {
+  //data to be sent
+  let dataToSend = {
+    id: 121211241, //id of the station
+  };
+  //--------------------------------
+  let response = await fetch("http://127.0.0.1:8080/allDriversOfStation", {
+    method: "POST",
+    body: JSON.stringify(dataToSend),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  let resivedData = await response.json();
+  //display the data
+  console.log(resivedData);
+  //-------------------------------
+}
+
+async function updateDriverSalary() {
+  //data to be sent
+  let dataToSend = {
+    id: 121211241, //id of the driver
+    salary: 21123 //new salary
+  };
+  //--------------------------------
+  let response = await fetch("http://127.0.0.1:8080/updateDriverSalary", {
+    method: "POST",
+    body: JSON.stringify(dataToSend),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  let resivedData = await response.json();
+  //display the data
+  console.log(resivedData);
+  //-------------------------------
+}
