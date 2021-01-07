@@ -84,6 +84,22 @@ label{color: #ffffff;}
     position: relative;
     transition: all .35s;
   }
+  .b-button,.c-button{
+    display: inline;
+    width: 100px;
+  height: 30px;
+  font-size: 15px;
+  background-color: #0563af;
+  font-family: sans-serif;
+  text-decoration: none;
+  color: rgb(250, 250, 250);
+  border: 2px solid #333;
+  letter-spacing: 2px;
+  text-align: center;
+  position: relative;
+  transition: all .35s;
+  margin: 5px;
+}
   .s-button span{
       position: relative;
       z-index: 2;
@@ -109,9 +125,8 @@ label{color: #ffffff;}
     width: 100%;
     color: #0563af;
   }
-  #b-button,#c-button{
-      display: inline;
-  }
+  
+ 
 
   #trips{
       height: 400px;
@@ -119,14 +134,16 @@ label{color: #ffffff;}
       background-color: aliceblue;
       margin: 10px;
   }
-  #t-info{margin:10px}
+  .t-info{margin:10px}
 
-  #t-info p{
+  .t-infop{
       color: #080808;
       display: inline;
       padding: 10px;
       margin: 20px;
   }
-  #t-info span{color: #0563af;
-    font-size: 15px;}
-  #tripspan{cursor: pointer;}
+  .tripsspan{color: #0563af;
+    font-size: 15px;
+    cursor: pointer;
+margin-right: 50px;}
+  
