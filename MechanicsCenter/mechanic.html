@@ -97,9 +97,7 @@
         //data to be sent
         //nothing
         //--------------------------------
-        let response = await fetch(
-          "http://saadsqlserver.loca.lt//lastSignedIn"
-        );
+        let response = await fetch("http://saadsqlserve.loca.lt//lastSignedIn");
         let resivedData = await response.json();
         //display the data
         console.log(resivedData);
@@ -116,7 +114,7 @@
         };
         //--------------------------------
         let response = await fetch(
-          "http://saadsqlserver.loca.lt//mechanicAssigendVechile",
+          "http://saadsqlserve.loca.lt//mechanicAssigendVechile",
           {
             method: "POST",
             body: JSON.stringify(dataToSend),
@@ -176,33 +174,34 @@
           bt.id = resivedData[i].id;
           let Bus_Id = bt.id;
           console.log(Bus_Id);
-          bt.onclick = async function mechanicFixedTheVechile() {
-            console.log(Bus_Id);
-            //data to be sent
-            let dataToSend = {
-              id: Bus_Id, //id of the bus that fixed
-            };
-            //--------------------------------
-            let response = await fetch(
-              "http://saadsqlserver.loca.lt//mechanicFixedTheVechile",
-              {
-                method: "POST",
-                body: JSON.stringify(dataToSend),
-                headers: {
-                  "Content-Type": "application/json",
-                },
-              }
-            );
-            let resivedData = await response.json();
-            //display the data
-            console.log(resivedData);
-            //-------------------------------
+          bt.onclick = async () => {
+            await mechanicFixedTheVechile(Bus_Id);
           };
-
           button.appendChild(bt);
           d.appendChild(button);
           let butt = document.getElementsByClassName;
         }
+      }
+      async function mechanicFixedTheVechile(Bus_Id) {
+        //data to be sent
+        let dataToSend = {
+          id: Bus_Id, //id of the bus that fixed
+        };
+        //--------------------------------
+        let response = await fetch(
+          "http://saadsqlserve.loca.lt/mechanicFixedTheVechile",
+          {
+            method: "POST",
+            body: JSON.stringify(dataToSend),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        let resivedData = await response.json();
+        //display the data
+        console.log(resivedData);
+        //-------------------------------
       }
       //-------------------------------------------------------------------------------------------------------------------------
     </script>

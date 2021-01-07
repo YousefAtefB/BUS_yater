@@ -120,16 +120,13 @@
           userpassword: pass,
         };
         //--------------------------------
-        let response = await fetch(
-          "https://saadsqlserver.loca.lt//CheckLogIn",
-          {
-            method: "POST",
-            body: JSON.stringify(dataToSend),
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        let response = await fetch("https://saadsqlserve.loca.lt//CheckLogIn", {
+          method: "POST",
+          body: JSON.stringify(dataToSend),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
         let resivedData = await response.json();
         //display the data
         console.log(resivedData);
