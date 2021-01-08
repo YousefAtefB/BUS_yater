@@ -60,6 +60,7 @@ create table trip
 	primary key (id),
 )
 
+
 create table Passenger
 (
 	id int not null,
@@ -69,15 +70,24 @@ create table Passenger
 	phone varchar(50),
 	username varchar(50) not null,
 	userpassword varchar(50) not null ,
-	tripId int ,
 	cardId int not null,
 	primary key(id),
-	Foreign key(tripId) references trip
-	ON DELETE set NULL
-	on UPDATE cascade,
 	Foreign key (cardId) references paymentCard
 	ON DELETE cascade
 	on UPDATE cascade,
+)
+
+create table onTrip
+(
+	Passengerid int not null,
+	tripId int not null,
+	primary key (Passengerid,tripId),
+	Foreign key (Passengerid) references Passenger
+	ON DELETE cascade
+	on UPDATE cascade,
+	Foreign key (tripId) references trip
+	ON DELETE cascade
+	on UPDATE cascade
 )
 
 create table driver

@@ -465,3 +465,21 @@ app.post('/removeThePassenger', (request, response) => {
 		}
 	})(request, response);
 });
+
+app.post('/addTrip', (request, response) => {
+	//this tamplate is for queries that have prameters you can replace CheckLogIn with appropiate name
+	(async (request, response) => {
+		let recivedData = request.body;
+		try {
+			//your logic
+			let query = ``;
+			let sqlServer = await sql.connect(config);
+			let queryResult = await sqlServer.request().query(query);
+			//----------------------------------
+			lastResult = queryResult.recordsets[0];
+			response.send(queryResult.recordsets[0]);
+		} catch (error) {
+			console.log(error);
+		}
+	})(request, response);
+});
