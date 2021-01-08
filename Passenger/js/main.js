@@ -8,9 +8,29 @@ var searchButton=document.getElementById('s-button'),
 
     myTrips=document.getElementById('my-trips'),
     tripid,
-    Money=document.getElementById('money'),   ///////////money
-  
+    Money=document.getElementById('money'),   ///////////money  
     arr;
+  var fromCheck=true;
+  var toCheck=true;
+  var passengerid;
+  var cardId;
+
+window.onload=async function lastSignedIn() {
+    //data to be sent
+    //nothing
+    //--------------------------------
+    //let response = await fetch('http://127.0.0.1:8080/lastSignedIn');
+    //let resivedData = await response.json();
+    //arr = resivedData;
+    //passengerid = arr[0].id;
+    //cardId = arr[0].cardId;
+    passengerid = 14068803;
+    cardId= 290618334;
+    //console.log(resivedData);
+    //------------------
+    await CardValue();
+  }
+
 
   async function allStations() {
     //data to be sent
@@ -43,6 +63,46 @@ var searchButton=document.getElementById('s-button'),
     console.log(resivedData);
     //-------------------------------
   }
+
+  async function CardValue() {
+    //data to be sent
+    let dataToSend = {
+      id: cardId, 
+    };
+    //--------------------------------
+    let response = await fetch("http://127.0.0.1:8080/CardValue", {
+      method: "POST",
+      body: JSON.stringify(dataToSend),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    let resivedData = await response.json();
+    //display the data
+    document.querySelector("#money").innerText=resivedData[0].moneyAmount;
+    console.log(resivedData);
+    //-------------------------------
+  }
+
+  async function myTrip() {
+    //data to be sent
+    let dataToSend = {
+      id: passengerid,
+    };
+    //--------------------------------
+    let response = await fetch("http://127.0.0.1:8080/myTrip", {
+      method: "POST",
+      body: JSON.stringify(dataToSend),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    let resivedData = await response.json();
+    //display the data
+    console.log(resivedData);
+    //-------------------------------
+  }
+
 
 from.onclick=async function ()
 {
@@ -150,10 +210,10 @@ searchButton.onclick = async function(){
       addButtonAction()
 };
 
-async function BookingEmployeeBook(tripid) {
+async function BookingEmployeeBook(busId) {
   //data to be sent
   let dataToSend = {
-    id: tripid, //bus id
+    id: busId, //bus id
   };
   //--------------------------------
   let response = await fetch("http://127.0.0.1:8080/BookingEmployeeBook", {
@@ -169,6 +229,45 @@ async function BookingEmployeeBook(tripid) {
   //-------------------------------
 }
 
+async function addThePassenger(tripid) {
+  //data to be sent
+  let dataToSend = {
+    id: passengerid,
+    tripid: tripid 
+  };
+  //--------------------------------
+  let response = await fetch("http://127.0.0.1:8080/addThePassenger", {
+    method: "POST",
+    body: JSON.stringify(dataToSend),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  let resivedData = await response.json();
+  //display the data
+  console.log(resivedData);
+  //-------------------------------
+}
+
+async function removeThePassenger(tripid) {
+  //data to be sent
+  let dataToSend = {
+    id: passengerid,
+    tripid: tripid
+  };
+  //--------------------------------
+  let response = await fetch("http://127.0.0.1:8080/removeThePassenger", {
+    method: "POST",
+    body: JSON.stringify(dataToSend),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  let resivedData = await response.json();
+  //display the data
+  console.log(resivedData);
+  //-------------------------------
+}
 
 
 async function BookingEmployeeCancel(tripid) {
@@ -197,26 +296,30 @@ function addButtonAction()
       document.querySelector("#trips").children[i].children[6].onclick=async function(){
         try{
           await BookingEmployeeBook(document.querySelector("#trips").children[i].children[1].innerText);
-
-          var mt=document.createElement('div');
-          mt.classList.add('t-info');
-          var mtid=document.createElement('p');
-          var mtidspan=document.createElement('span');
-          mtid.innerHTML='id:';
-          mtidspan.innerHTML=arr[i]['id'][1];
-          mtid.classList.add('t-infop');
-          mtidspan.classList.add('tripsspan');
-          mt.appendChild(tid);
-          mt.appendChild(tidspan);
-
-          var cancelBTN=document.createElement('button');
-          cancelBTN.innerHTML='cancel';
-          cancelBTN.classList.add('c-button');
-          mt.appendChild(cancelBTN);
-          myTrips.appendChild(mt);
         }
         catch{
         }
+        try{
+          addThePassenger(document.querySelector("#trips").children[i].children[1].innerText)
+        }
+        catch{
+        }
+        var mt=document.createElement('div');
+        mt.classList.add('t-info');
+        var mtid=document.createElement('p');
+        var mtidspan=document.createElement('span');
+        mtid.innerHTML='id:';
+        mtidspan.innerHTML=arr[i]['id'][1];
+        mtid.classList.add('t-infop');
+        mtidspan.classList.add('tripsspan');
+        mt.appendChild(tid);
+        mt.appendChild(tidspan);
+
+        var cancelBTN=document.createElement('button');
+        cancelBTN.innerHTML='cancel';
+        cancelBTN.classList.add('c-button');
+        mt.appendChild(cancelBTN);
+        myTrips.appendChild(mt);
         Trips.classList.add('hide');   
       }
   }
@@ -226,6 +329,11 @@ function addButtonAction()
       document.querySelector("#my-trips").children[i].children[2].onclick=async function(){
           try{
             await BookingEmployeeCancel(document.querySelector("#my-trips").children[i].children[1].innerText);
+          }
+          catch{
+          }
+          try{
+            await removeThePassenger(document.querySelector("#my-trips").children[i].children[1].innerText)
           }
           catch{
           }
