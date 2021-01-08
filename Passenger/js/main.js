@@ -9,8 +9,7 @@ var searchButton=document.getElementById('s-button'),
     myTrips=document.getElementById('my-trips'),
     tripid,
     Money=document.getElementById('money'),   ///////////money
-    amountofMoney=Money.innerText,             /////////money input
-    moneyBTN=document.getElementById('money-btn'),     //////money button
+  
     arr;
 
   async function allStations() {
