@@ -233,7 +233,7 @@ values
 	(85814135, 'Nat', 'Jakubowski', 'm', '+11106615037', 'hesselmina', 'jwsLeiQzaZ', 4090149),
 	(90025856, 'Armand', 'Sanford', 'm', '+11077331240', 'dietrichgermain', 'ZL4yCZnx9', 4090149)
 
-insert into trip
+insert into onTrip
 values
 	(727496779,328951693),
 	(683383820,106997833),
