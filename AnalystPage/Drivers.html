@@ -70,7 +70,7 @@
         <div class="container-fluid">
 
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -134,13 +134,13 @@
                                            
                                             '<div class="form-group">'+
                                                 '<label for="recipient-name" class="col-form-label">NewSalary:</label>'+
-                                                '<input type="text" class="form-control" id="recipient-name">'+
+                                                '<input type="text" class="form-control" id="recipient-name">'+//***---NewSalary field-----
                                             '</div>'+
                                         '</form>'+
                                     '</div>'+
                                     '<div class="modal-footer">'+
                                         '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>'+
-                                        '<button type="button" class="btn btn-primary" >Submit</button>'+
+                                        '<button type="button" class="btn btn-primary" >Submit</button>'+//***---sumbit button-----
                                     '</div>'+
                                 '</div>'+
                             '</div>'+
@@ -178,68 +178,39 @@
   let resivedData = await response.json();
   //display the data
   console.log(resivedData);
-  //-------------------------------
+  //-------------------------------creating table---------------------------------------------------------
   let newSalary;
+  let DID;
+  let temp=document.getElementById("tbody");
+
   for (var i = 0; i < resivedData.length; i++) //number of rows
-  {
-    let tr = document.createElement('tr');
-    let DID;
-  
-    let button;
-    let temp=document.getElementById("tbody");
-    for (var j = 0; j < 4; j++) // number of col 
-    {
-        var td = document.createElement('td');
-        switch(j) 
-        {
-            case 0:
-            td.innerHTML= resivedData[i].id;
-            DID=resivedData[i].id;//Id of driver which in the same row with the clicked button
-              break;
-            case 1:
-            td.innerHTML= resivedData[i].rate;
-              break;
-              case 2:
-            td.innerHTML= resivedData[i].salary;
-              break;
-            default:
-               td.innerHTML=codeblock;
-               let but=document.getElementsByClassName("btn btn-primary");
-               newSalary=document.getElementById("recipient-name").value;//newSal
-               but.onclick = async () => {
-            await updateDriverSalary(DID);
-          };
-        }
-        tr.appendChild(td)
-   temp.appendChild(tr);
-  }
-
-
-async function updateDriverSalary(DID) {
-    
-    console.log(DID);
-    ary
-    console.log(newSalary);
-  //data to be sent
-  let dataToSend = {
-    id: DID, //id of the driver
-    salary: newSalary //new salary
-  };
-  //--------------------------------
-  let response = await fetch("http://saadsqlserve.loca.lt/updateDriverSalary", {
-    method: "POST",
-    body: JSON.stringify(dataToSend),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  let resivedData = await response.json();
-  //display the data
-  console.log(resivedData);
-  //-------------------------------
+   {
+           let tr = document.createElement('tr');
+           for (var j = 0; j < 4; j++) // number of col 
+           {
+               var td = document.createElement('td');
+               switch(j) 
+               {
+                   case 0:
+                   td.innerHTML= resivedData[i].id;
+                     break;
+                   case 1:
+                   td.innerHTML= resivedData[i].rate;
+                     break;
+                     case 2:
+                   td.innerHTML= resivedData[i].salary;
+                     break;
+                   default:
+                      td.innerHTML=codeblock;
+                 };
+                 tr.appendChild(td)
+            }
+           
+            temp.appendChild(tr);
+    }
+        
 }
-  }
-}
+
 </script>
 
 
