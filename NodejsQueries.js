@@ -411,8 +411,8 @@ app.post('/myTrip', (request, response) => {
 			//your logic
 			let query = `
 				select *
-				from Passenger
-				Where id = ${recivedData.id}`;
+				from onTrip
+				Where passengerId = ${recivedData.id}`;
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
@@ -431,14 +431,31 @@ app.post('/addThePassenger', (request, response) => {
 		try {
 			//your logic
 			let query = `
-				select *
-				from Passenger
-				Where id = ${recivedData.id}`;
+			insert into onTrip
+			values
+				(${recivedData.passengerId},${recivedData.tripId})`;
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
+
+			query = `
+			Select *
+			from Passenger as P,paymentCard as PC
+			Where P.id = ${recivedData.passengerId} and PC.id = P.id
+			`;
+			sqlServer = await sql.connect(config);
+			queryResult = await sqlServer.request().query(query);
+			let value=queryResult.recordsets[0].moneyAmount;
+
+			query = `
+			Update paymentCard
+			Set moneyAmount = moneyAmount - ${value}
+			Where id = ${recivedData.passengerId}
+			`;
+
 			//----------------------------------
 			lastResult = queryResult.recordsets[0];
 			response.send(queryResult.recordsets[0]);
+
 		} catch (error) {
 			console.log(error);
 		}
@@ -452,11 +469,26 @@ app.post('/removeThePassenger', (request, response) => {
 		try {
 			//your logic
 			let query = `
-				select *
-				from Passenger
-				Where id = ${recivedData.id}`;
+			DELETE FROM onTrip WHERE passengerId = ${recivedData.passengerId} and tripId = ${recivedData.tripId}`;
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
+
+			query = `
+			Select *
+			from Passenger as P,paymentCard as PC
+			Where P.id = ${recivedData.passengerId} and PC.id = P.id
+			`;
+			sqlServer = await sql.connect(config);
+			queryResult = await sqlServer.request().query(query);
+			let value=queryResult.recordsets[0].moneyAmount;
+
+			query = `
+			Update paymentCard
+			Set moneyAmount = moneyAmount + ${value}
+			Where id = ${recivedData.passengerId}
+			`;
+			sqlServer = await sql.connect(config);
+			queryResult = await sqlServer.request().query(query);
 			//----------------------------------
 			lastResult = queryResult.recordsets[0];
 			response.send(queryResult.recordsets[0]);
@@ -472,7 +504,12 @@ app.post('/addTrip', (request, response) => {
 		let recivedData = request.body;
 		try {
 			//your logic
-			let query = ``;
+			let id =getRandomId()
+			let query = `
+			insert into trip
+			values
+				(${id}, '${recivedData.destination}', '${recivedData.date}', ${recivedData.duration}, ${recivedData.cost})
+			`;
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------

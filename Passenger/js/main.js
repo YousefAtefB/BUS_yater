@@ -232,8 +232,8 @@ async function BookingEmployeeBook(busId) {
 async function addThePassenger(tripid) {
   //data to be sent
   let dataToSend = {
-    id: passengerid,
-    tripid: tripid 
+    passengerId: passengerid,
+    tripId: tripid 
   };
   //--------------------------------
   let response = await fetch("http://127.0.0.1:8080/addThePassenger", {
@@ -252,8 +252,8 @@ async function addThePassenger(tripid) {
 async function removeThePassenger(tripid) {
   //data to be sent
   let dataToSend = {
-    id: passengerid,
-    tripid: tripid
+    passengerId: passengerid,
+    tripId: tripid
   };
   //--------------------------------
   let response = await fetch("http://127.0.0.1:8080/removeThePassenger", {
