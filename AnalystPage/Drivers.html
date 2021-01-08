@@ -120,6 +120,8 @@
     </div>
     </div>
 <script>
+    let theSelectedId;
+    let childsNum;
     let codeblock=
     '<button type="button" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">ChangeSalary</button>'+
     '<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog aria-labelledby="exampleModalLabel" aria-hidden="true">'+
@@ -150,7 +152,7 @@
         //data to be sent
         //nothing
         //--------------------------------
-        let response = await fetch("http://saadsqlserve.loca.lt//lastSignedIn");
+        let response = await fetch("http://127.0.0.1:8080/lastSignedIn");
         let resivedData = await response.json();
         //display the data
         console.log(resivedData);
@@ -161,14 +163,14 @@
       }
 
 //-------------------------------------------------------------------
-      async function allDriversOfStation() 
+async function allDriversOfStation() 
 {
   //data to be sent
   let dataToSend = {
     id: idA, //id of the station
   };
   //--------------------------------
-  let response = await fetch("http://saadsqlserve.loca.lt/allDriversOfStation", {
+  let response = await fetch("http://127.0.0.1:8080/allDriversOfStation", {
     method: "POST",
     body: JSON.stringify(dataToSend),
     headers: {
@@ -182,8 +184,8 @@
   let newSalary;
   let DID;
   let temp=document.getElementById("tbody");
-
-  for (var i = 0; i < resivedData.length; i++) //number of rows
+  childsNum=resivedData.length;
+  for (let i = 0; i < resivedData.length; i++) //number of rows
    {
            let tr = document.createElement('tr');
            for (var j = 0; j < 4; j++) // number of col 
@@ -203,12 +205,47 @@
                    default:
                       td.innerHTML=codeblock;
                  };
-                 tr.appendChild(td)
-            }
-           
-            temp.appendChild(tr);
+                 tr.appendChild(td);
+                }
+                temp.appendChild(tr);
+                document.getElementById('tbody').children[i].children[3].children[0].addEventListener('click',()=>{
+                    theSelectedId=resivedData[i].id;
+                    console.log(resivedData[i].id);
+                });
     }
-        
+    document.querySelector("#exampleModal > div > div > div.modal-footer > button.btn.btn-primary").addEventListener("click",async()=>{
+    try{
+        await updateDriverSalary();
+    }
+    catch{
+    }
+    for(let i=0;i<childsNum;i++){
+        document.getElementById("tbody").removeChild(document.getElementById('tbody').children[0])
+    }
+    await allDriversOfStation();
+    document.querySelector("body > div.modal-backdrop.fade.show").remove()
+    console.log(theSelectedId);
+    console.log(parseInt(document.querySelector("#recipient-name").value));
+})
+}
+async function updateDriverSalary() {
+  //data to be sent
+  let dataToSend = {
+    id: theSelectedId, //id of the driver
+    salary: parseInt(document.querySelector("#recipient-name").value), //new salary
+  };
+  //--------------------------------
+  let response = await fetch("http://127.0.0.1:8080/updateDriverSalary", {
+    method: "POST",
+    body: JSON.stringify(dataToSend),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  let resivedData = await response.json();
+  //display the data
+  console.log(resivedData);
+  //-------------------------------
 }
 
 </script>

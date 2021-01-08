@@ -368,7 +368,7 @@ app.post('/updateDriverSalary', (request, response) => {
 		try {
 			//your logic
 			let query = `
-				Update vehicle
+				Update driver
 				Set salary = ${recivedData.salary}
 				Where id = ${recivedData.id}`;//the query
 			let sqlServer = await sql.connect(config);

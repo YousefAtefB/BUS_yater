@@ -180,7 +180,8 @@ values
 	(158858656, 'Laredo', '2021-10-4', 11, 133),
 	(997442589, 'Chicago', '2021-8-5', 5, 701),
 	(486121551, 'Dallas', '2021-5-10', 9, 234),
-	(349290785, 'Houston', '2021-10-13', 3, 785)
+	(349290785, 'Houston', '2021-10-13', 3, 785),
+	(349280785, 'Vegas', '2021-10-13', 3, 900)
 insert into Passenger
 values
 	(727496779, 'Shyann', 'Hammes', 'f', '+11206523132', 'francescaveum', 'XV85ZvVGg', 328951693, 343299745),
@@ -242,7 +243,10 @@ values
 	(672228884, 'Florian', 'Olson', 'm', '47693 Cesar Throughway', 48600, 'sherman27', '3jpXLV7oa', 4.5),
 	(566816607, 'Burdette', 'Hansen', 'f', '86962 Abdullah Knolls Suite 462', 85900, 'pagacbraden', 'NQuV9F7MN', 0.5),
 	(766488825, 'Adrianna', 'Simonis', 'f', '6427 Sean Park', 91500, 'laurynstanton', 'vDSr0uWt', 4.5),
-	(652108037, 'Amira', 'Purdy', 'f', '420 Bergstrom Radial', 14700, 'elisabeth22', 'MvvnOIAx8', 1.5)
+	(652108037, 'Amira', 'Purdy', 'f', '420 Bergstrom Radial', 14700, 'elisabeth22', 'MvvnOIAx8', 1.5),
+	(651108037, 'Max', 'Steel', 'M', '421 Bergstrom Radial', 90000, 'MaxStell', 'MvvnOIAx8', 4.7),
+	(551108037, 'Man', 'Yay', 'M', '421 Bergstrom Radial', 10000, 'MaxMAD', 'MvvnOIAx8', 3.3)
+
 insert into mechanic
 values
 	(801998505, 'Maybell', 'Jerde', 'f', '44633 Ratke Stravenue Suite 285', 83600, 'bsipes', 'NASoZUtUHSBS'),
@@ -296,6 +300,8 @@ values
 	(623193790, 'Juwan', 'Adams', 'm', '4802 Hamill Drives Apt. 463', 22300, 'hesseldalton', '5E229quv0q')
 insert into vehicle
 values
+	(508345909, 'mercides', 'super jet', 0, 20, 40, 349280785, 765018846, 651108037),
+	(123570573, 'mercides', 'super jet', 0, 20, 40, 349290785, 765018846, 551108037),
 	(206172255, 'mercides', 'super jet', 0, 20, 40, 458471240, 765018846, 574860753),
 	(219259356 , 'mercides', 'super jet', 0, 20, 40, 106997833, 487876976, 845785500),
 	(712757970, 'mercides', 'super jet', 0, 20, 40, 372146399, 980343996, 618654132),
@@ -305,10 +311,11 @@ values
 	(760959908 , 'mercides', 'super jet', 0, 20, 40, 158858656, 802165137, 672228884),
 	(33853371, 'mercides', 'super jet', 0, 20, 40, 997442589, 995550964, 566816607),
 	(104672228 , 'mercides', 'super jet', 0, 20, 40, 486121551, 780157471, 766488825),
-	(241382708, 'mercides', 'super jet', 1, 0, 40, 349290785, 340925197, 652108037)
+	(241382708, 'mercides', 'super jet', 1, 0, 40, NULL, 340925197, 652108037)
 
 insert into fix
 values
+	(33853371, 801998505),
 	(241382708, 801998505),
 	(856824338, 801998505),
 	(712757970,927655960)
