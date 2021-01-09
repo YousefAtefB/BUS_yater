@@ -155,7 +155,7 @@ margin-right: 50px;}
   background-color: #ffffff;
   width:300px;
   margin:10px;
-  height: 200px;
+  height: 300px;
   overflow: auto;
 }
 
@@ -174,3 +174,5 @@ input:focus {
   border-color:#333;
 }
 
+#money{font-size: 20px;
+margin-left: 20px;}
