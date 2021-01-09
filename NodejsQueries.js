@@ -542,3 +542,135 @@ app.post('/deleteTrip', (request, response) => {
 		}
 	})(request, response);
 });
+//--------------------------------
+app.post('/deleteEmployee', (request, response) => {
+	//this tamplate is for queries that have prameters you can replace CheckLogIn with appropiate name
+	(async (request, response) => {
+		let recivedData = request.body;
+		try {
+			//your logic
+			let query = `
+			DELETE FROM employee
+			where id = ${recivedData.id}
+			`;
+			let sqlServer = await sql.connect(config);
+			let queryResult = await sqlServer.request().query(query);
+			//----------------------------------
+			lastResult = queryResult.recordsets[0];
+			response.send(queryResult.recordsets[0]);
+		} catch (error) {
+			console.log(error);
+		}
+	})(request, response);
+});
+
+app.post('/deleteVehicle', (request, response) => {
+	//this tamplate is for queries that have prameters you can replace CheckLogIn with appropiate name
+	(async (request, response) => {
+		let recivedData = request.body;
+		try {
+			//your logic
+			let query = `
+			DELETE FROM vehicle
+			where id = ${recivedData.id}
+			`;
+			let sqlServer = await sql.connect(config);
+			let queryResult = await sqlServer.request().query(query);
+			//----------------------------------
+			lastResult = queryResult.recordsets[0];
+			response.send(queryResult.recordsets[0]);
+		} catch (error) {
+			console.log(error);
+		}
+	})(request, response);
+});
+
+app.post('/deleteStation', (request, response) => {
+	//this tamplate is for queries that have prameters you can replace CheckLogIn with appropiate name
+	(async (request, response) => {
+		let recivedData = request.body;
+		try {
+			//your logic
+			let query = `
+			DELETE FROM station
+			where id = ${recivedData.id}
+			`;
+			let sqlServer = await sql.connect(config);
+			let queryResult = await sqlServer.request().query(query);
+			//----------------------------------
+			lastResult = queryResult.recordsets[0];
+			response.send(queryResult.recordsets[0]);
+		} catch (error) {
+			console.log(error);
+		}
+	})(request, response);
+});
+//---------------------------
+app.post('/addStation', (request, response) => {
+	//this tamplate is for queries that have prameters you can replace CheckLogIn with appropiate name
+	(async (request, response) => {
+		let recivedData = request.body;
+		try {
+			//your logic
+			let id =getRandomId()
+			let query = `
+			insert into station
+			values
+			(${id},'${recivedData.Location}')
+			`;
+			let sqlServer = await sql.connect(config);
+			let queryResult = await sqlServer.request().query(query);
+			//----------------------------------
+			lastResult = queryResult.recordsets[0];
+			response.send(queryResult.recordsets[0]);
+		} catch (error) {
+			console.log(error);
+		}
+	})(request, response);
+});
+
+app.post('/addEmployee', (request, response) => {
+	//this tamplate is for queries that have prameters you can replace CheckLogIn with appropiate name
+	(async (request, response) => {
+		let recivedData = request.body;
+		try {
+			//your logic
+			let id =getRandomId()
+			let query = `
+			insert into analyst,bookingEmployee,driver,mechanic
+			values
+			(${id},${recivedData},${recivedData},${recivedData},${recivedData},${recivedData},${recivedData})
+			`;
+			let sqlServer = await sql.connect(config);
+			let queryResult = await sqlServer.request().query(query);
+			//----------------------------------
+			lastResult = queryResult.recordsets[0];
+			response.send(queryResult.recordsets[0]);
+		} catch (error) {
+			console.log(error);
+		}
+	})(request, response);
+});
+
+app.post('/addVehicle', (request, response) => {
+	//this tamplate is for queries that have prameters you can replace CheckLogIn with appropiate name
+	(async (request, response) => {
+		let recivedData = request.body;
+		try {
+			//your logic
+			let id =getRandomId()
+			let query = `
+			insert into vehicle
+			values
+			(${id},'${recivedData.model}','${recivedData.type}',0,0,${recivedData.maxNumPassenger},${recivedData.tripId},${recivedData.StationId},${recivedData.driverId})
+			`;
+			let sqlServer = await sql.connect(config);
+			let queryResult = await sqlServer.request().query(query);
+			//----------------------------------
+			lastResult = queryResult.recordsets[0];
+			response.send(queryResult.recordsets[0]);
+		} catch (error) {
+			console.log(error);
+		}
+	})(request, response);
+});
