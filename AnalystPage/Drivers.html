@@ -208,10 +208,10 @@
                 }
                 temp.appendChild(tr);
                 document.getElementById('tbody').children[i].children[3].children[0].addEventListener('click',
-            () => {
-                    theSelectedId = resivedData[i].id;
-                    console.log(resivedData[i].id);
-                });
+                    () => {
+                        theSelectedId = resivedData[i].id;
+                        console.log(resivedData[i].id);
+                    });
             }
             document.querySelector("#exampleModal > div > div > div.modal-footer > button.btn.btn-primary")
                 .addEventListener("click", async () => {
@@ -235,7 +235,7 @@
                 salary: parseInt(document.querySelector("#recipient-name").value), //new salary
             };
             //--------------------------------
-            if (parseInt(salary) < 0) {
+            if (parseInt(dataToSend.salary) < 0) {
                 alert('salary must be a positive number')
             } else {
                 let response = await fetch("http://127.0.0.1:8080/updateDriverSalary", {

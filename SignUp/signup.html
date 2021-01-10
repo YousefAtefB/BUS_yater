@@ -124,7 +124,8 @@
         userpassword: pass,
       };
       //--------------------------------
-      if (firstName == "" || lastName == "" || gender == "" || phone == "" || userName == "" || userpassword == "") {
+      if (dataToSend.firstName == "" || dataToSend.lastName == "" || dataToSend.gender == "" || dataToSend.phone ==
+        "" || dataToSend.userName == "" || dataToSend.userpassword == "") {
         alert('please enter all data!')
       } else {
         let response = await fetch("http://saadsqlserve.loca.lt//SignUp", {

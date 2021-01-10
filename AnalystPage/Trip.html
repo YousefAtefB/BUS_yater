@@ -247,20 +247,20 @@
                 }
                 temp.appendChild(tr);
                 document.getElementById('tbody').children[i].children[3].children[0].addEventListener('click',
-            () => {
-                    theSelectedId = resivedData[i].id[0];
-                    console.log(resivedData[i].id[0]);
-                    document.querySelector(
-                            "#exampleModal > div > div > div.modal-footer > button.btn.btn-primary")
-                        .addEventListener("click", async () => {
-                            try {
-                                await deleteTrip(theSelectedId);
-                            } catch {}
-                            try {
-                                await allTripsOfStation();
-                            } catch {}
-                        })
-                });
+                    () => {
+                        theSelectedId = resivedData[i].id[0];
+                        console.log(resivedData[i].id[0]);
+                        document.querySelector(
+                                "#exampleModal > div > div > div.modal-footer > button.btn.btn-primary")
+                            .addEventListener("click", async () => {
+                                try {
+                                    await deleteTrip(theSelectedId);
+                                } catch {}
+                                try {
+                                    await allTripsOfStation();
+                                } catch {}
+                            })
+                    });
             }
             async function deleteTrip(theSelectedId) {
                 //data to be sent
@@ -290,17 +290,17 @@
 
         function Add() {
             document.querySelector("#tbody > tr:nth-child(1) > td:nth-child(5) > button").addEventListener('click',
-            () => {
+                () => {
                     Dest = document.getElementById("recipient-name1").value;
                     StarD = document.querySelector(
                         "#exampleModal2 > div > div > div.modal-body > form > div:nth-child(2) > textarea:nth-child(2)"
-                        ).value;
+                    ).value;
                     Dur = document.querySelector(
                         "#exampleModal2 > div > div > div.modal-body > form > div:nth-child(2) > textarea:nth-child(4)"
-                        ).value;
+                    ).value;
                     Cost = document.querySelector(
                         "#exampleModal2 > div > div > div.modal-body > form > div:nth-child(2) > textarea:nth-child(6)"
-                        ).value;
+                    ).value;
                     sum = document.querySelector(
                         "#exampleModal2 > div > div > div.modal-footer > button.btn.btn-primary");
                     sum.addEventListener("click", async () => {
@@ -321,18 +321,19 @@
                 destination: document.getElementById("recipient-name1").value,
                 startingDate: document.querySelector(
                     "#exampleModal2 > div > div > div.modal-body > form > div:nth-child(2) > textarea:nth-child(2)"
-                    ).value,
+                ).value,
                 duration: document.querySelector(
                     "#exampleModal2 > div > div > div.modal-body > form > div:nth-child(2) > textarea:nth-child(4)"
-                    ).value,
+                ).value,
                 cost: document.querySelector(
                     "#exampleModal2 > div > div > div.modal-body > form > div:nth-child(2) > textarea:nth-child(6)"
-                    ).value,
+                ).value,
             };
             console.log(dataToSend);
-            if (destination == "" || startingDate == "" || duration == "" || cost == "") {
+            if (dataToSend.destination == "" || dataToSend.startingDate == "" || dataToSend.duration == "" ||
+                dataToSend.cost == "") {
                 alert('please enter all data')
-            } else if (parseInt(cost) < 0) {
+            } else if (parseInt(dataToSend.cost) <= 0) {
                 alert('cost must be a positive number')
             } else {
                 //--------------------------------
