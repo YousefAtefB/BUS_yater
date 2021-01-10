@@ -1,158 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="canonical"
-      href="https://getbootstrap.com/docs/5.0/examples/sign-in/"
-    />
 
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/" />
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
       }
+    }
+  </style>
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
+  <!-- Custom styles for this template -->
+  <link href="signup.css" rel="stylesheet" />
+</head>
 
-    <!-- Custom styles for this template -->
-    <link href="signup.css" rel="stylesheet" />
-  </head>
+<body class="text-center container-fluid">
+  <div class="form-signin">
+    <form>
+      <img class="mb-4" src="bus.svg" alt="" width="72" height="57" />
+      <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
+      <label for="inputfirstname" class="visually-hidden">Firstname</label>
+      <input type="text" id="inputfirstname" class="form-control" placeholder="Firstname" required autofocus />
 
-  <body class="text-center container-fluid">
-    <div class="form-signin">
-      <form>
-        <img class="mb-4" src="bus.svg" alt="" width="72" height="57" />
-        <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
-        <label for="inputfirstname" class="visually-hidden">Firstname</label>
-        <input
-          type="text"
-          id="inputfirstname"
-          class="form-control"
-          placeholder="Firstname"
-          required
-          autofocus
-        />
+      <label for="minit" class="visually-hidden">Lastname</label>
+      <input type="text" id="inputlastname" class="form-control" placeholder="Lastname" required autofocus />
+      <label for="inputAddress" class="visually-hidden">Address</label>
+      <input type="text" id="Address" class="form-control" placeholder="Address" required />
+      <label for="inputPhone" class="visually-hidden">Phone</label>
+      <input type="text" id="Phone" class="form-control" placeholder="Phone" required />
+      <label for="inputgender" class="visually-hidden">Gender</label>
+      <input type="text" id="Gender" class="form-control" placeholder="Gender" required />
 
-        <label for="minit" class="visually-hidden">Lastname</label>
-        <input
-          type="text"
-          id="inputlastname"
-          class="form-control"
-          placeholder="Lastname"
-          required
-          autofocus
-        />
-        <label for="inputAddress" class="visually-hidden">Address</label>
-        <input
-          type="text"
-          id="Address"
-          class="form-control"
-          placeholder="Address"
-          required
-        />
-        <label for="inputPhone" class="visually-hidden">Phone</label>
-        <input
-          type="text"
-          id="Phone"
-          class="form-control"
-          placeholder="Phone"
-          required
-        />
-        <label for="inputgender" class="visually-hidden">Gender</label>
-        <input
-          type="text"
-          id="Gender"
-          class="form-control"
-          placeholder="Gender"
-          required
-        />
+      <label for="inputUsername" class="visually-hidden">Username</label>
+      <input type="text" id="inputusername" class="form-control" placeholder="Username" required autofocus />
+      <label for="inputPassword" class="visually-hidden">Password</label>
+      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required />
 
-        <label for="inputUsername" class="visually-hidden">Username</label>
-        <input
-          type="text"
-          id="inputusername"
-          class="form-control"
-          placeholder="Username"
-          required
-          autofocus
-        />
-        <label for="inputPassword" class="visually-hidden">Password</label>
-        <input
-          type="password"
-          id="inputPassword"
-          class="form-control"
-          placeholder="Password"
-          required
-        />
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me" /> Remember me
+        </label>
+      </div>
+      <input type="button" class="w-100 btn btn-lg btn-primary" id="SumbitButton" value="Sign Up" />
+      <p>
+        Already have an account? <a href="..\\LogIn\\signin.html">sign in</a>
+      </p>
+    </form>
+  </div>
 
-        <div class="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me" /> Remember me
-          </label>
-        </div>
-        <input
-          type="button"
-          class="w-100 btn btn-lg btn-primary"
-          id="SumbitButton"
-          value="Sign Up"
-        />
-        <p>
-          Already have an account? <a href="..\\LogIn\\signin.html">sign in</a>
-        </p>
-      </form>
-    </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
+  </script>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-      crossorigin="anonymous"
-    ></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
 
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"
-    ></script>
+  <script>
+    let inputfirstname = document.getElementById("inputfirstname");
+    let inputlastname = document.getElementById("inputlastname");
+    let Address = document.getElementById("Address");
+    let Phone = document.getElementById("Phone");
+    let Gender = document.getElementById("Gender");
+    let userName = document.getElementById("inputusername");
+    let Password = document.getElementById("inputPassword");
 
-    <script>
-      let inputfirstname = document.getElementById("inputfirstname");
-      let inputlastname = document.getElementById("inputlastname");
-      let Address = document.getElementById("Address");
-      let Phone = document.getElementById("Phone");
-      let Gender = document.getElementById("Gender");
-      let userName = document.getElementById("inputusername");
-      let Password = document.getElementById("inputPassword");
+    let sumbit = document.getElementById("SumbitButton");
+    let fn, ln, ad, ph, g, un, pass;
+    sumbit.addEventListener("click", () => {
+      fn = inputfirstname.value;
+      ln = inputlastname.value;
+      ad = Address.value;
+      ph = Phone.value;
+      g = Gender.value;
+      un = userName.value;
+      pass = Password.value;
 
-      let sumbit = document.getElementById("SumbitButton");
-      let fn, ln, ad, ph, g, un, pass;
-      sumbit.addEventListener("click", () => {
+      SignUp();
+    });
+    //////
+    input.addEventListener("keyup", function (event) {
+      // Number 13 is the "Enter" key on the keyboard
+      if (event.keyCode === 13) {
         fn = inputfirstname.value;
         ln = inputlastname.value;
         ad = Address.value;
@@ -160,21 +110,23 @@
         g = Gender.value;
         un = userName.value;
         pass = Password.value;
-
-        SignUp();
-      });
-
-      async function SignUp() {
-        //data to be sent
-        let dataToSend = {
-          firstName: fn,
-          lastName: ln,
-          gender: g,
-          phone: ph,
-          username: un,
-          userpassword: pass,
-        };
-        //--------------------------------
+      }
+    });
+    //////
+    async function SignUp() {
+      //data to be sent
+      let dataToSend = {
+        firstName: fn,
+        lastName: ln,
+        gender: g,
+        phone: ph,
+        username: un,
+        userpassword: pass,
+      };
+      //--------------------------------
+      if (firstName == "" || lastName == "" || gender == "" || phone == "" || userName == "" || userpassword == "") {
+        alert('please enter all data!')
+      } else {
         let response = await fetch("http://saadsqlserve.loca.lt//SignUp", {
           method: "POST",
           body: JSON.stringify(dataToSend),
@@ -182,15 +134,16 @@
             "Content-Type": "application/json",
           },
         });
-        try{
-        let resivedData = await response.json();
-        }catch{
-        }
+        try {
+          let resivedData = await response.json();
+        } catch {}
         console.log(fn);
         console.log(ph);
         console.log(pass);
         window.location.replace("..\\LogIn\\signin.html");
       }
-    </script>
-  </body>
+    }
+  </script>
+</body>
+
 </html>
