@@ -507,11 +507,12 @@ app.post('/myTrip', (request, response) => {
 		try {
 			//your logic
 			let query = `
-				select *
-				from onTrip
-				Where passengerId = ${recivedData.id}`;
+				select distinct *
+				from onTrip as ot,trip as t,vehicle as v
+				Where ot.passengerId = ${recivedData.id} and t.id = ot.tripId and v.tripId = ot.tripId`;
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
+
 			//----------------------------------
 			lastResult = queryResult.recordsets[0];
 			if(Array.isArray(lastResult)){
@@ -536,24 +537,28 @@ app.post('/addThePassenger', (request, response) => {
 			let query = `
 			insert into onTrip
 			values
-				(${recivedData.passengerId},${recivedData.tripId})`;
+			(${recivedData.passengerId},${recivedData.tripId})`;
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
-
+			
 			query = `
 			Select *
-			from Passenger as P,paymentCard as PC
-			Where P.id = ${recivedData.passengerId} and PC.id = P.id
+			from trip
+			Where id = ${recivedData.tripId}
 			`;
 			sqlServer = await sql.connect(config);
 			queryResult = await sqlServer.request().query(query);
-			let value=queryResult.recordsets[0].moneyAmount;
+
+			let value=queryResult.recordsets[0][0].cost;
+			console.log(value)
 
 			query = `
 			Update paymentCard
 			Set moneyAmount = moneyAmount - ${value}
-			Where id = ${recivedData.passengerId}
+			Where id = ${recivedData.cardId}
 			`;
+			sqlServer = await sql.connect(config);
+			queryResult = await sqlServer.request().query(query);
 
 			//----------------------------------
 			lastResult = queryResult.recordsets[0];
@@ -581,24 +586,29 @@ app.post('/removeThePassenger', (request, response) => {
 			DELETE FROM onTrip WHERE passengerId = ${recivedData.passengerId} and tripId = ${recivedData.tripId}`;
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
+			console.log(1)
 
 			query = `
 			Select *
-			from Passenger as P,paymentCard as PC
-			Where P.id = ${recivedData.passengerId} and PC.id = P.id
+			from trip
+			Where id = ${recivedData.tripId}
 			`;
 			sqlServer = await sql.connect(config);
 			queryResult = await sqlServer.request().query(query);
-			let value=queryResult.recordsets[0].moneyAmount;
+
+			let value=queryResult.recordsets[0][0].cost;
+			console.log(value)
+			
 
 			query = `
 			Update paymentCard
 			Set moneyAmount = moneyAmount + ${value}
-			Where id = ${recivedData.passengerId}
+			Where id = ${recivedData.cardId}
 			`;
-
 			sqlServer = await sql.connect(config);
 			queryResult = await sqlServer.request().query(query);
+
+			console.log(query)
 			//----------------------------------
 			lastResult = queryResult.recordsets[0];
 			if(Array.isArray(lastResult)){
@@ -877,6 +887,34 @@ app.post('/addVehicle', (request, response) => {
 			insert into vehicle
 			values
 			(${id},'${recivedData.model}','${recivedData.type}',0,0,${recivedData.maxNumPassenger},${recivedData.tripId},${recivedData.StationId},${recivedData.driverId})
+			`;
+			let sqlServer = await sql.connect(config);
+			let queryResult = await sqlServer.request().query(query);
+			//----------------------------------
+			lastResult = queryResult.recordsets[0];
+			if(Array.isArray(lastResult)){
+				response.send(queryResult.recordsets[0]);
+			}
+			else{
+				response.send({done: true});
+			}
+		} catch (error) {
+			response.send({error: error});
+			console.log(error);
+		}
+	})(request, response);
+});
+
+app.post('/myCard', (request, response) => {
+	//this tamplate is for queries that have prameters you can replace CheckLogIn with appropiate name
+	(async (request, response) => {
+		let recivedData = request.body;
+		try {
+			//your logic
+			let query = `
+				select * 
+				from Passenger , paymentCard  
+				where Passenger.id=${recivedData.id} and Passenger.cardId=paymentCard.id
 			`;
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);

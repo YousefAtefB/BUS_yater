@@ -17,8 +17,11 @@ var searchButton=document.getElementById('s-button'),
     passengerid,
     cardId,
     myTripsArr=[];
-window.onload=async function lastSignedIn() {
-    //data to be sent
+    window.onload=lastSignedIn(0)
+    async function lastSignedIn(par) {
+    if(par==0){
+
+    
     //nothing
     //--------------------------------
     //let response = await fetch('http://127.0.0.1:8080/lastSignedIn');
@@ -26,36 +29,45 @@ window.onload=async function lastSignedIn() {
     //arr = resivedData;
     //passengerid = arr[0].id;
     //cardId = arr[0].cardId;
-    passengerid = 23639040;
-    cardId= 290618334;
+    passengerid = 503179344;
     //console.log(resivedData);
     //------------------
+  }
+  else{
+  }
+  document.querySelector("#money").innerHTML="";
+  bookedTrips.innerHTML="";
+
+    await myCard();
     await CardValue();
     await myTrip();
   for(let i=0;i<myTripsArr.length;i++)
   {
-  
       var mydiv=document.createElement('div');
 
       var myid=document.createElement('p');
-      myid.innerHTML="id: "+arr[i][id];
+      myid.innerHTML="Bus id: "+myTripsArr[i].id[1];
       mydiv.appendChild(myid);
 
       var myid=document.createElement('p');
-      myid.innerHTML="from: "+arr[i][from];
+      myid.innerHTML="date: "+myTripsArr[i].startingDate.substr(0, 10);
       mydiv.appendChild(myid);
   
       var myid=document.createElement('p');
-      myid.innerHTML="to: "+arr[i][destination];
+      myid.innerHTML="to: "+myTripsArr[i].destination;
       mydiv.appendChild(myid);
 
       cancelBTN=document.createElement('button');
       cancelBTN.innerHTML='cancel';
       cancelBTN.classList.add('c-button');
+      cancelBTN.addEventListener('click',async () =>{
+        await BookingEmployeeCancel(myTripsArr[i].id[1]);
+        await removeThePassenger(myTripsArr[i].tripId[0],cardId);
+        lastSignedIn(1);
+      });
       mydiv.appendChild(cancelBTN);
 
-      bookedTrips.appendChild('mydiv');
-
+      bookedTrips.appendChild(mydiv);
     }
   }
 
@@ -90,7 +102,24 @@ window.onload=async function lastSignedIn() {
     console.log(resivedData);
     //-------------------------------
   }
-
+  async function myCard(){
+        //data to be sent
+        let dataToSend = {
+          id: passengerid,
+        };
+        //--------------------------------
+        let response = await fetch("http://127.0.0.1:8080/myCard", {
+          method: "POST",
+          body: JSON.stringify(dataToSend),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        let resivedData = await response.json();
+        //display the data
+        cardId=resivedData[0].cardId;
+        console.log(resivedData);
+  }
   async function CardValue() {
     //data to be sent
     let dataToSend = {
@@ -200,7 +229,7 @@ searchButton.onclick = async function(){
           var tid=document.createElement('p');
           var tidspan=document.createElement('span');
           tid.innerHTML='id:';
-          tidspan.innerHTML=arr[i]['id'][1];
+          tidspan.innerHTML=arr[i]['id'][0];
           tid.classList.add('t-infop');
           tidspan.classList.add('tripsspan');
           t.appendChild(tid);
@@ -257,11 +286,12 @@ async function BookingEmployeeBook(busId) {
   //-------------------------------
 }
 
-async function addThePassenger(tripid) {
+async function addThePassenger(tripid,cardId) {
   //data to be sent
   let dataToSend = {
     passengerId: passengerid,
-    tripId: tripid 
+    tripId: tripid,
+    cardId:cardId
   };
   //--------------------------------
   let response = await fetch("http://127.0.0.1:8080/addThePassenger", {
@@ -277,11 +307,12 @@ async function addThePassenger(tripid) {
   //-------------------------------
 }
 
-async function removeThePassenger(tripid) {
+async function removeThePassenger(tripid,cardId) {
   //data to be sent
   let dataToSend = {
     passengerId: passengerid,
-    tripId: tripid
+    tripId: tripid,
+    cardId: cardId
   };
   //--------------------------------
   let response = await fetch("http://127.0.0.1:8080/removeThePassenger", {
@@ -298,10 +329,10 @@ async function removeThePassenger(tripid) {
 }
 
 
-async function BookingEmployeeCancel(tripid) {
+async function BookingEmployeeCancel(id) {
   //data to be sent
   let dataToSend = {
-    id: tripid, //bus id
+    id: id, //bus id
   };
   //--------------------------------
   let response = await fetch("http://127.0.0.1:8080/BookingEmployeeCancel", {
@@ -328,11 +359,12 @@ async function addButtonAction()
         catch{
         }
         try{
-          addThePassenger(document.querySelector("#trips").children[i].children[1].innerText)
+          addThePassenger(document.querySelector("#trips").children[i].children[1].innerText,cardId);
         }
         catch{
         }
-        Trips.classList.add('hide'); 
+        Trips.classList.add('hide');
+        lastSignedIn(1);
       }
   }
 
@@ -350,8 +382,8 @@ async function addButtonAction()
           }
           catch{
           }
-          Trips.classList.add('hide');   
-          myTrips.parentNode.removeChild(mt);
+          Trips.classList.add('hide');
+
       }
   }
 }
