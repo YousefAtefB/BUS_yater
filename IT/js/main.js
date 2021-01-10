@@ -11,6 +11,7 @@ var addemp = document.getElementById('employee-btn'), //add employee button
 	remID = document.getElementById('remID'), //employee removal id
 	empRem = document.getElementById('emp-rem'), //employee remove button
 	sid, //to create station id input
+    	vehidmec, 
 	Type, //some vars to get inputs
 	Fname, //
 	Lname, //
@@ -47,26 +48,54 @@ var addemp = document.getElementById('employee-btn'), //add employee button
 	SID, //
 	driverid, //
 	vid, //
-	exist = false;
+	exista=false,
+    	existm=false;
 
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
-
-empType.onchange = function () {
-	'use strict';
-	if (
-		(empType.options[empType.selectedIndex].value == 'Analyst' ||
-			empType.options[empType.selectedIndex].value ==
-				'Booking Employee') &&
-		!exist
-	) {
-		sid = document.createElement('input');
-		sid.setAttribute('placeholder', 'Station ID');
-		sid.setAttribute('type', 'number');
-		empForm.insertBefore(sid, empForm.childNodes[12]);
-		exist = true;
-	}
-	Type = empType.options[empType.selectedIndex].value;
+empType.onchange=function()
+{
+    "use strict";
+    if((empType.options[empType.selectedIndex].value=="Analyst" || empType.options[empType.selectedIndex].value=="Booking Employee" ) && !exista)
+    {
+        sid=document.createElement('input');
+        sid.setAttribute("placeholder","Station ID");
+        sid.setAttribute("type","number");
+        empForm.insertBefore(sid,empForm.childNodes[12]);
+        exista=true;
+        if(existm)
+        {
+            existm=false;
+            empForm.removeChild(vehidmec);
+        }
+    }
+    else if(empType.options[empType.selectedIndex].value=="Mechanic"&&!existm)
+    {
+        vehidmec=document.createElement('input');
+        vehidmec.setAttribute("placeholder","Vehicle ID");
+        vehidmec.setAttribute("type","number");
+        empForm.insertBefore(vehidmec,empForm.childNodes[12]);
+        existm=true;
+        if(exista)
+        {
+            exista=false;
+            empForm.removeChild(sid);
+        }
+    }
+    else if(empType.options[empType.selectedIndex].value=="Driver")
+    {
+        if(exista)
+        {
+            empForm.removeChild(sid);
+            exista=false;
+        }
+        if(existm)
+        {
+            empForm.removeChild(vehidmec);
+            existm=false;
+        }
+    }
+    Type=empType.options[empType.selectedIndex].value;
 };
 
 empGender.onchange = function () {
