@@ -9,12 +9,14 @@ var searchButton=document.getElementById('s-button'),
     myTrips=document.getElementById('my-trips'),
     tripid,
     Money=document.getElementById('money'),   ///////////money  
-    arr;
-  var fromCheck=true;
-  var toCheck=true;
-  var passengerid;
-  var cardId;
-  var myTripsArr=[];
+    bookedTrips=document.getElementById('bookedtrips'),
+    cancelBTN,
+    arr,
+    fromCheck=true,
+    toCheck=true,
+    passengerid,
+    cardId,
+    myTripsArr=[];
 window.onload=async function lastSignedIn() {
     //data to be sent
     //nothing
@@ -32,23 +34,29 @@ window.onload=async function lastSignedIn() {
     await myTrip();
   for(let i=0;i<myTripsArr.length;i++)
   {
-    var mt=document.createElement('div');
-        mt.classList.add('t-info');
-        var mtid=document.createElement('p');
-        var mtidspan=document.createElement('span');
-        mtid.innerHTML='id:';
-        mtidspan.innerHTML=myTripsArr[i].tripId;
-        mtid.classList.add('t-infop');
-        mtidspan.classList.add('tripsspan');
-        mt.appendChild(tid);
-        mt.appendChild(tidspan);
   
-        var cancelBTN=document.createElement('button');
-        cancelBTN.innerHTML='cancel';
-        cancelBTN.classList.add('c-button');
-        mt.appendChild(cancelBTN);
-        myTrips.appendChild(mt);
-  }
+      var mydiv=document.createElement('div');
+
+      var myid=document.createElement('p');
+      myid.innerHTML="id: "+arr[i][id];
+      mydiv.appendChild(myid);
+
+      var myid=document.createElement('p');
+      myid.innerHTML="from: "+arr[i][from];
+      mydiv.appendChild(myid);
+  
+      var myid=document.createElement('p');
+      myid.innerHTML="to: "+arr[i][destination];
+      mydiv.appendChild(myid);
+
+      cancelBTN=document.createElement('button');
+      cancelBTN.innerHTML='cancel';
+      cancelBTN.classList.add('c-button');
+      mydiv.appendChild(cancelBTN);
+
+      bookedTrips.appendChild('mydiv');
+
+    }
   }
 
   async function allStations() {
@@ -333,12 +341,12 @@ async function addButtonAction()
   {
       document.querySelector("#my-trips").children[i].children[2].onclick=async function(){
           try{
-            await BookingEmployeeCancel(document.querySelector("#my-trips").children[i].children[1].innerText);
+            await BookingEmployeeCancel(document.querySelector("#bookedtrips").children[i].children[1].innerText);
           }
           catch{
           }
           try{
-            await removeThePassenger(document.querySelector("#my-trips").children[i].children[1].innerText)
+            await removeThePassenger(document.querySelector("#bookedtripss").children[i].children[1].innerText)
           }
           catch{
           }
@@ -347,3 +355,19 @@ async function addButtonAction()
       }
   }
 }
+
+/*window.onload=function()
+{
+  "use strict";
+  for(let i=0;i<myTripsArr.length;i++)
+  {
+      var mydiv=document.createElement('div');
+      bookedTrips.appendChild('mydiv');
+      var myid=document.createElement('p');
+
+      myid.innerHTML="id: "+arr[i][id];
+      mydiv.appendChild(myid);
+
+  }
+
+}*/
