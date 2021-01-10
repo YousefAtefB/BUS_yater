@@ -286,7 +286,14 @@ async function BookingEmployeeBook(busId) {
   //-------------------------------
 }
 
-async function addThePassenger(tripid,cardId) {
+async function addThePassenger(tripid,cardId,value) {
+  value=parseInt(value);
+  console.log(value);
+  console.log(parseInt(document.querySelector("#money").innerText));
+  if(parseInt(document.querySelector("#money").innerText)-value < 0){
+    alert("don't have enough money");
+    return;
+  }
   //data to be sent
   let dataToSend = {
     passengerId: passengerid,
@@ -359,7 +366,7 @@ async function addButtonAction()
         catch{
         }
         try{
-          addThePassenger(document.querySelector("#trips").children[i].children[1].innerText,cardId);
+          addThePassenger(document.querySelector("#trips").children[i].children[1].innerText,cardId,document.querySelector("#trips").children[0].children[5].innerText.slice(6));
         }
         catch{
         }
