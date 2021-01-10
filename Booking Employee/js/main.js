@@ -27,7 +27,10 @@ var searchButton=document.getElementById('s-button'),
       let dataToSend = {
         id: arr[from.selectedIndex].id, //id of the station
       };
+      if(parseInt(id)<0)
+      {alert('id must be positive integer');}
       //--------------------------------
+      else{
       let response = await fetch("http://127.0.0.1:8080/allTripsOfStation", {
         method: "POST",
         body: JSON.stringify(dataToSend),
@@ -38,7 +41,7 @@ var searchButton=document.getElementById('s-button'),
       let resivedData = await response.json();
       //display the data
       arr=resivedData
-      console.log(resivedData);
+      console.log(resivedData);}
       //-------------------------------
     }
 
@@ -79,7 +82,10 @@ async function BookingEmployeeSearch() {
         location: from.options[from.selectedIndex].value, //source
         destination: to.options[to.selectedIndex].value, //destination
     };
+    if(from.options[from.selectedIndex].value=="--SELECT--" || to.options[to.selectedIndex].value=="--SELECT--")
+    {alert("You should select valid location");}
     //--------------------------------
+    else{
     let response = await fetch("http://127.0.0.1:8080/BookingEmployeeSearch", {
         method: "POST",
         body: JSON.stringify(dataToSend),
@@ -89,7 +95,7 @@ async function BookingEmployeeSearch() {
     });
     let resivedData = await response.json();
     //display the data
-    arr=resivedData;
+    arr=resivedData;}
     //-------------------------------
 }
 
@@ -154,7 +160,10 @@ async function BookingEmployeeBook(tripid) {
     let dataToSend = {
       id: tripid, //bus id
     };
+    if (parseInt(id)<0)
+    {alert("ID must be Positive integer");}
     //--------------------------------
+    else{
     let response = await fetch("http://127.0.0.1:8080/BookingEmployeeBook", {
       method: "POST",
       body: JSON.stringify(dataToSend),
@@ -164,7 +173,7 @@ async function BookingEmployeeBook(tripid) {
     });
     let resivedData = await response.json();
     //display the data
-    console.log(resivedData);
+    console.log(resivedData);}
     //-------------------------------
   }
 
@@ -175,7 +184,10 @@ async function BookingEmployeeCancel(tripid) {
     let dataToSend = {
       id: tripid, //bus id
     };
+    if (parseInt(id)<0)
+    {alert("ID must be Positive integer");}
     //--------------------------------
+    else{
     let response = await fetch("http://127.0.0.1:8080/BookingEmployeeCancel", {
       method: "POST",
       body: JSON.stringify(dataToSend),
@@ -185,7 +197,7 @@ async function BookingEmployeeCancel(tripid) {
     });
     let resivedData = await response.json();
     //display the data
-    console.log(resivedData);
+    console.log(resivedData);}
     //-------------------------------
   }
 
