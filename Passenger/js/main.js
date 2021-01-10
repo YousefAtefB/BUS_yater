@@ -26,6 +26,13 @@ var searchButton=document.getElementById('s-button'),
     //--------------------------------
     //let response = await fetch('http://127.0.0.1:8080/lastSignedIn');
     //let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
     //arr = resivedData;
     //passengerid = arr[0].id;
     //cardId = arr[0].cardId;
@@ -77,6 +84,13 @@ var searchButton=document.getElementById('s-button'),
     //--------------------------------
     let response = await fetch('http://127.0.0.1:8080/allStations');
     let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
     //display the data
     arr=resivedData;
     console.log(resivedData);
@@ -97,6 +111,13 @@ var searchButton=document.getElementById('s-button'),
       },
     });
     let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
     //display the data
     arr=resivedData
     console.log(resivedData);
@@ -116,6 +137,13 @@ var searchButton=document.getElementById('s-button'),
           },
         });
         let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
         //display the data
         cardId=resivedData[0].cardId;
         console.log(resivedData);
@@ -134,6 +162,13 @@ var searchButton=document.getElementById('s-button'),
       },
     });
     let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
     //display the data
     document.querySelector("#money").innerText=resivedData[0].moneyAmount;
     console.log(resivedData);
@@ -154,6 +189,13 @@ var searchButton=document.getElementById('s-button'),
       },
     });
     let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
     //display the data
     myTripsArr=resivedData;
     console.log(resivedData);
@@ -212,6 +254,13 @@ async function BookingEmployeeSearch() {
       },
   });
   let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
   //display the data
   arr=resivedData;
   //-------------------------------
@@ -281,6 +330,13 @@ async function BookingEmployeeBook(busId) {
     },
   });
   let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
   //display the data
   console.log(resivedData);
   //-------------------------------
@@ -309,6 +365,13 @@ async function addThePassenger(tripid,cardId,value) {
     },
   });
   let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
   //display the data
   console.log(resivedData);
   //-------------------------------
@@ -330,6 +393,13 @@ async function removeThePassenger(tripid,cardId) {
     },
   });
   let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
   //display the data
   console.log(resivedData);
   //-------------------------------
@@ -350,6 +420,13 @@ async function BookingEmployeeCancel(id) {
     },
   });
   let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
   //display the data
   console.log(resivedData);
   //-------------------------------

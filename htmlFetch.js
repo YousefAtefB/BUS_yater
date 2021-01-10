@@ -13,6 +13,13 @@ async function BookingEmployeeSearch() {
     },
   });
   let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
   //display the data
   console.log(resivedData);
   //-------------------------------
@@ -32,6 +39,13 @@ async function BookingEmployeeBook() {
     },
   });
   let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
   //display the data
   console.log(resivedData);
   //-------------------------------
@@ -51,6 +65,13 @@ async function BookingEmployeeCancel() {
     },
   });
   let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
   //display the data
   console.log(resivedData);
   //-------------------------------
@@ -70,6 +91,13 @@ async function DriverVehicle() {
     },
   });
   let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
   //display the data
   console.log(resivedData);
   //-------------------------------
@@ -89,6 +117,13 @@ async function DriverToBeRepaired() {
     },
   });
   let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
   //display the data
   console.log(resivedData);
   //-------------------------------
@@ -116,6 +151,13 @@ async function SignUp() {
     },
   });
   let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
   //display the data
   console.log(resivedData);
   //-------------------------------
@@ -136,6 +178,13 @@ async function sendLogInInfo() {
     },
   });
   let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
   //display the data
   console.log(resivedData);
   //-------------------------------
@@ -154,6 +203,13 @@ async function mechanicFixedTheVechile() {
     },
   });
   let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
   //display the data
   console.log(resivedData);
   //-------------------------------
@@ -173,6 +229,13 @@ async function vechilesThatMechanicFixes() {
     },
   });
   let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
   //display the data
   console.log(resivedData);
   //-------------------------------
@@ -184,6 +247,13 @@ async function lastSignedIn() {
   //--------------------------------
   let response = await fetch("http://127.0.0.1:8080/lastSignedIn");
   let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
   //display the data
   console.log(resivedData);
   //------------------
@@ -195,6 +265,13 @@ async function allStations() {
   //--------------------------------
   let response = await fetch("http://127.0.0.1:8080/allStations");
   let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
   //display the data
   console.log(resivedData);
   //------------------
@@ -214,6 +291,13 @@ async function allTripsOfStation() {
     },
   });
   let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
   //display the data
   console.log(resivedData);
   //-------------------------------

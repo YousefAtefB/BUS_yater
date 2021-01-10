@@ -16,6 +16,13 @@ var searchButton=document.getElementById('s-button'),
       //--------------------------------
       let response = await fetch('http://127.0.0.1:8080/allStations');
       let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
       //display the data
       arr=resivedData;
       console.log(resivedData);
@@ -39,6 +46,13 @@ var searchButton=document.getElementById('s-button'),
         },
       });
       let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
       //display the data
       arr=resivedData
       console.log(resivedData);}
@@ -94,6 +108,13 @@ async function BookingEmployeeSearch() {
         },
     });
     let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
     //display the data
     arr=resivedData;}
     //-------------------------------
@@ -172,6 +193,13 @@ async function BookingEmployeeBook(tripid) {
       },
     });
     let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
     //display the data
     console.log(resivedData);}
     //-------------------------------
@@ -196,6 +224,13 @@ async function BookingEmployeeCancel(tripid) {
       },
     });
     let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
     //display the data
     console.log(resivedData);}
     //-------------------------------

@@ -111,6 +111,13 @@
             },
           });
           let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
           //display the data
           console.log(resivedData);
           //-------------------------------

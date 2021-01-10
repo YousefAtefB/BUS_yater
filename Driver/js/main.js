@@ -15,6 +15,13 @@ async function lastSignedIn() {
 	//--------------------------------
 	let response = await fetch('http://127.0.0.1:8080/lastSignedIn');
 	let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
 	//display the data
 	arr = resivedData;
 	arr = arr[0];
@@ -37,6 +44,13 @@ window.onload = async function DriverVehicle() {
 		},
 	});
 	let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
 	//display the data
 	arr = resivedData; //EDITED
 	arr = arr[0];
@@ -58,6 +72,13 @@ BTN.onclick = async function DriverToBeRepaired() {
 		},
 	});
 	let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
 	//display the data
 
 	//-------------------------------

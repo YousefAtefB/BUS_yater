@@ -231,6 +231,13 @@ async function deleteEmployee(id,type) {
 			},
 		});
 		let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
 		//display the data
 		//-------------------------------
 	}
@@ -253,6 +260,13 @@ async function deleteStation(id) {
 		},
 	});
 	let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
 	//display the data
     //-------------------------------
     }
@@ -276,6 +290,13 @@ async function deleteVehicle(id) {
 		},
 	});
 	let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
 	//display the data
     //-------------------------------
     }
@@ -310,6 +331,13 @@ async function addVehicle(
 		},
 	});
 	let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
 	//display the data
     //-------------------------------
     }
@@ -329,6 +357,13 @@ async function addStation(Location) {
 		},
 	});
 	let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
 	//display the data
 	//-------------------------------
 }
@@ -364,6 +399,13 @@ async function addEmployee(type, firstName, lastName, gender, address, salary,sp
 		},
 	});
 	let resivedData = await response.json();
+                        if (resivedData.error) {
+                            alert('an error occurred');
+                            return;
+                        }
+                        else {
+                            alert('the Query is done');
+                        }
 	//display the data
     //-------------------------------
     }
