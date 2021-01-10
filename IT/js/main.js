@@ -209,19 +209,6 @@ addvehicle.onclick = function () {
 		console.log('add');
 	};
 };
-staSubmit.onclick = function () {
-	'use strict';
-	vehicleModel = vehmodel.value;
-	vehicletype = empLN.value;
-	numofpass = empAddress.value;
-	tid = empsalary.value;
-	SID = empUN.value;
-	driverid = empPW.value;
-};
-stationRem.onclick = function () {
-	'use strict';
-	vid = remvehID.value;
-};
 
 async function deleteEmployee(id,type) {
 	//data to be sent
@@ -253,9 +240,12 @@ async function deleteStation(id) {
 	//data to be sent
 	let dataToSend = {
 		id: id, //driver id
-	};
+    };
+    if (parseInt(id) < 0) {
+		alert('id must be positive integer');
+	}
 	//--------------------------------
-	let response = await fetch('http://127.0.0.1:8080/deleteStation', {
+	else{let response = await fetch('http://127.0.0.1:8080/deleteStation', {
 		method: 'POST',
 		body: JSON.stringify(dataToSend),
 		headers: {
@@ -264,16 +254,21 @@ async function deleteStation(id) {
 	});
 	let resivedData = await response.json();
 	//display the data
-	//-------------------------------
+    //-------------------------------
+    }
 }
 
 async function deleteVehicle(id) {
 	//data to be sent
 	let dataToSend = {
 		id: id,
-	};
+    };
+    if (parseInt(id) < 0) {
+		alert('id must be positive integer');
+	}
 	//--------------------------------
-	let response = await fetch('http://127.0.0.1:8080/deleteVehicle', {
+	else{
+        let response = await fetch('http://127.0.0.1:8080/deleteVehicle', {
 		method: 'POST',
 		body: JSON.stringify(dataToSend),
 		headers: {
@@ -282,9 +277,9 @@ async function deleteVehicle(id) {
 	});
 	let resivedData = await response.json();
 	//display the data
-	//-------------------------------
+    //-------------------------------
+    }
 }
-
 async function addVehicle(
 	model,
 	type,
@@ -301,9 +296,13 @@ async function addVehicle(
 		tripId: tripId,
 		StationId: StationId,
 		driverId: driverId,
-	};
+    };
+    if(model==""||type==""||parseInt(maxNumPassenger)<=0||parseInt(tripID)<0||parseInt(StationId)<0||parseInt(driverID)<0)
+    {
+        alert("Some input are invalid");
+    }
 	//--------------------------------
-	let response = await fetch('http://127.0.0.1:8080/addVehicle', {
+	else{let response = await fetch('http://127.0.0.1:8080/addVehicle', {
 		method: 'POST',
 		body: JSON.stringify(dataToSend),
 		headers: {
@@ -312,7 +311,8 @@ async function addVehicle(
 	});
 	let resivedData = await response.json();
 	//display the data
-	//-------------------------------
+    //-------------------------------
+    }
 }
 
 async function addStation(Location) {
@@ -344,8 +344,18 @@ async function addEmployee(type, firstName, lastName, gender, address, salary,sp
 		address: address,
 		salary: salary,
 		specialId: specialId
-	};
-	//--------------------------------
+    };
+    if (type == '--Employee--'){
+		alert('select employee type');
+    } 
+    else if (gender == '--GENDER--'){
+		alert('select employee gender');
+    } 
+    else if (firstName==""||lastName==""||address==""||parseInt(salary)<=0||parseInt(specialId)<0){
+		alert('Some input are invalid');
+    } 
+    //--------------------------------
+    else{
 	let response = await fetch('http://127.0.0.1:8080/addEmployee', {
 		method: 'POST',
 		body: JSON.stringify(dataToSend),
@@ -355,5 +365,6 @@ async function addEmployee(type, firstName, lastName, gender, address, salary,sp
 	});
 	let resivedData = await response.json();
 	//display the data
-	//-------------------------------
+    //-------------------------------
+    }
 }
