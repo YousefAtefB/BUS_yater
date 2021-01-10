@@ -51,8 +51,14 @@ app.post('/BookingEmployeeSearch', (request, response) => {
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
 			lastResult = queryResult.recordsets[0];
-			response.send(queryResult.recordsets[0]);
+			if(Array.isArray(lastResult)){
+				response.send(queryResult.recordsets[0]);
+			}
+			else{
+				response.send({done: true});
+			}
 		} catch (error) {
+			response.send({error: error});
 			console.log(error);
 		}
 	})(request, response);
@@ -73,8 +79,14 @@ app.post('/BookingEmployeeBook', (request, response) => {
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
 			lastResult = queryResult.recordsets[0];
-			response.send(queryResult.recordsets[0]);
+			if(Array.isArray(lastResult)){
+				response.send(queryResult.recordsets[0]);
+			}
+			else{
+				response.send({done: true});
+			}
 		} catch (error) {
+			response.send({error: error});
 			console.log(error);
 		}
 	})(request, response);
@@ -95,8 +107,14 @@ app.post('/BookingEmployeeCancel', (request, response) => {
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
 			lastResult = queryResult.recordsets[0];
-			response.send(queryResult.recordsets[0]);
+			if(Array.isArray(lastResult)){
+				response.send(queryResult.recordsets[0]);
+			}
+			else{
+				response.send({done: true});
+			}
 		} catch (error) {
+			response.send({error: error});
 			console.log(error);
 		}
 	})(request, response);
@@ -117,8 +135,14 @@ app.post('/DriverVehicle', (request, response) => {
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
 			lastResult = queryResult.recordsets[0];
-			response.send(queryResult.recordsets[0]);
+			if(Array.isArray(lastResult)){
+				response.send(queryResult.recordsets[0]);
+			}
+			else{
+				response.send({done: true});
+			}
 		} catch (error) {
+			response.send({error: error});
 			console.log(error);
 		}
 	})(request, response);
@@ -140,8 +164,14 @@ app.post('/DriverToBeRepaired', (request, response) => {
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
 			lastResult = queryResult.recordsets[0];
-			response.send(queryResult.recordsets[0]);
+			if(Array.isArray(lastResult)){
+				response.send(queryResult.recordsets[0]);
+			}
+			else{
+				response.send({done: true});
+			}
 		} catch (error) {
+			response.send({error: error});
 			console.log(error);
 		}
 	})(request, response);
@@ -188,8 +218,14 @@ app.post('/SignUp', (request, response) => {
 			queryResult = await sqlServer.request().query(query);
 			//----------------------------------
 			lastResult = queryResult.recordsets[0];
-			response.send(queryResult.recordsets[0]);
+			if(Array.isArray(lastResult)){
+				response.send(queryResult.recordsets[0]);
+			}
+			else{
+				response.send({done: true});
+			}
 		} catch (error) {
+			response.send({error: error});
 			console.log(error);
 		}
 	})(request, response);
@@ -212,8 +248,14 @@ app.post('/mechanicFixedTheVechile', (request, response) => {
 				where F.mechanicId = M.id And F.vechicleId =  V.id And V.needToReapair = 0`;
 			lqueryResult = await sqlServer.request().query(query);
 			lastResult = queryResult.recordsets[0];
-			response.send(queryResult.recordsets[0]);
+			if(Array.isArray(lastResult)){
+				response.send(queryResult.recordsets[0]);
+			}
+			else{
+				response.send({done: true});
+			}
 		} catch (error) {
+			response.send({error: error});
 			console.log(error);
 		}
 	})(request, response);
@@ -230,8 +272,14 @@ app.post('/mechanicAssigendVechile', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			lastResult = queryResult.recordsets[0];
-			response.send(queryResult.recordsets[0]);
+			if(Array.isArray(lastResult)){
+				response.send(queryResult.recordsets[0]);
+			}
+			else{
+				response.send({done: true});
+			}
 		} catch (error) {
+			response.send({error: error});
 			console.log(error);
 		}
 	})(request, response);
@@ -241,6 +289,12 @@ app.post('/CheckLogIn', (request, response) => {
 	//this tamplate is for queries that have prameters you can replace CheckLogIn with appropiate name
 	(async (request, response) => {
 		let recivedData = request.body;
+		//IT
+        if (recivedData.username == "TEAM6"&& recivedData.password == "1234") {
+			lastResult[1] = 'IT';
+			response.send(lastResult);
+			return;
+		}
 		try {
 			let query = `SELECT * from Passenger 
 			where username='${recivedData.username}' and userpassword='${recivedData.userpassword}'`; //the query
@@ -295,6 +349,7 @@ app.post('/CheckLogIn', (request, response) => {
 			response.send(lastResult);
 			return;
 		} catch (error) {
+			response.send({error: error});
 			console.log(error);
 		}
 	})(request, response);
@@ -306,6 +361,7 @@ app.get('/lastSignedIn', (request, response) => {
 		try {
 			response.send(lastResult);
 		} catch (error) {
+			response.send({error: error});
 			console.log(error);
 		}
 	})(request, response);
@@ -322,8 +378,14 @@ app.get('/allStations', (request, response) => {
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
 			lastResult = queryResult.recordsets[0];
-			response.send(queryResult.recordsets[0]);
+			if(Array.isArray(lastResult)){
+				response.send(queryResult.recordsets[0]);
+			}
+			else{
+				response.send({done: true});
+			}
 		} catch (error) {
+			response.send({error: error});
 			console.log(error);
 		}
 	})(request, response);
@@ -344,8 +406,14 @@ app.post('/allTripsOfStation', (request, response) => {
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
 			lastResult = queryResult.recordsets[0];
-			response.send(queryResult.recordsets[0]);
+			if(Array.isArray(lastResult)){
+				response.send(queryResult.recordsets[0]);
+			}
+			else{
+				response.send({done: true});
+			}
 		} catch (error) {
+			response.send({error: error});
 			console.log(error);
 		}
 	})(request, response);
@@ -365,8 +433,14 @@ app.post('/allDriversOfStation', (request, response) => {
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
 			lastResult = queryResult.recordsets[0];
-			response.send(queryResult.recordsets[0]);
+			if(Array.isArray(lastResult)){
+				response.send(queryResult.recordsets[0]);
+			}
+			else{
+				response.send({done: true});
+			}
 		} catch (error) {
+			response.send({error: error});
 			console.log(error);
 		}
 	})(request, response);
@@ -386,8 +460,14 @@ app.post('/updateDriverSalary', (request, response) => {
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
 			lastResult = queryResult.recordsets[0];
-			response.send(queryResult.recordsets[0]);
+			if(Array.isArray(lastResult)){
+				response.send(queryResult.recordsets[0]);
+			}
+			else{
+				response.send({done: true});
+			}
 		} catch (error) {
+			response.send({error: error});
 			console.log(error);
 		}
 	})(request, response);
@@ -407,8 +487,14 @@ app.post('/CardValue', (request, response) => {
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
 			lastResult = queryResult.recordsets[0];
-			response.send(queryResult.recordsets[0]);
+			if(Array.isArray(lastResult)){
+				response.send(queryResult.recordsets[0]);
+			}
+			else{
+				response.send({done: true});
+			}
 		} catch (error) {
+			response.send({error: error});
 			console.log(error);
 		}
 	})(request, response);
@@ -428,8 +514,14 @@ app.post('/myTrip', (request, response) => {
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
 			lastResult = queryResult.recordsets[0];
-			response.send(queryResult.recordsets[0]);
+			if(Array.isArray(lastResult)){
+				response.send(queryResult.recordsets[0]);
+			}
+			else{
+				response.send({done: true});
+			}
 		} catch (error) {
+			response.send({error: error});
 			console.log(error);
 		}
 	})(request, response);
@@ -465,9 +557,15 @@ app.post('/addThePassenger', (request, response) => {
 
 			//----------------------------------
 			lastResult = queryResult.recordsets[0];
-			response.send(queryResult.recordsets[0]);
+			if(Array.isArray(lastResult)){
+				response.send(queryResult.recordsets[0]);
+			}
+			else{
+				response.send({done: true});
+			}
 
 		} catch (error) {
+			response.send({error: error});
 			console.log(error);
 		}
 	})(request, response);
@@ -503,8 +601,14 @@ app.post('/removeThePassenger', (request, response) => {
 			queryResult = await sqlServer.request().query(query);
 			//----------------------------------
 			lastResult = queryResult.recordsets[0];
-			response.send(queryResult.recordsets[0]);
+			if(Array.isArray(lastResult)){
+				response.send(queryResult.recordsets[0]);
+			}
+			else{
+				response.send({done: true});
+			}
 		} catch (error) {
+			response.send({error: error});
 			console.log(error);
 		}
 	})(request, response);
@@ -526,8 +630,14 @@ app.post('/addTrip', (request, response) => {
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
 			lastResult = queryResult.recordsets[0];
-			response.send(queryResult.recordsets[0]);
+			if(Array.isArray(lastResult)){
+				response.send(queryResult.recordsets[0]);
+			}
+			else{
+				response.send({done: true});
+			}
 		} catch (error) {
+			response.send({error: error});
 			console.log(error);
 		}
 	})(request, response);
@@ -548,8 +658,14 @@ app.post('/deleteTrip', (request, response) => {
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
 			lastResult = queryResult.recordsets[0];
-			response.send(queryResult.recordsets[0]);
+			if(Array.isArray(lastResult)){
+				response.send(queryResult.recordsets[0]);
+			}
+			else{
+				response.send({done: true});
+			}
 		} catch (error) {
+			response.send({error: error});
 			console.log(error);
 		}
 	})(request, response);
@@ -589,8 +705,14 @@ app.post('/deleteEmployee', (request, response) => {
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
 			lastResult = queryResult.recordsets[0];
-			response.send(queryResult.recordsets[0]);
+			if(Array.isArray(lastResult)){
+				response.send(queryResult.recordsets[0]);
+			}
+			else{
+				response.send({done: true});
+			}
 		} catch (error) {
+			response.send({error: error});
 			console.log(error);
 		}
 	})(request, response);
@@ -610,8 +732,14 @@ app.post('/deleteVehicle', (request, response) => {
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
 			lastResult = queryResult.recordsets[0];
-			response.send(queryResult.recordsets[0]);
+			if(Array.isArray(lastResult)){
+				response.send(queryResult.recordsets[0]);
+			}
+			else{
+				response.send({done: true});
+			}
 		} catch (error) {
+			response.send({error: error});
 			console.log(error);
 		}
 	})(request, response);
@@ -631,8 +759,14 @@ app.post('/deleteStation', (request, response) => {
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
 			lastResult = queryResult.recordsets[0];
-			response.send(queryResult.recordsets[0]);
+			if(Array.isArray(lastResult)){
+				response.send(queryResult.recordsets[0]);
+			}
+			else{
+				response.send({done: true});
+			}
 		} catch (error) {
+			response.send({error: error});
 			console.log(error);
 		}
 	})(request, response);
@@ -654,8 +788,14 @@ app.post('/addStation', (request, response) => {
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
 			lastResult = queryResult.recordsets[0];
-			response.send(queryResult.recordsets[0]);
+			if(Array.isArray(lastResult)){
+				response.send(queryResult.recordsets[0]);
+			}
+			else{
+				response.send({done: true});
+			}
 		} catch (error) {
+			response.send({error: error});
 			console.log(error);
 		}
 	})(request, response);
@@ -712,8 +852,14 @@ app.post('/addEmployee', (request, response) => {
 			queryResult = await sqlServer.request().query(query);
 			//----------------------------------
 			lastResult = queryResult.recordsets[0];
-			response.send(queryResult.recordsets[0]);
+			if(Array.isArray(lastResult)){
+				response.send(queryResult.recordsets[0]);
+			}
+			else{
+				response.send({done: true});
+			}
 		} catch (error) {
+			response.send({error: error});
 			console.log(error);
 		}
 	})(request, response);
@@ -736,8 +882,14 @@ app.post('/addVehicle', (request, response) => {
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
 			lastResult = queryResult.recordsets[0];
-			response.send(queryResult.recordsets[0]);
+			if(Array.isArray(lastResult)){
+				response.send(queryResult.recordsets[0]);
+			}
+			else{
+				response.send({done: true});
+			}
 		} catch (error) {
+			response.send({error: error});
 			console.log(error);
 		}
 	})(request, response);
