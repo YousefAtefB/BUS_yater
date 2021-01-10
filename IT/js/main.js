@@ -11,7 +11,7 @@ var addemp = document.getElementById('employee-btn'), //add employee button
 	remID = document.getElementById('remID'), //employee removal id
 	empRem = document.getElementById('emp-rem'), //employee remove button
 	sid, //to create station id input
-    	vehidmec, 
+	vehidmec,
 	Type, //some vars to get inputs
 	Fname, //
 	Lname, //
@@ -48,54 +48,52 @@ var addemp = document.getElementById('employee-btn'), //add employee button
 	SID, //
 	driverid, //
 	vid, //
-	exista=false,
-    	existm=false;
+	exista = false,
+	existm = false;
 
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
-empType.onchange=function()
-{
-    "use strict";
-    if((empType.options[empType.selectedIndex].value=="Analyst" || empType.options[empType.selectedIndex].value=="Booking Employee" ) && !exista)
-    {
-        sid=document.createElement('input');
-        sid.setAttribute("placeholder","Station ID");
-        sid.setAttribute("type","number");
-        empForm.insertBefore(sid,empForm.childNodes[12]);
-        exista=true;
-        if(existm)
-        {
-            existm=false;
-            empForm.removeChild(vehidmec);
-        }
-    }
-    else if(empType.options[empType.selectedIndex].value=="Mechanic"&&!existm)
-    {
-        vehidmec=document.createElement('input');
-        vehidmec.setAttribute("placeholder","Vehicle ID");
-        vehidmec.setAttribute("type","number");
-        empForm.insertBefore(vehidmec,empForm.childNodes[12]);
-        existm=true;
-        if(exista)
-        {
-            exista=false;
-            empForm.removeChild(sid);
-        }
-    }
-    else if(empType.options[empType.selectedIndex].value=="Driver")
-    {
-        if(exista)
-        {
-            empForm.removeChild(sid);
-            exista=false;
-        }
-        if(existm)
-        {
-            empForm.removeChild(vehidmec);
-            existm=false;
-        }
-    }
-    Type=empType.options[empType.selectedIndex].value;
+empType.onchange = function () {
+	'use strict';
+	if (
+		(empType.options[empType.selectedIndex].value == 'Analyst' ||
+			empType.options[empType.selectedIndex].value ==
+				'Booking Employee') &&
+		!exista
+	) {
+		sid = document.createElement('input');
+		sid.setAttribute('placeholder', 'Station ID');
+		sid.setAttribute('type', 'number');
+		empForm.insertBefore(sid, empForm.childNodes[12]);
+		exista = true;
+		if (existm) {
+			existm = false;
+			empForm.removeChild(vehidmec);
+		}
+	} else if (
+		empType.options[empType.selectedIndex].value == 'Mechanic' &&
+		!existm
+	) {
+		vehidmec = document.createElement('input');
+		vehidmec.setAttribute('placeholder', 'Vehicle ID');
+		vehidmec.setAttribute('type', 'number');
+		empForm.insertBefore(vehidmec, empForm.childNodes[12]);
+		existm = true;
+		if (exista) {
+			exista = false;
+			empForm.removeChild(sid);
+		}
+	} else if (empType.options[empType.selectedIndex].value == 'Driver') {
+		if (exista) {
+			empForm.removeChild(sid);
+			exista = false;
+		}
+		if (existm) {
+			empForm.removeChild(vehidmec);
+			existm = false;
+		}
+	}
+	Type = empType.options[empType.selectedIndex].value;
 };
 
 empGender.onchange = function () {
@@ -110,23 +108,34 @@ addemp.onclick = function () {
 	vehicleDiv.classList.add('hide');
 	document.querySelector('#emp-rem').onclick = async () => {
 		try {
-			await deleteEmployee(document.querySelector('#remID').value);
+			await deleteEmployee(document.querySelector('#remID').value,document.querySelector('#emptype').value);
 		} catch {}
 		console.log('delete');
 	};
-	document.querySelector('#vehicle-sub').onclick = async () => {
+	document.querySelector("#emp-sub").onclick = async () => {
 		try {
-			await addEmployee(
-				document.querySelector('#emptype').value,
-				document.querySelector('#fname').value,
-				document.querySelector('#lname').value,
-				document.querySelector('#gender').value,
-				document.querySelector('#address').value,
-				document.querySelector('#salary').value,
-				document.querySelector(
-					'#employeeform > input[type=number]:nth-child(7)'
-				).value
-			);
+			if (document.querySelector('#emptype').value == 'Driver') {
+				await addEmployee(
+					document.querySelector('#emptype').value,
+					document.querySelector('#fname').value,
+					document.querySelector('#lname').value,
+					document.querySelector('#gender').value,
+					document.querySelector('#address').value,
+					document.querySelector('#salary').value,
+					" ");
+			} else {
+				await addEmployee(
+					document.querySelector('#emptype').value,
+					document.querySelector('#fname').value,
+					document.querySelector('#lname').value,
+					document.querySelector('#gender').value,
+					document.querySelector('#address').value,
+					document.querySelector('#salary').value,
+					document.querySelector(
+						'#employeeform > input[type=number]:nth-child(7)'
+					).value
+				);
+			}
 		} catch {}
 		console.log('add');
 	};
@@ -186,7 +195,7 @@ addvehicle.onclick = function () {
 		} catch {}
 		console.log('delete');
 	};
-	document.querySelector('#emp-sub').onclick = async () => {
+	document.querySelector("#vehicle-sub").onclick = async () => {
 		try {
 			await addVehicle(
 				document.querySelector('#model').value,
@@ -214,22 +223,30 @@ stationRem.onclick = function () {
 	vid = remvehID.value;
 };
 
-async function deleteEmployee(id) {
+async function deleteEmployee(id,type) {
 	//data to be sent
 	let dataToSend = {
-		id: id, //driver id
+		id: id,
+		type: type
 	};
-	//--------------------------------
-	let response = await fetch('http://127.0.0.1:8080/deleteEmployee', {
-		method: 'POST',
-		body: JSON.stringify(dataToSend),
-		headers: {
-			'Content-Type': 'application/json',
-		},
-	});
-	let resivedData = await response.json();
-	//display the data
-	//-------------------------------
+	if (parseInt(id) < 0) {
+		alert('id must be positive integer');
+	} else if (type == '--Employee--'){
+		alert('select employee type');
+	} 
+	else {
+		//--------------------------------
+		let response = await fetch('http://127.0.0.1:8080/deleteEmployee', {
+			method: 'POST',
+			body: JSON.stringify(dataToSend),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
+		let resivedData = await response.json();
+		//display the data
+		//-------------------------------
+	}
 }
 
 async function deleteStation(id) {
@@ -253,7 +270,7 @@ async function deleteStation(id) {
 async function deleteVehicle(id) {
 	//data to be sent
 	let dataToSend = {
-		id: id, //driver id
+		id: id,
 	};
 	//--------------------------------
 	let response = await fetch('http://127.0.0.1:8080/deleteVehicle', {
@@ -316,7 +333,7 @@ async function addStation(Location) {
 	//-------------------------------
 }
 
-async function addEmployee(type, firstName, lastName, gender, address, salary) {
+async function addEmployee(type, firstName, lastName, gender, address, salary,specialId) {
 	//data to be sent
 	gender = gender[0];
 	let dataToSend = {
@@ -326,6 +343,7 @@ async function addEmployee(type, firstName, lastName, gender, address, salary) {
 		gender: gender,
 		address: address,
 		salary: salary,
+		specialId: specialId
 	};
 	//--------------------------------
 	let response = await fetch('http://127.0.0.1:8080/addEmployee', {

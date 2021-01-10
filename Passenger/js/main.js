@@ -14,7 +14,7 @@ var searchButton=document.getElementById('s-button'),
   var toCheck=true;
   var passengerid;
   var cardId;
-
+  var myTripsArr=[];
 window.onload=async function lastSignedIn() {
     //data to be sent
     //nothing
@@ -24,13 +24,32 @@ window.onload=async function lastSignedIn() {
     //arr = resivedData;
     //passengerid = arr[0].id;
     //cardId = arr[0].cardId;
-    passengerid = 14068803;
+    passengerid = 23639040;
     cardId= 290618334;
     //console.log(resivedData);
     //------------------
     await CardValue();
+    await myTrip();
+  for(let i=0;i<myTripsArr.length;i++)
+  {
+    var mt=document.createElement('div');
+        mt.classList.add('t-info');
+        var mtid=document.createElement('p');
+        var mtidspan=document.createElement('span');
+        mtid.innerHTML='id:';
+        mtidspan.innerHTML=myTripsArr[i].tripId;
+        mtid.classList.add('t-infop');
+        mtidspan.classList.add('tripsspan');
+        mt.appendChild(tid);
+        mt.appendChild(tidspan);
+  
+        var cancelBTN=document.createElement('button');
+        cancelBTN.innerHTML='cancel';
+        cancelBTN.classList.add('c-button');
+        mt.appendChild(cancelBTN);
+        myTrips.appendChild(mt);
   }
-
+  }
 
   async function allStations() {
     //data to be sent
@@ -99,6 +118,7 @@ window.onload=async function lastSignedIn() {
     });
     let resivedData = await response.json();
     //display the data
+    myTripsArr=resivedData;
     console.log(resivedData);
     //-------------------------------
   }
@@ -289,7 +309,7 @@ async function BookingEmployeeCancel(tripid) {
   //-------------------------------
 }
 
-function addButtonAction()
+async function addButtonAction()
 {
   for(let i=0;i<arr.length;i++)
   {
@@ -304,26 +324,11 @@ function addButtonAction()
         }
         catch{
         }
-        var mt=document.createElement('div');
-        mt.classList.add('t-info');
-        var mtid=document.createElement('p');
-        var mtidspan=document.createElement('span');
-        mtid.innerHTML='id:';
-        mtidspan.innerHTML=arr[i]['id'][1];
-        mtid.classList.add('t-infop');
-        mtidspan.classList.add('tripsspan');
-        mt.appendChild(tid);
-        mt.appendChild(tidspan);
-
-        var cancelBTN=document.createElement('button');
-        cancelBTN.innerHTML='cancel';
-        cancelBTN.classList.add('c-button');
-        mt.appendChild(cancelBTN);
-        myTrips.appendChild(mt);
-        Trips.classList.add('hide');   
+        Trips.classList.add('hide'); 
       }
   }
 
+      
   for(let i=0;i<arr.length;i++)
   {
       document.querySelector("#my-trips").children[i].children[2].onclick=async function(){

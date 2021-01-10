@@ -26,6 +26,17 @@ var server = app.listen(8080, () => console.log('listening...'));
 
 var lastResult = [];
 
+function makeid(length) {
+	var result           = '';
+	var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+	var charactersLength = characters.length;
+	for ( var i = 0; i < length; i++ ) {
+	   result += characters.charAt(Math.floor(Math.random() * charactersLength));
+	}
+	return result;
+ }
+ 
+
 app.post('/BookingEmployeeSearch', (request, response) => {
 	//this tamplate is for queries that have prameters you can replace CheckLogIn with appropiate name
 	(async (request, response) => {
@@ -487,6 +498,7 @@ app.post('/removeThePassenger', (request, response) => {
 			Set moneyAmount = moneyAmount + ${value}
 			Where id = ${recivedData.passengerId}
 			`;
+
 			sqlServer = await sql.connect(config);
 			queryResult = await sqlServer.request().query(query);
 			//----------------------------------
@@ -549,10 +561,30 @@ app.post('/deleteEmployee', (request, response) => {
 		let recivedData = request.body;
 		try {
 			//your logic
-			let query = `
-			DELETE FROM employee
-			where id = ${recivedData.id}
-			`;
+			let query;
+			if(recivedData.type=='Analyst'){
+				query = `
+				DELETE FROM analyst
+				where id = ${recivedData.id}
+				`;
+			}else if(recivedData.type=='Booking Employee'){
+				query = `
+				DELETE FROM bookingEmployee
+				where id = ${recivedData.id}
+				`;
+			}else if(recivedData.type=='Mechanic'){
+				query = `
+				DELETE FROM employee
+				where id = ${recivedData.id}
+				DELETE FROM mechanic
+				`;
+				
+			}else if(recivedData.type=='Driver'){
+				query = `
+				DELETE FROM driver
+				where id = ${recivedData.id}
+				`;
+			}
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
@@ -635,14 +667,49 @@ app.post('/addEmployee', (request, response) => {
 		let recivedData = request.body;
 		try {
 			//your logic
-			let id =getRandomId()
-			let query = `
-			insert into analyst,bookingEmployee,driver,mechanic
-			values
-			(${id},${recivedData},${recivedData},${recivedData},${recivedData},${recivedData},${recivedData})
-			`;
-			let sqlServer = await sql.connect(config);
-			let queryResult = await sqlServer.request().query(query);
+			let id =getRandomId();
+			let username =makeid(12);
+			let password =makeid(12);
+			let query="";
+			let sqlServer;
+			let queryResult;
+			console.log(recivedData.type)
+			if(recivedData.type=='Analyst'){
+				query = `
+				insert into analyst
+				values
+				(${id},'${recivedData.firstName}','${recivedData.lastName}','${recivedData.gender}','${recivedData.address}',${recivedData.salary},'${username}','${password}',${recivedData.specialId})
+				`;
+			}
+			else if(recivedData.type=='Booking Employee'){
+				query = `
+				insert into bookingEmployee
+				values
+				(${id},'${recivedData.firstName}','${recivedData.lastName}','${recivedData.gender}','${recivedData.address}',${recivedData.salary},'${username}','${password}',${recivedData.specialId})
+				`;
+			}else if(recivedData.type=='Mechanic'){
+				query = `
+				insert into mechanic
+				values
+				(${id},'${recivedData.firstName}','${recivedData.lastName}','${recivedData.gender}','${recivedData.address}',${recivedData.salary},'${username}','${password}')
+				`;
+				sqlServer = await sql.connect(config);
+				queryResult = await sqlServer.request().query(query);
+				query = `
+				insert into fix
+				values
+				(${recivedData.specialId},${id})
+				`;
+			}
+			else if(recivedData.type=='Driver'){
+				query = `
+				insert into driver
+				values
+				(${id},'${recivedData.firstName}','${recivedData.lastName}','${recivedData.gender}','${recivedData.address}',${recivedData.salary},'${username}','${password}',0)
+				`;
+			}
+			sqlServer = await sql.connect(config);
+			queryResult = await sqlServer.request().query(query);
 			//----------------------------------
 			lastResult = queryResult.recordsets[0];
 			response.send(queryResult.recordsets[0]);
@@ -659,6 +726,7 @@ app.post('/addVehicle', (request, response) => {
 		try {
 			//your logic
 			let id =getRandomId()
+			console.log(recivedData);
 			let query = `
 			insert into vehicle
 			values
