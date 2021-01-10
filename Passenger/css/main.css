@@ -176,3 +176,7 @@ input:focus {
 
 #money{font-size: 20px;
 margin-left: 20px;}
+
+.bookedtrips{
+  overflow: auto;
+}
