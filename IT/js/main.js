@@ -108,11 +108,14 @@ addemp.onclick = function () {
 	vehicleDiv.classList.add('hide');
 	document.querySelector('#emp-rem').onclick = async () => {
 		try {
-			await deleteEmployee(document.querySelector('#remID').value,document.querySelector('#emptype').value);
+			await deleteEmployee(
+				document.querySelector('#remID').value,
+				document.querySelector('#emptype').value
+			);
 		} catch {}
 		console.log('delete');
 	};
-	document.querySelector("#emp-sub").onclick = async () => {
+	document.querySelector('#emp-sub').onclick = async () => {
 		try {
 			if (document.querySelector('#emptype').value == 'Driver') {
 				await addEmployee(
@@ -122,7 +125,8 @@ addemp.onclick = function () {
 					document.querySelector('#gender').value,
 					document.querySelector('#address').value,
 					document.querySelector('#salary').value,
-					" ");
+					' '
+				);
 			} else {
 				await addEmployee(
 					document.querySelector('#emptype').value,
@@ -136,7 +140,9 @@ addemp.onclick = function () {
 					).value
 				);
 			}
-		} catch {}
+		} catch {
+			alert('input error');
+		}
 		console.log('add');
 	};
 };
@@ -195,7 +201,7 @@ addvehicle.onclick = function () {
 		} catch {}
 		console.log('delete');
 	};
-	document.querySelector("#vehicle-sub").onclick = async () => {
+	document.querySelector('#vehicle-sub').onclick = async () => {
 		try {
 			await addVehicle(
 				document.querySelector('#model').value,
@@ -210,18 +216,17 @@ addvehicle.onclick = function () {
 	};
 };
 
-async function deleteEmployee(id,type) {
+async function deleteEmployee(id, type) {
 	//data to be sent
 	let dataToSend = {
 		id: id,
-		type: type
+		type: type,
 	};
-	if (parseInt(id) < 0) {
+	if (parseInt(dataToSend.id) < 0) {
 		alert('id must be positive integer');
-	} else if (type == '--Employee--'){
+	} else if (type == '--Employee--') {
 		alert('select employee type');
-	} 
-	else {
+	} else {
 		//--------------------------------
 		let response = await fetch('http://127.0.0.1:8080/deleteEmployee', {
 			method: 'POST',
@@ -231,13 +236,11 @@ async function deleteEmployee(id,type) {
 			},
 		});
 		let resivedData = await response.json();
-                        if (resivedData.error) {
-                            alert('an error occurred');
-                            return;
-                        }
-                        else {
-                            alert('the Query is done');
-                        }
+		if (resivedData.error) {
+			alert('an error occurred');
+			return;
+		} else {
+		}
 		//display the data
 		//-------------------------------
 	}
@@ -247,59 +250,56 @@ async function deleteStation(id) {
 	//data to be sent
 	let dataToSend = {
 		id: id, //driver id
-    };
-    if (parseInt(id) < 0) {
+	};
+	if (parseInt(dataToSend.id) < 0) {
 		alert('id must be positive integer');
 	}
 	//--------------------------------
-	else{let response = await fetch('http://127.0.0.1:8080/deleteStation', {
-		method: 'POST',
-		body: JSON.stringify(dataToSend),
-		headers: {
-			'Content-Type': 'application/json',
-		},
-	});
-	let resivedData = await response.json();
-                        if (resivedData.error) {
-                            alert('an error occurred');
-                            return;
-                        }
-                        else {
-                            alert('the Query is done');
-                        }
-	//display the data
-    //-------------------------------
-    }
+	else {
+		let response = await fetch('http://127.0.0.1:8080/deleteStation', {
+			method: 'POST',
+			body: JSON.stringify(dataToSend),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
+		let resivedData = await response.json();
+		if (resivedData.error) {
+			alert('an error occurred');
+			return;
+		} else {
+		}
+		//display the data
+		//-------------------------------
+	}
 }
 
 async function deleteVehicle(id) {
 	//data to be sent
 	let dataToSend = {
 		id: id,
-    };
-    if (parseInt(id) < 0) {
+	};
+	if (parseInt(dataToSend.id) < 0) {
 		alert('id must be positive integer');
 	}
 	//--------------------------------
-	else{
-        let response = await fetch('http://127.0.0.1:8080/deleteVehicle', {
-		method: 'POST',
-		body: JSON.stringify(dataToSend),
-		headers: {
-			'Content-Type': 'application/json',
-		},
-	});
-	let resivedData = await response.json();
-                        if (resivedData.error) {
-                            alert('an error occurred');
-                            return;
-                        }
-                        else {
-                            alert('the Query is done');
-                        }
-	//display the data
-    //-------------------------------
-    }
+	else {
+		let response = await fetch('http://127.0.0.1:8080/deleteVehicle', {
+			method: 'POST',
+			body: JSON.stringify(dataToSend),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
+		let resivedData = await response.json();
+		if (resivedData.error) {
+			alert('an error occurred');
+			return;
+		} else {
+		}
+		//display the data
+		//-------------------------------
+	}
 }
 async function addVehicle(
 	model,
@@ -317,30 +317,35 @@ async function addVehicle(
 		tripId: tripId,
 		StationId: StationId,
 		driverId: driverId,
-    };
-    if(model==""||type==""||parseInt(maxNumPassenger)<=0||parseInt(tripID)<0||parseInt(StationId)<0||parseInt(driverID)<0)
-    {
-        alert("Some input are invalid");
-    }
+	};
+	if (
+		dataToSend.model == '' ||
+		dataToSend.type == '' ||
+		parseInt(dataToSend.maxNumPassenger) <= 0 ||
+		parseInt(dataToSend.tripId) < 0 ||
+		parseInt(dataToSend.StationId) < 0 ||
+		parseInt(dataToSend.driverID) < 0
+	) {
+		alert('Some input are invalid');
+	}
 	//--------------------------------
-	else{let response = await fetch('http://127.0.0.1:8080/addVehicle', {
-		method: 'POST',
-		body: JSON.stringify(dataToSend),
-		headers: {
-			'Content-Type': 'application/json',
-		},
-	});
-	let resivedData = await response.json();
-                        if (resivedData.error) {
-                            alert('an error occurred');
-                            return;
-                        }
-                        else {
-                            alert('the Query is done');
-                        }
-	//display the data
-    //-------------------------------
-    }
+	else {
+		let response = await fetch('http://127.0.0.1:8080/addVehicle', {
+			method: 'POST',
+			body: JSON.stringify(dataToSend),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
+		let resivedData = await response.json();
+		if (resivedData.error) {
+			alert('an error occurred');
+			return;
+		} else {
+		}
+		//display the data
+		//-------------------------------
+	}
 }
 
 async function addStation(Location) {
@@ -357,18 +362,24 @@ async function addStation(Location) {
 		},
 	});
 	let resivedData = await response.json();
-                        if (resivedData.error) {
-                            alert('an error occurred');
-                            return;
-                        }
-                        else {
-                            alert('the Query is done');
-                        }
+	if (resivedData.error) {
+		alert('an error occurred');
+		return;
+	} else {
+	}
 	//display the data
 	//-------------------------------
 }
 
-async function addEmployee(type, firstName, lastName, gender, address, salary,specialId) {
+async function addEmployee(
+	type,
+	firstName,
+	lastName,
+	gender,
+	address,
+	salary,
+	specialId
+) {
 	//data to be sent
 	gender = gender[0];
 	let dataToSend = {
@@ -378,35 +389,38 @@ async function addEmployee(type, firstName, lastName, gender, address, salary,sp
 		gender: gender,
 		address: address,
 		salary: salary,
-		specialId: specialId
-    };
-    if (type == '--Employee--'){
+		specialId: specialId,
+	};
+	console.log(dataToSend)
+	if (dataToSend.type == '--Employee--') {
 		alert('select employee type');
-    } 
-    else if (gender == '--GENDER--'){
+	} else if (dataToSend.gender == '--GENDER--') {
 		alert('select employee gender');
-    } 
-    else if (firstName==""||lastName==""||address==""||parseInt(salary)<=0||parseInt(specialId)<0){
+	} else if (
+		dataToSend.firstName == '' ||
+		dataToSend.lastName == '' ||
+		dataToSend.address == '' ||
+		parseInt(dataToSend.salary) <= 0 ||
+		parseInt(dataToSend.specialId) < 0
+	) {
 		alert('Some input are invalid');
-    } 
-    //--------------------------------
-    else{
-	let response = await fetch('http://127.0.0.1:8080/addEmployee', {
-		method: 'POST',
-		body: JSON.stringify(dataToSend),
-		headers: {
-			'Content-Type': 'application/json',
-		},
-	});
-	let resivedData = await response.json();
-                        if (resivedData.error) {
-                            alert('an error occurred');
-                            return;
-                        }
-                        else {
-                            alert('the Query is done');
-                        }
-	//display the data
-    //-------------------------------
-    }
+	}
+	//--------------------------------
+	else {
+		let response = await fetch('http://127.0.0.1:8080/addEmployee', {
+			method: 'POST',
+			body: JSON.stringify(dataToSend),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
+		let resivedData = await response.json();
+		if (resivedData.error) {
+			alert('an error occurred');
+			return;
+		} else {
+		}
+		//display the data
+		//-------------------------------
+	}
 }

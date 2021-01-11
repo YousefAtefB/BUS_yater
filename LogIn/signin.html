@@ -103,7 +103,7 @@
         }
         else {
           //--------------------------------
-          let response = await fetch("https://saadsqlserve.loca.lt//CheckLogIn", {
+          let response = await fetch("http://127.0.0.1:8080/CheckLogIn", {
             method: "POST",
             body: JSON.stringify(dataToSend),
             headers: {
@@ -111,13 +111,13 @@
             },
           });
           let resivedData = await response.json();
-                        if (resivedData.error) {
-                            alert('an error occurred');
-                            return;
-                        }
-                        else {
-                            alert('the Query is done');
-                        }
+          if (resivedData.error) {
+              alert('an error occurred');
+              return;
+          }
+          else {
+              
+          }
           //display the data
           console.log(resivedData);
           //-------------------------------
@@ -129,8 +129,8 @@
             window.location.replace("..\\MechanicsCenter\\mechanic.html");
           } else if (resivedData[1] == "bookingEmployee") {
             window.location.replace("..\\Booking Employee\\BE.html");
-          } else if (resivedData[1] == "Passenger") {
-            window.location.replace("..\\ Passenger\\Passenger.html");
+          } else if (resivedData[1] == "passenger") {
+            window.location.replace("..\\Passenger\\Passenger.html");
           } else if (resivedData[1] == "IT") {
             window.location.replace("..\\IT\\IT.html");
           }
