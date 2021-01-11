@@ -102,7 +102,10 @@ var searchButton=document.getElementById('s-button'),
     let dataToSend = {
       id: arr[from.selectedIndex].id, //id of the station
     };
+    if(parseInt(id)<0)
+    {alert('You must input positive id');}
     //--------------------------------
+    else{
     let response = await fetch("http://127.0.0.1:8080/allTripsOfStation", {
       method: "POST",
       body: JSON.stringify(dataToSend),
@@ -122,13 +125,17 @@ var searchButton=document.getElementById('s-button'),
     arr=resivedData
     console.log(resivedData);
     //-------------------------------
+                      }
   }
   async function myCard(){
         //data to be sent
         let dataToSend = {
           id: passengerid,
         };
+        if(parseInt(id)<0)
+    {alert('You must input positive id');}
         //--------------------------------
+        else{
         let response = await fetch("http://127.0.0.1:8080/myCard", {
           method: "POST",
           body: JSON.stringify(dataToSend),
@@ -147,13 +154,17 @@ var searchButton=document.getElementById('s-button'),
         //display the data
         cardId=resivedData[0].cardId;
         console.log(resivedData);
+                      }
   }
   async function CardValue() {
     //data to be sent
     let dataToSend = {
       id: cardId, 
     };
+    if(parseInt(id)<0)
+    {alert('You must input positive id');}
     //--------------------------------
+    else{
     let response = await fetch("http://127.0.0.1:8080/CardValue", {
       method: "POST",
       body: JSON.stringify(dataToSend),
@@ -173,6 +184,7 @@ var searchButton=document.getElementById('s-button'),
     document.querySelector("#money").innerText=resivedData[0].moneyAmount;
     console.log(resivedData);
     //-------------------------------
+                      }
   }
 
   async function myTrip() {
@@ -180,7 +192,10 @@ var searchButton=document.getElementById('s-button'),
     let dataToSend = {
       id: passengerid,
     };
+    if(parseInt(id)<0)
+    {alert('You must input positive id');}
     //--------------------------------
+    else{
     let response = await fetch("http://127.0.0.1:8080/myTrip", {
       method: "POST",
       body: JSON.stringify(dataToSend),
@@ -200,6 +215,7 @@ var searchButton=document.getElementById('s-button'),
     myTripsArr=resivedData;
     console.log(resivedData);
     //-------------------------------
+                      }
   }
 
 
@@ -245,7 +261,10 @@ async function BookingEmployeeSearch() {
       location: from.options[from.selectedIndex].value, //source
       destination: to.options[to.selectedIndex].value, //destination
   };
+  if(location=="--SELECt--"||destination=="--SELECT--")
+    {alert('You must choose valid location');}
   //--------------------------------
+  else{
   let response = await fetch("http://127.0.0.1:8080/BookingEmployeeSearch", {
       method: "POST",
       body: JSON.stringify(dataToSend),
@@ -264,6 +283,7 @@ async function BookingEmployeeSearch() {
   //display the data
   arr=resivedData;
   //-------------------------------
+                      }
 }
 
 searchButton.onclick = async function(){
@@ -321,7 +341,10 @@ async function BookingEmployeeBook(busId) {
   let dataToSend = {
     id: busId, //bus id
   };
+  if(parseInt(id)<0)
+    {alert('You must input positive id');}
   //--------------------------------
+  else{}
   let response = await fetch("http://127.0.0.1:8080/BookingEmployeeBook", {
     method: "POST",
     body: JSON.stringify(dataToSend),
@@ -340,6 +363,7 @@ async function BookingEmployeeBook(busId) {
   //display the data
   console.log(resivedData);
   //-------------------------------
+                      }
 }
 
 async function addThePassenger(tripid,cardId,value) {
@@ -356,7 +380,10 @@ async function addThePassenger(tripid,cardId,value) {
     tripId: tripid,
     cardId:cardId
   };
+  if(parseInt(passengerid)<0||parseInt(tripId)<0||parseInt(cardId)<0)
+  {alert("Some input are invalid");}
   //--------------------------------
+  else{
   let response = await fetch("http://127.0.0.1:8080/addThePassenger", {
     method: "POST",
     body: JSON.stringify(dataToSend),
@@ -375,6 +402,7 @@ async function addThePassenger(tripid,cardId,value) {
   //display the data
   console.log(resivedData);
   //-------------------------------
+                      }
 }
 
 async function removeThePassenger(tripid,cardId) {
@@ -384,7 +412,11 @@ async function removeThePassenger(tripid,cardId) {
     tripId: tripid,
     cardId: cardId
   };
+  if(parseInt(passengerid)<0||parseInt(tripId)<0||parseInt(cardId)<0)
+  {alert("Some input are invalid");}
   //--------------------------------
+  
+  else{
   let response = await fetch("http://127.0.0.1:8080/removeThePassenger", {
     method: "POST",
     body: JSON.stringify(dataToSend),
@@ -403,6 +435,7 @@ async function removeThePassenger(tripid,cardId) {
   //display the data
   console.log(resivedData);
   //-------------------------------
+                      }
 }
 
 
@@ -411,7 +444,10 @@ async function BookingEmployeeCancel(id) {
   let dataToSend = {
     id: id, //bus id
   };
+  if(parseInt(id)<0)
+  {alert("ID must be positive");}
   //--------------------------------
+  else{
   let response = await fetch("http://127.0.0.1:8080/BookingEmployeeCancel", {
     method: "POST",
     body: JSON.stringify(dataToSend),
@@ -430,6 +466,7 @@ async function BookingEmployeeCancel(id) {
   //display the data
   console.log(resivedData);
   //-------------------------------
+                      }
 }
 
 async function addButtonAction()
@@ -471,19 +508,3 @@ async function addButtonAction()
       }
   }
 }
-
-/*window.onload=function()
-{
-  "use strict";
-  for(let i=0;i<myTripsArr.length;i++)
-  {
-      var mydiv=document.createElement('div');
-      bookedTrips.appendChild('mydiv');
-      var myid=document.createElement('p');
-
-      myid.innerHTML="id: "+arr[i][id];
-      mydiv.appendChild(myid);
-
-  }
-
-}*/
