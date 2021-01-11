@@ -132,7 +132,7 @@ searchButton.onclick = async function () {
 		t.classList.add('t-info');
 		var tid = document.createElement('p');
 		var tidspan = document.createElement('span');
-		tid.innerHTML = 'id:';
+		tid.innerHTML = 'Bus Id:';
 		tidspan.innerHTML = arr[i]['id'][1];
 		tid.classList.add('t-infop');
 		tidspan.classList.add('tripsspan');
