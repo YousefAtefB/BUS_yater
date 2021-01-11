@@ -27,15 +27,17 @@ var server = app.listen(8080, () => console.log('listening...'));
 var lastResult = [];
 
 function makeid(length) {
-	var result           = '';
-	var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+	var result = '';
+	var characters =
+		'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 	var charactersLength = characters.length;
-	for ( var i = 0; i < length; i++ ) {
-	   result += characters.charAt(Math.floor(Math.random() * charactersLength));
+	for (var i = 0; i < length; i++) {
+		result += characters.charAt(
+			Math.floor(Math.random() * charactersLength)
+		);
 	}
 	return result;
- }
-
+}
 
 app.post('/BookingEmployeeSearch', (request, response) => {
 	//this tamplate is for queries that have prameters you can replace CheckLogIn with appropiate name
@@ -50,15 +52,14 @@ app.post('/BookingEmployeeSearch', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			
-			if(Array.isArray(queryResult.recordsets[0])){
+
+			if (Array.isArray(queryResult.recordsets[0])) {
 				response.send(queryResult.recordsets[0]);
-			}
-			else{
-				response.send({done: true});
+			} else {
+				response.send({ done: true });
 			}
 		} catch (error) {
-			response.send({error: error});
+			response.send({ error: error });
 			console.log(error);
 		}
 	})(request, response);
@@ -78,15 +79,14 @@ app.post('/BookingEmployeeBook', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			
-			if(Array.isArray(queryResult.recordsets[0])){
+
+			if (Array.isArray(queryResult.recordsets[0])) {
 				response.send(queryResult.recordsets[0]);
-			}
-			else{
-				response.send({done: true});
+			} else {
+				response.send({ done: true });
 			}
 		} catch (error) {
-			response.send({error: error});
+			response.send({ error: error });
 			console.log(error);
 		}
 	})(request, response);
@@ -106,15 +106,14 @@ app.post('/BookingEmployeeCancel', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			
-			if(Array.isArray(queryResult.recordsets[0])){
+
+			if (Array.isArray(queryResult.recordsets[0])) {
 				response.send(queryResult.recordsets[0]);
-			}
-			else{
-				response.send({done: true});
+			} else {
+				response.send({ done: true });
 			}
 		} catch (error) {
-			response.send({error: error});
+			response.send({ error: error });
 			console.log(error);
 		}
 	})(request, response);
@@ -134,15 +133,14 @@ app.post('/DriverVehicle', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			
-			if(Array.isArray(queryResult.recordsets[0])){
+
+			if (Array.isArray(queryResult.recordsets[0])) {
 				response.send(queryResult.recordsets[0]);
-			}
-			else{
-				response.send({done: true});
+			} else {
+				response.send({ done: true });
 			}
 		} catch (error) {
-			response.send({error: error});
+			response.send({ error: error });
 			console.log(error);
 		}
 	})(request, response);
@@ -163,15 +161,14 @@ app.post('/DriverToBeRepaired', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			
-			if(Array.isArray(queryResult.recordsets[0])){
+
+			if (Array.isArray(queryResult.recordsets[0])) {
 				response.send(queryResult.recordsets[0]);
-			}
-			else{
-				response.send({done: true});
+			} else {
+				response.send({ done: true });
 			}
 		} catch (error) {
-			response.send({error: error});
+			response.send({ error: error });
 			console.log(error);
 		}
 	})(request, response);
@@ -199,9 +196,9 @@ app.post('/SignUp', (request, response) => {
 		let recivedData = request.body;
 		try {
 			//your logic
-			tripid='NULL';
-			cardid=getRandomId();
-			id=getRandomId();
+			tripid = 'NULL';
+			cardid = getRandomId();
+			id = getRandomId();
 			let query = `
 			Insert Into paymentCard
 			Values (${cardid},0)			
@@ -217,20 +214,18 @@ app.post('/SignUp', (request, response) => {
 			sqlServer = await sql.connect(config);
 			queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			
-			if(Array.isArray(queryResult.recordsets[0])){
+
+			if (Array.isArray(queryResult.recordsets[0])) {
 				response.send(queryResult.recordsets[0]);
-			}
-			else{
-				response.send({done: true});
+			} else {
+				response.send({ done: true });
 			}
 		} catch (error) {
-			response.send({error: error});
+			response.send({ error: error });
 			console.log(error);
 		}
 	})(request, response);
 });
-
 
 app.post('/mechanicFixedTheVechile', (request, response) => {
 	(async (request, response) => {
@@ -247,15 +242,14 @@ app.post('/mechanicFixedTheVechile', (request, response) => {
 				from vehicle As V,mechanic As M,fix As F
 				where F.mechanicId = M.id And F.vechicleId =  V.id And V.needToReapair = 0`;
 			lqueryResult = await sqlServer.request().query(query);
-			
-			if(Array.isArray(queryResult.recordsets[0])){
+
+			if (Array.isArray(queryResult.recordsets[0])) {
 				response.send(queryResult.recordsets[0]);
-			}
-			else{
-				response.send({done: true});
+			} else {
+				response.send({ done: true });
 			}
 		} catch (error) {
-			response.send({error: error});
+			response.send({ error: error });
 			console.log(error);
 		}
 	})(request, response);
@@ -271,15 +265,14 @@ app.post('/mechanicAssigendVechile', (request, response) => {
 			Where F.mechanicId = M.id And F.vechicleId =  V.id And V.needToReapair = 1 And M.id =${recivedData.id}`;
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
-			
-			if(Array.isArray(queryResult.recordsets[0])){
+
+			if (Array.isArray(queryResult.recordsets[0])) {
 				response.send(queryResult.recordsets[0]);
-			}
-			else{
-				response.send({done: true});
+			} else {
+				response.send({ done: true });
 			}
 		} catch (error) {
-			response.send({error: error});
+			response.send({ error: error });
 			console.log(error);
 		}
 	})(request, response);
@@ -290,10 +283,13 @@ app.post('/CheckLogIn', (request, response) => {
 	(async (request, response) => {
 		let recivedData = request.body;
 		//IT
-        if (recivedData.username == "TEAM6"&& recivedData.userpassword == "1234") {
-			lastResult=[];
+		if (
+			recivedData.username == 'TEAM6' &&
+			recivedData.userpassword == '1234'
+		) {
+			lastResult = [];
 			lastResult[1] = 'IT';
-			console.log("IT");
+			console.log('IT');
 			response.send(lastResult);
 			return;
 		}
@@ -320,14 +316,14 @@ app.post('/CheckLogIn', (request, response) => {
 							queryResult = await sqlServer
 								.request()
 								.query(query);
-								lastResult = queryResult.recordsets[0];
+							lastResult = queryResult.recordsets[0];
 							if (lastResult.length == 0) {
 								query = `SELECT * from mechanic 
 								where username='${recivedData.username}' and userpassword='${recivedData.userpassword}'`; //the query
 								queryResult = await sqlServer
 									.request()
 									.query(query);
-									lastResult = queryResult.recordsets[0];
+								lastResult = queryResult.recordsets[0];
 								if (lastResult.length != 0) {
 									lastResult[1] = 'mechanic';
 								}
@@ -351,19 +347,18 @@ app.post('/CheckLogIn', (request, response) => {
 			response.send(lastResult);
 			return;
 		} catch (error) {
-			response.send({error: error});
+			response.send({ error: error });
 			console.log(error);
 		}
 	})(request, response);
 });
-
 
 app.get('/lastSignedIn', (request, response) => {
 	(async (request, response) => {
 		try {
 			response.send(lastResult);
 		} catch (error) {
-			response.send({error: error});
+			response.send({ error: error });
 			console.log(error);
 		}
 	})(request, response);
@@ -379,20 +374,18 @@ app.get('/allStations', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			
-			if(Array.isArray(queryResult.recordsets[0])){
+
+			if (Array.isArray(queryResult.recordsets[0])) {
 				response.send(queryResult.recordsets[0]);
-			}
-			else{
-				response.send({done: true});
+			} else {
+				response.send({ done: true });
 			}
 		} catch (error) {
-			response.send({error: error});
+			response.send({ error: error });
 			console.log(error);
 		}
 	})(request, response);
 });
-
 
 app.post('/allTripsOfStation', (request, response) => {
 	//this tamplate is for queries that have prameters you can replace CheckLogIn with appropiate name
@@ -407,15 +400,14 @@ app.post('/allTripsOfStation', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			
-			if(Array.isArray(queryResult.recordsets[0])){
+
+			if (Array.isArray(queryResult.recordsets[0])) {
 				response.send(queryResult.recordsets[0]);
-			}
-			else{
-				response.send({done: true});
+			} else {
+				response.send({ done: true });
 			}
 		} catch (error) {
-			response.send({error: error});
+			response.send({ error: error });
 			console.log(error);
 		}
 	})(request, response);
@@ -434,15 +426,14 @@ app.post('/allDriversOfStation', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			
-			if(Array.isArray(queryResult.recordsets[0])){
+
+			if (Array.isArray(queryResult.recordsets[0])) {
 				response.send(queryResult.recordsets[0]);
-			}
-			else{
-				response.send({done: true});
+			} else {
+				response.send({ done: true });
 			}
 		} catch (error) {
-			response.send({error: error});
+			response.send({ error: error });
 			console.log(error);
 		}
 	})(request, response);
@@ -457,19 +448,18 @@ app.post('/updateDriverSalary', (request, response) => {
 			let query = `
 				Update driver
 				Set salary = ${recivedData.salary}
-				Where id = ${recivedData.id}`;//the query
+				Where id = ${recivedData.id}`; //the query
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			
-			if(Array.isArray(queryResult.recordsets[0])){
+
+			if (Array.isArray(queryResult.recordsets[0])) {
 				response.send(queryResult.recordsets[0]);
-			}
-			else{
-				response.send({done: true});
+			} else {
+				response.send({ done: true });
 			}
 		} catch (error) {
-			response.send({error: error});
+			response.send({ error: error });
 			console.log(error);
 		}
 	})(request, response);
@@ -484,19 +474,18 @@ app.post('/CardValue', (request, response) => {
 			let query = `
 				select *
 				from paymentCard
-				Where id = ${recivedData.id}`;//the query
+				Where id = ${recivedData.id}`; //the query
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			
-			if(Array.isArray(queryResult.recordsets[0])){
+
+			if (Array.isArray(queryResult.recordsets[0])) {
 				response.send(queryResult.recordsets[0]);
-			}
-			else{
-				response.send({done: true});
+			} else {
+				response.send({ done: true });
 			}
 		} catch (error) {
-			response.send({error: error});
+			response.send({ error: error });
 			console.log(error);
 		}
 	})(request, response);
@@ -516,15 +505,14 @@ app.post('/myTrip', (request, response) => {
 			let queryResult = await sqlServer.request().query(query);
 
 			//----------------------------------
-			
-			if(Array.isArray(queryResult.recordsets[0])){
+
+			if (Array.isArray(queryResult.recordsets[0])) {
 				response.send(queryResult.recordsets[0]);
-			}
-			else{
-				response.send({done: true});
+			} else {
+				response.send({ done: true });
 			}
 		} catch (error) {
-			response.send({error: error});
+			response.send({ error: error });
 			console.log(error);
 		}
 	})(request, response);
@@ -542,7 +530,7 @@ app.post('/addThePassenger', (request, response) => {
 			(${recivedData.passengerId},${recivedData.tripId})`;
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
-			
+
 			query = `
 			Select *
 			from trip
@@ -551,29 +539,27 @@ app.post('/addThePassenger', (request, response) => {
 			sqlServer = await sql.connect(config);
 			queryResult = await sqlServer.request().query(query);
 
-			let value=queryResult.recordsets[0][0].cost;
-			
+			let value = queryResult.recordsets[0][0].cost;
+
 			query = `
 			Update paymentCard
 			Set moneyAmount = moneyAmount - ${value}
 			Where id = ${recivedData.cardId}
 			`;
-			
-			console.log(query)
+
+			console.log(query);
 			sqlServer = await sql.connect(config);
 			queryResult = await sqlServer.request().query(query);
 
 			//----------------------------------
-			
-			if(Array.isArray(queryResult.recordsets[0])){
-				response.send(queryResult.recordsets[0]);
-			}
-			else{
-				response.send({done: true});
-			}
 
+			if (Array.isArray(queryResult.recordsets[0])) {
+				response.send(queryResult.recordsets[0]);
+			} else {
+				response.send({ done: true });
+			}
 		} catch (error) {
-			response.send({error: error});
+			response.send({ error: error });
 			console.log(error);
 		}
 	})(request, response);
@@ -589,7 +575,7 @@ app.post('/removeThePassenger', (request, response) => {
 			DELETE FROM onTrip WHERE passengerId = ${recivedData.passengerId} and tripId = ${recivedData.tripId}`;
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
-			console.log(1)
+			console.log(1);
 
 			query = `
 			Select *
@@ -599,9 +585,8 @@ app.post('/removeThePassenger', (request, response) => {
 			sqlServer = await sql.connect(config);
 			queryResult = await sqlServer.request().query(query);
 
-			let value=queryResult.recordsets[0][0].cost;
-			console.log(value)
-			
+			let value = queryResult.recordsets[0][0].cost;
+			console.log(value);
 
 			query = `
 			Update paymentCard
@@ -611,17 +596,16 @@ app.post('/removeThePassenger', (request, response) => {
 			sqlServer = await sql.connect(config);
 			queryResult = await sqlServer.request().query(query);
 
-			console.log(query)
+			console.log(query);
 			//----------------------------------
-			
-			if(Array.isArray(queryResult.recordsets[0])){
+
+			if (Array.isArray(queryResult.recordsets[0])) {
 				response.send(queryResult.recordsets[0]);
-			}
-			else{
-				response.send({done: true});
+			} else {
+				response.send({ done: true });
 			}
 		} catch (error) {
-			response.send({error: error});
+			response.send({ error: error });
 			console.log(error);
 		}
 	})(request, response);
@@ -633,7 +617,7 @@ app.post('/addTrip', (request, response) => {
 		let recivedData = request.body;
 		try {
 			//your logic
-			let id =getRandomId()
+			let id = getRandomId();
 			let query = `
 			insert into trip
 			values
@@ -642,15 +626,14 @@ app.post('/addTrip', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			
-			if(Array.isArray(queryResult.recordsets[0])){
+
+			if (Array.isArray(queryResult.recordsets[0])) {
 				response.send(queryResult.recordsets[0]);
-			}
-			else{
-				response.send({done: true});
+			} else {
+				response.send({ done: true });
 			}
 		} catch (error) {
-			response.send({error: error});
+			response.send({ error: error });
 			console.log(error);
 		}
 	})(request, response);
@@ -662,7 +645,7 @@ app.post('/deleteTrip', (request, response) => {
 		let recivedData = request.body;
 		try {
 			//your logic
-			let id =getRandomId()
+			let id = getRandomId();
 			let query = `
 			DELETE FROM trip
 			where id = ${recivedData.id}
@@ -670,15 +653,14 @@ app.post('/deleteTrip', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			
-			if(Array.isArray(queryResult.recordsets[0])){
+
+			if (Array.isArray(queryResult.recordsets[0])) {
 				response.send(queryResult.recordsets[0]);
-			}
-			else{
-				response.send({done: true});
+			} else {
+				response.send({ done: true });
 			}
 		} catch (error) {
-			response.send({error: error});
+			response.send({ error: error });
 			console.log(error);
 		}
 	})(request, response);
@@ -691,24 +673,23 @@ app.post('/deleteEmployee', (request, response) => {
 		try {
 			//your logic
 			let query;
-			if(recivedData.type=='Analyst'){
+			if (recivedData.type == 'Analyst') {
 				query = `
 				DELETE FROM analyst
 				where id = ${recivedData.id}
 				`;
-			}else if(recivedData.type=='Booking Employee'){
+			} else if (recivedData.type == 'Booking Employee') {
 				query = `
 				DELETE FROM bookingEmployee
 				where id = ${recivedData.id}
 				`;
-			}else if(recivedData.type=='Mechanic'){
+			} else if (recivedData.type == 'Mechanic') {
 				query = `
 				DELETE FROM employee
 				where id = ${recivedData.id}
 				DELETE FROM mechanic
 				`;
-				
-			}else if(recivedData.type=='Driver'){
+			} else if (recivedData.type == 'Driver') {
 				query = `
 				DELETE FROM driver
 				where id = ${recivedData.id}
@@ -717,15 +698,14 @@ app.post('/deleteEmployee', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			
-			if(Array.isArray(queryResult.recordsets[0])){
+
+			if (Array.isArray(queryResult.recordsets[0])) {
 				response.send(queryResult.recordsets[0]);
-			}
-			else{
-				response.send({done: true});
+			} else {
+				response.send({ done: true });
 			}
 		} catch (error) {
-			response.send({error: error});
+			response.send({ error: error });
 			console.log(error);
 		}
 	})(request, response);
@@ -744,15 +724,14 @@ app.post('/deleteVehicle', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			
-			if(Array.isArray(queryResult.recordsets[0])){
+
+			if (Array.isArray(queryResult.recordsets[0])) {
 				response.send(queryResult.recordsets[0]);
-			}
-			else{
-				response.send({done: true});
+			} else {
+				response.send({ done: true });
 			}
 		} catch (error) {
-			response.send({error: error});
+			response.send({ error: error });
 			console.log(error);
 		}
 	})(request, response);
@@ -771,15 +750,14 @@ app.post('/deleteStation', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			
-			if(Array.isArray(queryResult.recordsets[0])){
+
+			if (Array.isArray(queryResult.recordsets[0])) {
 				response.send(queryResult.recordsets[0]);
-			}
-			else{
-				response.send({done: true});
+			} else {
+				response.send({ done: true });
 			}
 		} catch (error) {
-			response.send({error: error});
+			response.send({ error: error });
 			console.log(error);
 		}
 	})(request, response);
@@ -791,7 +769,7 @@ app.post('/addStation', (request, response) => {
 		let recivedData = request.body;
 		try {
 			//your logic
-			let id =getRandomId()
+			let id = getRandomId();
 			let query = `
 			insert into station
 			values
@@ -800,15 +778,14 @@ app.post('/addStation', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			
-			if(Array.isArray(queryResult.recordsets[0])){
+
+			if (Array.isArray(queryResult.recordsets[0])) {
 				response.send(queryResult.recordsets[0]);
-			}
-			else{
-				response.send({done: true});
+			} else {
+				response.send({ done: true });
 			}
 		} catch (error) {
-			response.send({error: error});
+			response.send({ error: error });
 			console.log(error);
 		}
 	})(request, response);
@@ -820,27 +797,26 @@ app.post('/addEmployee', (request, response) => {
 		let recivedData = request.body;
 		try {
 			//your logic
-			let id =getRandomId();
-			let username =makeid(12);
-			let password =makeid(12);
-			let query="";
+			let id = getRandomId();
+			let username = makeid(12);
+			let password = makeid(12);
+			let query = '';
 			let sqlServer;
 			let queryResult;
-			console.log(recivedData.type)
-			if(recivedData.type=='Analyst'){
+			console.log(recivedData.type);
+			if (recivedData.type == 'Analyst') {
 				query = `
 				insert into analyst
 				values
 				(${id},'${recivedData.firstName}','${recivedData.lastName}','${recivedData.gender}','${recivedData.address}',${recivedData.salary},'${username}','${password}',${recivedData.specialId})
 				`;
-			}
-			else if(recivedData.type=='Booking Employee'){
+			} else if (recivedData.type == 'Booking Employee') {
 				query = `
 				insert into bookingEmployee
 				values
 				(${id},'${recivedData.firstName}','${recivedData.lastName}','${recivedData.gender}','${recivedData.address}',${recivedData.salary},'${username}','${password}',${recivedData.specialId})
 				`;
-			}else if(recivedData.type=='Mechanic'){
+			} else if (recivedData.type == 'Mechanic') {
 				query = `
 				insert into mechanic
 				values
@@ -853,8 +829,7 @@ app.post('/addEmployee', (request, response) => {
 				values
 				(${recivedData.specialId},${id})
 				`;
-			}
-			else if(recivedData.type=='Driver'){
+			} else if (recivedData.type == 'Driver') {
 				query = `
 				insert into driver
 				values
@@ -864,15 +839,14 @@ app.post('/addEmployee', (request, response) => {
 			sqlServer = await sql.connect(config);
 			queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			
-			if(Array.isArray(queryResult.recordsets[0])){
+
+			if (Array.isArray(queryResult.recordsets[0])) {
 				response.send(queryResult.recordsets[0]);
-			}
-			else{
-				response.send({done: true});
+			} else {
+				response.send({ done: true });
 			}
 		} catch (error) {
-			response.send({error: error});
+			response.send({ error: error });
 			console.log(error);
 		}
 	})(request, response);
@@ -884,7 +858,7 @@ app.post('/addVehicle', (request, response) => {
 		let recivedData = request.body;
 		try {
 			//your logic
-			let id =getRandomId()
+			let id = getRandomId();
 			console.log(recivedData);
 			let query = `
 			insert into vehicle
@@ -894,15 +868,14 @@ app.post('/addVehicle', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			
-			if(Array.isArray(queryResult.recordsets[0])){
+
+			if (Array.isArray(queryResult.recordsets[0])) {
 				response.send(queryResult.recordsets[0]);
-			}
-			else{
-				response.send({done: true});
+			} else {
+				response.send({ done: true });
 			}
 		} catch (error) {
-			response.send({error: error});
+			response.send({ error: error });
 			console.log(error);
 		}
 	})(request, response);
@@ -922,15 +895,14 @@ app.post('/myCard', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			
-			if(Array.isArray(queryResult.recordsets[0])){
+
+			if (Array.isArray(queryResult.recordsets[0])) {
 				response.send(queryResult.recordsets[0]);
-			}
-			else{
-				response.send({done: true});
+			} else {
+				response.send({ done: true });
 			}
 		} catch (error) {
-			response.send({error: error});
+			response.send({ error: error });
 			console.log(error);
 		}
 	})(request, response);
