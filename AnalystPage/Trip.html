@@ -194,87 +194,12 @@
 
         //-------------------------------------------------------------------
         async function allTripsOfStation() {
-            //data to be sent
-            let dataToSend = {
-                id: idA, //id of the station
-            };
-            //--------------------------------
-            let response = await fetch("http://127.0.0.1:8080/allTripsOfStation", {
-                method: "POST",
-                body: JSON.stringify(dataToSend),
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-            let resivedData = await response.json();
-            if (resivedData.error) {
-                alert('an error occurred');
-                return;
-            } else {
-                alert('the Query is done');
-            }
-            //display the data
-            console.log(resivedData);
-            //-------------------------------
-            //-------------------------------creating table---------------------------------------------------------
-            if (document.querySelector("body > div.modal-backdrop.fade.show")) {
-                document.querySelector("body > div.modal-backdrop.fade.show").remove();
-            }
-            document.querySelector("#tbody").innerHTML = "";
-            let newSalary;
-            let DID;
-            let temp = document.getElementById("tbody");
-            childsNum = resivedData.length;
-            for (let i = 0; i < resivedData.length; i++) //number of rows
-            {
-                let tr = document.createElement('tr');
-
-                for (var j = 0; j < 4; j++) // number of col 
-                {
-                    var td = document.createElement('td');
-                    switch (j) {
-                        case 0:
-                            td.innerHTML = resivedData[i].id[0];
-                            break;
-                        case 1:
-                            td.innerHTML = resivedData[i].destination;
-                            break;
-                        case 2:
-                            td.innerHTML = resivedData[i].startingDate.substring(0, 10);
-                            break;
-                        default:
-                            td.innerHTML = codeblock;
-
-
-
-                    };
-                    tr.appendChild(td);
-                }
-                temp.appendChild(tr);
-                document.getElementById('tbody').children[i].children[3].children[0].addEventListener('click',
-                    () => {
-                        theSelectedId = resivedData[i].id[0];
-                        console.log(resivedData[i].id[0]);
-                        document.querySelector(
-                                "#exampleModal > div > div > div.modal-footer > button.btn.btn-primary")
-                            .addEventListener("click", async () => {
-                                try {
-                                    await deleteTrip(theSelectedId);
-                                } catch {}
-                                try {
-                                    await allTripsOfStation();
-                                } catch {}
-                            })
-                    });
-            }
-            async function deleteTrip(theSelectedId) {
                 //data to be sent
                 let dataToSend = {
-                    id: theSelectedId, //id of the trip
+                    id: idA, //id of the station
                 };
-                console.log('delete');
                 //--------------------------------
-                let response = await fetch("http://127.0.0.1:8080/deleteTrip", {
+                let response = await fetch("http://127.0.0.1:8080/allTripsOfStation", {
                     method: "POST",
                     body: JSON.stringify(dataToSend),
                     headers: {
@@ -291,82 +216,243 @@
                 //display the data
                 console.log(resivedData);
                 //-------------------------------
-            }
-            Add();
-        }
-        let Dest;
-        let StarD;
-        let Dur;
-        let Cost;
+                //-------------------------------creating table---------------------------------------------------------
+                if (document.querySelector("body > div.modal-backdrop.fade.show")) {
+                    document.querySelector("body > div.modal-backdrop.fade.show").remove();
+                }
+                document.querySelector("#tbody").innerHTML = "";
+                let newSalary;
+                let DID;
+                let temp = document.getElementById("tbody");
+                childsNum = resivedData.length;
+                for (let i = 0; i < resivedData.length; i++) //number of rows
+                {
+                    let tr = document.createElement('tr');
 
-        function Add() {
-            document.querySelector("#tbody > tr:nth-child(1) > td:nth-child(5) > button").addEventListener('click',
-                () => {
-                    Dest = document.getElementById("recipient-name1").value;
-                    StarD = document.querySelector(
-                        "#exampleModal2 > div > div > div.modal-body > form > div:nth-child(2) > textarea:nth-child(2)"
-                    ).value;
-                    Dur = document.querySelector(
-                        "#exampleModal2 > div > div > div.modal-body > form > div:nth-child(2) > textarea:nth-child(4)"
-                    ).value;
-                    Cost = document.querySelector(
-                        "#exampleModal2 > div > div > div.modal-body > form > div:nth-child(2) > textarea:nth-child(6)"
-                    ).value;
-                    sum = document.querySelector(
-                        "#exampleModal2 > div > div > div.modal-footer > button.btn.btn-primary");
-                    sum.addEventListener("click", async () => {
-                        try {
-                            await addTrip();
-                        } catch {
+                    for (var j = 0; j < 4; j++) // number of col 
+                    {
+                        var td = document.createElement('td');
+                        switch (j) {
+                            case 0:
+                                td.innerHTML = resivedData[i].id[0];
+                                break;
+                            case 1:
+                                td.innerHTML = resivedData[i].destination;
+                                break;
+                            case 2:
+                                td.innerHTML = resivedData[i].startingDate.substring(0, 10);
+                                break;
+                            default:
+                                td.innerHTML = codeblock;
 
+
+
+
+                                <
+                                script >
+                                    let code =
+                                        '<button type="button" onclick="Add" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#exampleModal2" data-whatever="@getbootstrap">Add Trip</button>' +
+                                        '<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                                        '<div class="modal-dialog" role="document">' +
+                                        '<div class="modal-content">' +
+                                        '<div class="modal-header">' +
+                                        '<h5 class="modal-title" id="exampleModalLabel">Add Trip</h5>' +
+                                        '<button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>' +
+                                        '</div>' +
+                                        '<div class="modal-body">' +
+                                        '<form>' +
+                                        '<div class="form-group">' +
+                                        '<label for="recipient-name" class="col-form-label">Destination:</label>' +
+                                        '<input type="text" class="form-control" id="recipient-name1">' +
+                                        '</div>' +
+                                        '<div class="form-group">' +
+                                        '<label for="message-text" class="col-form-label">StartingDate:</label>' +
+                                        '<textarea class="form-control" "recipient-name2"></textarea>' +
+                                        '<label for="message-text" class="col-form-label">Duration:</label>' +
+                                        '<textarea class="form-control" "recipient-name3"></textarea>' +
+                                        '<label for="message-text" class="col-form-label">Cost:</label>' +
+                                        '<textarea class="form-control" "recipient-name4"></textarea>' +
+                                        '</div>' +
+                                        '</form>' +
+                                        '</div>' +
+                                        '<div class="modal-footer">' +
+                                        '<button type="button" class="btn btn-secondary" data-dismiss="modal" Id="SumbitButton">Close</button>' +
+                                        '<button type="button" class="btn btn-primary" >Submit</button>' +
+                                        //***---sumbit button-----
+                                        '</div>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</div>';
+                                let theSelectedId;
+                                let childsNum;
+                                let codeblock =
+                                    '<button type="button"  class="btn btn-dark btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Delete Trip</button>' +
+                                    '<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                                    '<div class="modal-dialog" role="document">' +
+                                    '<div class="modal-content">' +
+                                    '<div class="modal-header">' +
+                                    '<h5 class="modal-title" id="exampleModalLabel">Delete Trip</h5>' +
+                                    '<button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>' +
+                                    '</div>' +
+                                    '<div class="modal-body">' +
+                                    '<form>' +
+
+                                    '<div class="form-group">' +
+
+                                    '</div>' + '<strong>Are you sure that you want to delete this trip</strong>' +
+                                    '</form>' +
+                                    '</div>' +
+                                    '<div class="modal-footer">' +
+                                    '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>' +
+                                    '<button type="button" class="btn btn-primary" >Submit</button>' +
+                                    //***---sumbit button-----
+                                    '</div>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</div>';
+
+
+                                let idA;
+                                async function lastSignedIn() {
+                                    //data to be sent
+                                    //nothing
+                                    //--------------------------------
+                                    let response = await fetch("http://127.0.0.1:8080/lastSignedIn");
+                                    let resivedData = await response.json();
+                                    if (resivedData.error) {
+                                        alert('an error occurred');
+                                        return;
+                                    } else {
+
+                                    }
+                                    //display the data
+                                    console.log(resivedData);
+                                    idA = resivedData[0].stationId;
+                                    console.log(idA);
+                                    //------------------
+                                    await allTripsOfStation();
+                                }
+
+                                //-------------------------------------------------------------------
+                                async function allTripsOfStation() {
+                                    //data to be sent
+                                    let dataToSend = {
+                                        id: idA, //id of the station
+                                    };
+                                    //--------------------------------
+                                    let response = await fetch("http://127.0.0.1:8080/allTripsOfStation", {
+                                        method: "POST",
+                                        body: JSON.stringify(dataToSend),
+                                        headers: {
+                                            "Content-Type": "application/json",
+                                        },
+                                    });
+                                }
+                                async function deleteTrip(theSelectedId) {
+                                    //data to be sent
+                                    let dataToSend = {
+                                        id: theSelectedId, //id of the trip
+                                    };
+                                    console.log('delete');
+                                    //--------------------------------
+                                    let response = await fetch("http://127.0.0.1:8080/deleteTrip", {
+                                        method: "POST",
+                                        body: JSON.stringify(dataToSend),
+                                        headers: {
+                                            "Content-Type": "application/json",
+                                        },
+                                    });
+                                    let resivedData = await response.json();
+                                    if (resivedData.error) {
+                                        alert('an error occurred');
+                                        return;
+                                    } else {
+                                        alert('the Query is done');
+                                    }
+                                    //display the data
+                                    console.log(resivedData);
+                                    //-------------------------------
+                                }
+                                Add();
                         }
-                        document.querySelector("#exampleModal2 > div > div > div.modal-header > button")
-                            .click();
-                    });
-                })
-        }
+                        let Dest;
+                        let StarD;
+                        let Dur;
+                        let Cost;
 
-        async function addTrip() {
-            //data to be sent
-            let dataToSend = {
-                destination: document.getElementById("recipient-name1").value,
-                startingDate: document.querySelector(
-                    "#exampleModal2 > div > div > div.modal-body > form > div:nth-child(2) > textarea:nth-child(2)"
-                ).value,
-                duration: document.querySelector(
-                    "#exampleModal2 > div > div > div.modal-body > form > div:nth-child(2) > textarea:nth-child(4)"
-                ).value,
-                cost: document.querySelector(
-                    "#exampleModal2 > div > div > div.modal-body > form > div:nth-child(2) > textarea:nth-child(6)"
-                ).value,
-            };
-            console.log(dataToSend);
-            if (dataToSend.destination == "" || dataToSend.startingDate == "" || dataToSend.duration == "" ||
-                dataToSend.cost == "") {
-                alert('please enter all data')
-            } else if (parseInt(dataToSend.cost) <= 0) {
-                alert('cost must be a positive number')
-            } else {
-                //--------------------------------
-                let response = await fetch("http://127.0.0.1:8080/addTrip", {
-                    method: "POST",
-                    body: JSON.stringify(dataToSend),
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                });
-                let resivedData = await response.json();
-                if (resivedData.error) {
-                    alert('an error occurred');
-                    return;
-                } else {
-                    alert('the Query is done');
-                }
-                //display the data
-                console.log(resivedData);
-                //-------------------------------
-            }
-        }
+                        function Add() {
+                            document.querySelector("#tbody > tr:nth-child(1) > td:nth-child(5) > button")
+                                .addEventListener('click',
+                                    () => {
+                                        Dest = document.getElementById("recipient-name1").value;
+                                        StarD = document.querySelector(
+                                            "#exampleModal2 > div > div > div.modal-body > form > div:nth-child(2) > textarea:nth-child(2)"
+                                        ).value;
+                                        Dur = document.querySelector(
+                                            "#exampleModal2 > div > div > div.modal-body > form > div:nth-child(2) > textarea:nth-child(4)"
+                                        ).value;
+                                        Cost = document.querySelector(
+                                            "#exampleModal2 > div > div > div.modal-body > form > div:nth-child(2) > textarea:nth-child(6)"
+                                        ).value;
+                                        sum = document.querySelector(
+                                            "#exampleModal2 > div > div > div.modal-footer > button.btn.btn-primary"
+                                            );
+                                        sum.addEventListener("click", async () => {
+                                            try {
+                                                await addTrip();
+                                            } catch {
+
+                                            }
+                                            document.querySelector(
+                                                    "#exampleModal2 > div > div > div.modal-header > button"
+                                                    )
+                                                .click();
+                                        });
+                                    })
+                        }
+
+                        async function addTrip() {
+                            //data to be sent
+                            let dataToSend = {
+                                destination: document.getElementById("recipient-name1").value,
+                                startingDate: document.querySelector(
+                                    "#exampleModal2 > div > div > div.modal-body > form > div:nth-child(2) > textarea:nth-child(2)"
+                                ).value,
+                                duration: document.querySelector(
+                                    "#exampleModal2 > div > div > div.modal-body > form > div:nth-child(2) > textarea:nth-child(4)"
+                                ).value,
+                                cost: document.querySelector(
+                                    "#exampleModal2 > div > div > div.modal-body > form > div:nth-child(2) > textarea:nth-child(6)"
+                                ).value,
+                            };
+                            console.log(dataToSend);
+                            if (dataToSend.destination == "" || dataToSend.startingDate == "" || dataToSend
+                                .duration == "" ||
+                                dataToSend.cost == "") {
+                                alert('please enter all data')
+                            } else if (parseInt(dataToSend.cost) <= 0) {
+                                alert('cost must be a positive number')
+                            } else {
+                                //--------------------------------
+                                let response = await fetch("http://127.0.0.1:8080/addTrip", {
+                                    method: "POST",
+                                    body: JSON.stringify(dataToSend),
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                    },
+                                });
+                                let resivedData = await response.json();
+                                if (resivedData.error) {
+                                    alert('an error occurred');
+                                    return;
+                                } else {
+                                    alert('the Query is done');
+                                }
+                                //display the data
+                                console.log(resivedData);
+                                //-------------------------------
+                            }
+                        }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">

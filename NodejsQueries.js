@@ -35,7 +35,7 @@ function makeid(length) {
 	}
 	return result;
  }
- 
+
 
 app.post('/BookingEmployeeSearch', (request, response) => {
 	//this tamplate is for queries that have prameters you can replace CheckLogIn with appropiate name
@@ -50,8 +50,8 @@ app.post('/BookingEmployeeSearch', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			lastResult = queryResult.recordsets[0];
-			if(Array.isArray(lastResult)){
+			
+			if(Array.isArray(queryResult.recordsets[0])){
 				response.send(queryResult.recordsets[0]);
 			}
 			else{
@@ -78,8 +78,8 @@ app.post('/BookingEmployeeBook', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			lastResult = queryResult.recordsets[0];
-			if(Array.isArray(lastResult)){
+			
+			if(Array.isArray(queryResult.recordsets[0])){
 				response.send(queryResult.recordsets[0]);
 			}
 			else{
@@ -106,8 +106,8 @@ app.post('/BookingEmployeeCancel', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			lastResult = queryResult.recordsets[0];
-			if(Array.isArray(lastResult)){
+			
+			if(Array.isArray(queryResult.recordsets[0])){
 				response.send(queryResult.recordsets[0]);
 			}
 			else{
@@ -134,8 +134,8 @@ app.post('/DriverVehicle', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			lastResult = queryResult.recordsets[0];
-			if(Array.isArray(lastResult)){
+			
+			if(Array.isArray(queryResult.recordsets[0])){
 				response.send(queryResult.recordsets[0]);
 			}
 			else{
@@ -163,8 +163,8 @@ app.post('/DriverToBeRepaired', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			lastResult = queryResult.recordsets[0];
-			if(Array.isArray(lastResult)){
+			
+			if(Array.isArray(queryResult.recordsets[0])){
 				response.send(queryResult.recordsets[0]);
 			}
 			else{
@@ -217,8 +217,8 @@ app.post('/SignUp', (request, response) => {
 			sqlServer = await sql.connect(config);
 			queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			lastResult = queryResult.recordsets[0];
-			if(Array.isArray(lastResult)){
+			
+			if(Array.isArray(queryResult.recordsets[0])){
 				response.send(queryResult.recordsets[0]);
 			}
 			else{
@@ -247,8 +247,8 @@ app.post('/mechanicFixedTheVechile', (request, response) => {
 				from vehicle As V,mechanic As M,fix As F
 				where F.mechanicId = M.id And F.vechicleId =  V.id And V.needToReapair = 0`;
 			lqueryResult = await sqlServer.request().query(query);
-			lastResult = queryResult.recordsets[0];
-			if(Array.isArray(lastResult)){
+			
+			if(Array.isArray(queryResult.recordsets[0])){
 				response.send(queryResult.recordsets[0]);
 			}
 			else{
@@ -271,8 +271,8 @@ app.post('/mechanicAssigendVechile', (request, response) => {
 			Where F.mechanicId = M.id And F.vechicleId =  V.id And V.needToReapair = 1 And M.id =${recivedData.id}`;
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
-			lastResult = queryResult.recordsets[0];
-			if(Array.isArray(lastResult)){
+			
+			if(Array.isArray(queryResult.recordsets[0])){
 				response.send(queryResult.recordsets[0]);
 			}
 			else{
@@ -290,8 +290,10 @@ app.post('/CheckLogIn', (request, response) => {
 	(async (request, response) => {
 		let recivedData = request.body;
 		//IT
-        if (recivedData.username == "TEAM6"&& recivedData.password == "1234") {
+        if (recivedData.username == "TEAM6"&& recivedData.userpassword == "1234") {
+			lastResult=[];
 			lastResult[1] = 'IT';
+			console.log("IT");
 			response.send(lastResult);
 			return;
 		}
@@ -318,14 +320,14 @@ app.post('/CheckLogIn', (request, response) => {
 							queryResult = await sqlServer
 								.request()
 								.query(query);
-							lastResult = queryResult.recordsets[0];
+								lastResult = queryResult.recordsets[0];
 							if (lastResult.length == 0) {
 								query = `SELECT * from mechanic 
 								where username='${recivedData.username}' and userpassword='${recivedData.userpassword}'`; //the query
 								queryResult = await sqlServer
 									.request()
 									.query(query);
-								lastResult = queryResult.recordsets[0];
+									lastResult = queryResult.recordsets[0];
 								if (lastResult.length != 0) {
 									lastResult[1] = 'mechanic';
 								}
@@ -377,8 +379,8 @@ app.get('/allStations', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			lastResult = queryResult.recordsets[0];
-			if(Array.isArray(lastResult)){
+			
+			if(Array.isArray(queryResult.recordsets[0])){
 				response.send(queryResult.recordsets[0]);
 			}
 			else{
@@ -405,8 +407,8 @@ app.post('/allTripsOfStation', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			lastResult = queryResult.recordsets[0];
-			if(Array.isArray(lastResult)){
+			
+			if(Array.isArray(queryResult.recordsets[0])){
 				response.send(queryResult.recordsets[0]);
 			}
 			else{
@@ -432,8 +434,8 @@ app.post('/allDriversOfStation', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			lastResult = queryResult.recordsets[0];
-			if(Array.isArray(lastResult)){
+			
+			if(Array.isArray(queryResult.recordsets[0])){
 				response.send(queryResult.recordsets[0]);
 			}
 			else{
@@ -459,8 +461,8 @@ app.post('/updateDriverSalary', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			lastResult = queryResult.recordsets[0];
-			if(Array.isArray(lastResult)){
+			
+			if(Array.isArray(queryResult.recordsets[0])){
 				response.send(queryResult.recordsets[0]);
 			}
 			else{
@@ -486,8 +488,8 @@ app.post('/CardValue', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			lastResult = queryResult.recordsets[0];
-			if(Array.isArray(lastResult)){
+			
+			if(Array.isArray(queryResult.recordsets[0])){
 				response.send(queryResult.recordsets[0]);
 			}
 			else{
@@ -514,8 +516,8 @@ app.post('/myTrip', (request, response) => {
 			let queryResult = await sqlServer.request().query(query);
 
 			//----------------------------------
-			lastResult = queryResult.recordsets[0];
-			if(Array.isArray(lastResult)){
+			
+			if(Array.isArray(queryResult.recordsets[0])){
 				response.send(queryResult.recordsets[0]);
 			}
 			else{
@@ -550,19 +552,20 @@ app.post('/addThePassenger', (request, response) => {
 			queryResult = await sqlServer.request().query(query);
 
 			let value=queryResult.recordsets[0][0].cost;
-			console.log(value)
-
+			
 			query = `
 			Update paymentCard
 			Set moneyAmount = moneyAmount - ${value}
 			Where id = ${recivedData.cardId}
 			`;
+			
+			console.log(query)
 			sqlServer = await sql.connect(config);
 			queryResult = await sqlServer.request().query(query);
 
 			//----------------------------------
-			lastResult = queryResult.recordsets[0];
-			if(Array.isArray(lastResult)){
+			
+			if(Array.isArray(queryResult.recordsets[0])){
 				response.send(queryResult.recordsets[0]);
 			}
 			else{
@@ -610,8 +613,8 @@ app.post('/removeThePassenger', (request, response) => {
 
 			console.log(query)
 			//----------------------------------
-			lastResult = queryResult.recordsets[0];
-			if(Array.isArray(lastResult)){
+			
+			if(Array.isArray(queryResult.recordsets[0])){
 				response.send(queryResult.recordsets[0]);
 			}
 			else{
@@ -639,8 +642,8 @@ app.post('/addTrip', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			lastResult = queryResult.recordsets[0];
-			if(Array.isArray(lastResult)){
+			
+			if(Array.isArray(queryResult.recordsets[0])){
 				response.send(queryResult.recordsets[0]);
 			}
 			else{
@@ -667,8 +670,8 @@ app.post('/deleteTrip', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			lastResult = queryResult.recordsets[0];
-			if(Array.isArray(lastResult)){
+			
+			if(Array.isArray(queryResult.recordsets[0])){
 				response.send(queryResult.recordsets[0]);
 			}
 			else{
@@ -714,8 +717,8 @@ app.post('/deleteEmployee', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			lastResult = queryResult.recordsets[0];
-			if(Array.isArray(lastResult)){
+			
+			if(Array.isArray(queryResult.recordsets[0])){
 				response.send(queryResult.recordsets[0]);
 			}
 			else{
@@ -741,8 +744,8 @@ app.post('/deleteVehicle', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			lastResult = queryResult.recordsets[0];
-			if(Array.isArray(lastResult)){
+			
+			if(Array.isArray(queryResult.recordsets[0])){
 				response.send(queryResult.recordsets[0]);
 			}
 			else{
@@ -768,8 +771,8 @@ app.post('/deleteStation', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			lastResult = queryResult.recordsets[0];
-			if(Array.isArray(lastResult)){
+			
+			if(Array.isArray(queryResult.recordsets[0])){
 				response.send(queryResult.recordsets[0]);
 			}
 			else{
@@ -797,8 +800,8 @@ app.post('/addStation', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			lastResult = queryResult.recordsets[0];
-			if(Array.isArray(lastResult)){
+			
+			if(Array.isArray(queryResult.recordsets[0])){
 				response.send(queryResult.recordsets[0]);
 			}
 			else{
@@ -861,8 +864,8 @@ app.post('/addEmployee', (request, response) => {
 			sqlServer = await sql.connect(config);
 			queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			lastResult = queryResult.recordsets[0];
-			if(Array.isArray(lastResult)){
+			
+			if(Array.isArray(queryResult.recordsets[0])){
 				response.send(queryResult.recordsets[0]);
 			}
 			else{
@@ -891,8 +894,8 @@ app.post('/addVehicle', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			lastResult = queryResult.recordsets[0];
-			if(Array.isArray(lastResult)){
+			
+			if(Array.isArray(queryResult.recordsets[0])){
 				response.send(queryResult.recordsets[0]);
 			}
 			else{
@@ -919,8 +922,8 @@ app.post('/myCard', (request, response) => {
 			let sqlServer = await sql.connect(config);
 			let queryResult = await sqlServer.request().query(query);
 			//----------------------------------
-			lastResult = queryResult.recordsets[0];
-			if(Array.isArray(lastResult)){
+			
+			if(Array.isArray(queryResult.recordsets[0])){
 				response.send(queryResult.recordsets[0]);
 			}
 			else{
