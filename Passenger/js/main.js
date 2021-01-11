@@ -24,19 +24,18 @@ var searchButton=document.getElementById('s-button'),
     
     //nothing
     //--------------------------------
-    //let response = await fetch('http://127.0.0.1:8080/lastSignedIn');
-    //let resivedData = await response.json();
-                        if (resivedData.error) {
-                            alert('an error occurred');
-                            return;
-                        }
-                        else {
-                            alert('the Query is done');
-                        }
-    //arr = resivedData;
-    //passengerid = arr[0].id;
-    //cardId = arr[0].cardId;
-    passengerid = 503179344;
+    let response = await fetch('http://127.0.0.1:8080/lastSignedIn');
+    let resivedData = await response.json();
+    if (resivedData.error) {
+        alert('an error occurred');
+        return;
+    }
+    else {
+        alert('the Query is done');
+    }
+    arr = resivedData;
+    passengerid = arr[0].id;
+    cardId = arr[0].cardId;
     //console.log(resivedData);
     //------------------
   }
@@ -44,8 +43,7 @@ var searchButton=document.getElementById('s-button'),
   }
   document.querySelector("#money").innerHTML="";
   bookedTrips.innerHTML="";
-
-    await myCard();
+  
     await CardValue();
     await myTrip();
   for(let i=0;i<myTripsArr.length;i++)
@@ -363,7 +361,6 @@ async function BookingEmployeeBook(busId) {
   //display the data
   console.log(resivedData);
   //-------------------------------
-                      }
 }
 
 async function addThePassenger(tripid,cardId,value) {
