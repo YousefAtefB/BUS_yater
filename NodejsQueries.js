@@ -35,7 +35,9 @@ function makeid(length) {
 	}
 	return result;
  }
- 
+app.get('/',(request, response)=>{
+	response.send('./LogIn/signin.html');
+});
 
 app.post('/BookingEmployeeSearch', (request, response) => {
 	//this tamplate is for queries that have prameters you can replace CheckLogIn with appropiate name

@@ -1,0 +1,149 @@
+*{
+    box-sizing: border-box;
+    padding:0;
+    margin: 0;
+ }
+ .pull-left
+ {float: left}
+ .pull-right
+ {float: right}
+
+ body{background: none;}
+ .full{
+    height: 752px;
+    width: 1536px;
+    background: url('../bus.jpg') no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    }
+ 
+ .container
+{
+    width: 1200px;
+    margin: auto;
+    overflow: hidden;
+    position: absolute;
+    left:170px;
+
+
+}
+
+.hide {display: none;}
+
+
+  
+
+
+.choises select {
+    background-color: #0563af;
+    color: white;
+    padding: 8px;
+    margin: 14px;
+    border: none;
+    font-size: 15px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    outline: none;
+}
+
+.container h1{background-color: #ffffff;
+    text-align: center;
+    margin: 10px;
+    width: 140px;
+    border:2px ridge #0563af ;
+    border-radius: 10%;
+}
+.choises select:hover{
+    color:#0563af ;
+    background-color: #fff9f9e7;
+}
+
+.choises select option {
+    padding: 10px;
+}
+label{color: #ffffff;}
+
+.s-button
+{
+    position: absolute;
+    left:40%;
+}
+.s-button{
+    display: block;
+    width: 200px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
+    background-color: #0563af;
+    font-family: sans-serif;
+    text-decoration: none;
+    color: rgb(250, 250, 250);
+    border: 2px solid #333;
+    letter-spacing: 2px;
+    text-align: center;
+    position: relative;
+    transition: all .35s;
+  }
+  .b-button,.c-button{
+    display: inline;
+    width: 100px;
+  height: 30px;
+  font-size: 15px;
+  background-color: #0563af;
+  font-family: sans-serif;
+  text-decoration: none;
+  color: rgb(250, 250, 250);
+  border: 2px solid #333;
+  letter-spacing: 2px;
+  text-align: center;
+  position: relative;
+  transition: all .35s;
+  margin: 5px;
+}
+  .s-button span{
+      position: relative;
+      z-index: 2;
+  }
+
+  .s-button:after{
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: #ffffff;
+    color: #0563af;
+    transition: all .35s;
+  }
+  
+  .s-button:hover{
+    color: #0563af;
+  }
+  
+  .s-button:hover:after{
+    width: 100%;
+    color: #0563af;
+  }
+  
+ 
+
+  #trips{
+      height: 400px;
+      overflow: auto;
+      background-color: aliceblue;
+      margin: 10px;
+  }
+  .t-info{margin:10px}
+
+  .t-infop{
+      color: #080808;
+      display: inline;
+      padding: 10px;
+      margin: 20px;
+  }
+  .tripsspan{color: #0563af;
+    font-size: 15px;
+    cursor: pointer;
+margin-right: 50px;}
+  
