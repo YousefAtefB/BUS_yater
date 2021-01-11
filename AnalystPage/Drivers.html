@@ -85,12 +85,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="Drivers.html">Drivers</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Mechanics.html">Mechanics</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Inspectors.html">Inspectors</a>
-                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="Trip.html">Trips</a>
                     </li>
@@ -155,13 +150,12 @@
             //--------------------------------
             let response = await fetch("http://127.0.0.1:8080/lastSignedIn");
             let resivedData = await response.json();
-                        if (resivedData.error) {
-                            alert('an error occurred');
-                            return;
-                        }
-                        else {
-                            alert('the Query is done');
-                        }
+            if (resivedData.error) {
+                alert('an error occurred');
+                return;
+            } else {
+                alert('the Query is done');
+            }
             //display the data
             console.log(resivedData);
             idA = resivedData[0].stationId;
@@ -185,13 +179,12 @@
                 },
             });
             let resivedData = await response.json();
-                        if (resivedData.error) {
-                            alert('an error occurred');
-                            return;
-                        }
-                        else {
-                            alert('the Query is done');
-                        }
+            if (resivedData.error) {
+                alert('an error occurred');
+                return;
+            } else {
+                alert('the Query is done');
+            }
             //display the data
             console.log(resivedData);
             //-------------------------------creating table---------------------------------------------------------
@@ -260,13 +253,12 @@
                     },
                 });
                 let resivedData = await response.json();
-                        if (resivedData.error) {
-                            alert('an error occurred');
-                            return;
-                        }
-                        else {
-                            alert('the Query is done');
-                        }
+                if (resivedData.error) {
+                    alert('an error occurred');
+                    return;
+                } else {
+                    alert('the Query is done');
+                }
                 //display the data
                 console.log(resivedData);
                 //-------------------------------

@@ -54,19 +54,11 @@
 
 <body onload="lastSignedIn()">
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" .navbar-btn>
         <img class="mb-4" src="analyst.svg" alt="" width="40" height="40">
         <strong class="temp">AnalystCenter</strong>
 
         <div class="container-fluid">
-
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item active">
@@ -76,20 +68,57 @@
                         <a class="nav-link" href="Drivers.html">Drivers</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Mechanics.html">Mechanics</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Inspectors.html">Inspectors</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="Trip.html">Trips</a>
+                    </li>
+                    <li id="deleteButton">
                     </li>
 
                 </ul>
+            </div>
 
+        </div>
+
+    </nav>
+    <form class="form-inline my-2 my-lg-0">
+        <button type="button" onclick="Add" class="btn btn-dark btn-block" data-toggle="modal"
+            data-target="#exampleModal2" data-whatever="@getbootstrap">Add Trip</button>
+        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog aria-labelledby=" exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add Trip</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span
+                                aria-hidden="true">&times;</span> </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Destination:</label>
+                                <input type="text" class="form-control" id="recipient-name1">
+                            </div>
+                            <div class="form-group">
+                                <label for="message-text" class="col-form-label">StartingDate:</label>
+                                <textarea class="form-control" "recipient-name2"></textarea>
+                                <label for="message-text" class="col-form-label">Duration:</label>
+                                <textarea class="form-control" "recipient-name3"></textarea>
+                                <label for="message-text" class="col-form-label">Cost:</label>
+                                <textarea class="form-control" "recipient-name4"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                            Id="SumbitButton">Close</button>
+                        <button type="button" class="btn btn-primary">Submit</button>
+
+                    </div>
+                </div>
             </div>
         </div>
-    </nav>
+    </form>
+
+
 
     <h2>TripsStatistics
     </h2>
@@ -102,7 +131,6 @@
                     <th>Destination</th>
                     <th>StartingDate</th>
                     <th>DeleteTrip</th>
-                    <th>Add_Trip</th>
                 </tr>
             </thead>
             <tbody id="tbody">
@@ -115,38 +143,6 @@
 
 
     <script>
-        let code =
-            '<button type="button" onclick="Add" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#exampleModal2" data-whatever="@getbootstrap">Add Trip</button>' +
-            '<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog aria-labelledby="exampleModalLabel" aria-hidden="true">' +
-            '<div class="modal-dialog" role="document">' +
-            '<div class="modal-content">' +
-            '<div class="modal-header">' +
-            '<h5 class="modal-title" id="exampleModalLabel">Add Trip</h5>' +
-            '<button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>' +
-            '</div>' +
-            '<div class="modal-body">' +
-            '<form>' +
-            '<div class="form-group">' +
-            '<label for="recipient-name" class="col-form-label">Destination:</label>' +
-            '<input type="text" class="form-control" id="recipient-name1">' +
-            '</div>' +
-            '<div class="form-group">' +
-            '<label for="message-text" class="col-form-label">StartingDate:</label>' +
-            '<textarea class="form-control" "recipient-name2"></textarea>' +
-            '<label for="message-text" class="col-form-label">Duration:</label>' +
-            '<textarea class="form-control" "recipient-name3"></textarea>' +
-            '<label for="message-text" class="col-form-label">Cost:</label>' +
-            '<textarea class="form-control" "recipient-name4"></textarea>' +
-            '</div>' +
-            '</form>' +
-            '</div>' +
-            '<div class="modal-footer">' +
-            '<button type="button" class="btn btn-secondary" data-dismiss="modal" Id="SumbitButton">Close</button>' +
-            '<button type="button" class="btn btn-primary" >Submit</button>' + //***---sumbit button-----
-            '</div>' +
-            '</div>' +
-            '</div>' +
-            '</div>';
         let theSelectedId;
         let childsNum;
         let codeblock =
@@ -182,13 +178,12 @@
             //--------------------------------
             let response = await fetch("http://127.0.0.1:8080/lastSignedIn");
             let resivedData = await response.json();
-                        if (resivedData.error) {
-                            alert('an error occurred');
-                            return;
-                        }
-                        else {
-                            alert('the Query is done');
-                        }
+            if (resivedData.error) {
+                alert('an error occurred');
+                return;
+            } else {
+                alert('the Query is done');
+            }
             //display the data
             console.log(resivedData);
             idA = resivedData[0].stationId;
@@ -212,13 +207,12 @@
                 },
             });
             let resivedData = await response.json();
-                        if (resivedData.error) {
-                            alert('an error occurred');
-                            return;
-                        }
-                        else {
-                            alert('the Query is done');
-                        }
+            if (resivedData.error) {
+                alert('an error occurred');
+                return;
+            } else {
+                alert('the Query is done');
+            }
             //display the data
             console.log(resivedData);
             //-------------------------------
@@ -235,7 +229,7 @@
             {
                 let tr = document.createElement('tr');
 
-                for (var j = 0; j < 5; j++) // number of col 
+                for (var j = 0; j < 4; j++) // number of col 
                 {
                     var td = document.createElement('td');
                     switch (j) {
@@ -248,13 +242,10 @@
                         case 2:
                             td.innerHTML = resivedData[i].startingDate.substring(0, 10);
                             break;
-                        case 3:
-                            td.innerHTML = codeblock;
-                            break;
                         default:
-                            if (i == 0) {
-                                td.innerHTML = code;
-                            }
+                            td.innerHTML = codeblock;
+
+
 
                     };
                     tr.appendChild(td);
@@ -291,13 +282,12 @@
                     },
                 });
                 let resivedData = await response.json();
-                        if (resivedData.error) {
-                            alert('an error occurred');
-                            return;
-                        }
-                        else {
-                            alert('the Query is done');
-                        }
+                if (resivedData.error) {
+                    alert('an error occurred');
+                    return;
+                } else {
+                    alert('the Query is done');
+                }
                 //display the data
                 console.log(resivedData);
                 //-------------------------------
@@ -366,13 +356,12 @@
                     },
                 });
                 let resivedData = await response.json();
-                        if (resivedData.error) {
-                            alert('an error occurred');
-                            return;
-                        }
-                        else {
-                            alert('the Query is done');
-                        }
+                if (resivedData.error) {
+                    alert('an error occurred');
+                    return;
+                } else {
+                    alert('the Query is done');
+                }
                 //display the data
                 console.log(resivedData);
                 //-------------------------------
