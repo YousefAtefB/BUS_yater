@@ -10,14 +10,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
         integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
         crossorigin="anonymous" />
+
+
 </head>
 
 <body>
 
     <div class="full">
+        <button class="btn" style="height: 35px;width:70px ;margin-left:0px" onclick="Home()"><i class="fa fa-home"></i>
+            Home</button>
         <div class="container">
-            <a href="../HomePage/home.html"
-                style="font-size:x-large;color: black;background-color:white; margin-top: 5px;">Back home</a>
+
             <h1 style="color:#202328">Passenger</h1>
             <div class="any">
                 <div class="choises pull-left">
@@ -56,7 +59,12 @@
 
         </div>
     </div>
-    <script type="application/x-javascript" src="js/main.js"></script>
+
 </body>
+<script>
+    function Home() {
+        window.location.pathname = "../HomePage/home.html";
+    }
+</script>
 
 </html>

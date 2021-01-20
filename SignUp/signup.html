@@ -151,9 +151,10 @@
         .gender != "m" || dataToSend.gender != "Female" || dataToSend.gender != "female" || dataToSend.gender !=
         "F" ||
         dataToSend.gender != "f") {
-        alert('please enter male or female in gender')
-      } else if (dataToSend.phone.length < 11) {
-        alert('please enter a complete phone number')
+        alert('please enter a valid gender')
+      } else if (dataToSend.phone.length < 11 || dataToSend.phone.substring != "011" || dataToSend.phone.substring !=
+        "010" || dataToSend.phone.substring != "015") {
+        alert('please enter a valid phone number')
       } else {
         let response = await fetch("http://saadsqlserve.loca.lt//SignUp", {
           method: "POST",

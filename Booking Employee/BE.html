@@ -14,9 +14,10 @@
 
 <body>
     <div class="full">
+        <button class="btn" style="height: 35px;width:70px ;margin-left:0px" onclick="Home()"><i class="fa fa-home"></i>
+            Home</button>
         <div class="container">
-            <a href="../HomePage/home.html"
-                style="font-size:x-large;color: black;background-color:white; margin-top: 5px;">Back home</a>
+
             <h1 style="color:#202328">Booking</h1>
             <div class="choises">
                 <label for="From" style="color:#202328">From:</label>
@@ -43,5 +44,10 @@
     </div>
     <script src="js/main.js"></script>
 </body>
+<script>
+    function Home() {
+        window.location.pathname = "../HomePage/home.html";
+    }
+</script>
 
 </html>
