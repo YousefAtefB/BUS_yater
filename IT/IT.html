@@ -1,92 +1,100 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>IT</title>
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" href="css/font-awesome.min.css" >
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" />
-    </head>
-    <body>
 
-        <div class="full">
-            <div class="navbar ">
-                        <div class="container"><p class="pull-left">IT</p></div>
-            </div>
+<head>
+    <meta charset="utf-8">
+    <title>IT</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
+        crossorigin="anonymous" />
+</head>
+
+<body>
+
+    <div class="full">
+        <div class="navbar ">
             <div class="container">
-                <div class="addbuttons">
-                    <button class="employee-btn" id="employee-btn">
-                        <span>Add Employee/Remove</span>
-                    </button>
-                    <button class="station-btn" id="station-btn">
-                        <span>Add Station/Remove</span>
-                    </button>
-                    <button class="vehicle-btn" id="vehicle-btn">
-                        <span>Add Vehicle/Remove</span>
-                    </button>
-                </div>
-                
-                <div id="forms" class="forms container ">
-                    <div class="employeediv hide" id="employeediv">
-                        <form action="" name="addemployee" class="employeeform" id="employeeform">
-                            <select name="emptype" id="emptype">
-                                <option >--Employee--</option>
-                                <option > Analyst</option>
-                                <option > Booking Employee</option>
-                                <option > Mechanic</option>
-                                <option > Driver</option>
-                            </select>
-
-                            <input type="text" name="fname" id="fname" placeholder="First Name">
-                            <input type="text" name="lname" id="lname" placeholder="Last Name">
-                            <select name="gender" id="gender">
-                                <option >--GENDER--</option>
-                                <option > Male</option>
-                                <option > Female</option>
-                            </select>
-                            <input type="text" name="address" id="address" placeholder="Address">
-                            <input type="number" name="salary" id="salary" placeholder="Salary">
-
-                            <button type="button" id="emp-sub"> Submit</button>
-                        </form>
-                        <div class="remove">
-                            <input  type="number" name="remID" id="remID" placeholder="Enter Employee ID">
-                            <button type="button" id="emp-rem"> Remove</button>
-                        </div>
-                    </div>
-
-                    <div class="stationdiv hide" id="stationdiv">
-                        <form action="" name="addstation" class="stationform" id="stationform">
-                            
-                            <input type="text" name="slocation" id="slocation" placeholder="Location">
-                            <button type="button" id="sta-sub"> Submit</button>
-                        </form>
-                        <div class="remove">
-                            <input  type="number" name="remID" id="remstation" placeholder="Enter Station ID">
-                            <button type="button" id="sta-rem"> Remove</button>
-                        </div>
-                    </div>
-
-                    <div class="vehiclediv hide" id="vehiclediv">
-                        <form action="" name="addvehicle" class="vehicleform" id="vehicleform">
-                            <input type="text" name="model" id="model" placeholder="Model">
-                            <input type="text" name="type" id="vehicletype" placeholder="Vehicle Type">
-                            <input type="number" name="no_passenger" id="no_pass" placeholder="Number of Passengers">
-                            <input type="number" name="trip-id" id="trip-id" placeholder="Trip ID">
-                            <input type="number" name="station-id" id="station-id" placeholder="Station ID">
-                            <input type="number" name="driver-id" id="driver-id" placeholder="Driver ID">
-                            <button type="button" id="vehicle-sub"> Submit</button>
-                        </form>
-                        <div class="remove">
-                            <input  type="number" name="remID" id="remvehID" placeholder="Enter Vehicle ID">
-                            <button type="button" id="vehicle-rem"> Remove</button>
-                        </div>
-                    </div>
-                </div>
-                
+                <p class="pull-left">IT</p>
             </div>
+
         </div>
-        <script type="application/x-javascript" src="js/main.js"></script>
-    </body>
+        <div class="container">
+            <div class="addbuttons">
+                <button class="employee-btn" id="employee-btn">
+                    <span>Add Employee/Remove</span>
+                </button>
+                <button class="station-btn" id="station-btn">
+                    <span>Add Station/Remove</span>
+                </button>
+                <button class="vehicle-btn" id="vehicle-btn">
+                    <span>Add Vehicle/Remove</span>
+                </button>
+            </div>
+
+            <div id="forms" class="forms container ">
+                <div class="employeediv hide" id="employeediv">
+                    <form action="" name="addemployee" class="employeeform" id="employeeform">
+                        <select name="emptype" id="emptype">
+                            <option>--Employee--</option>
+                            <option> Analyst</option>
+                            <option> Booking Employee</option>
+                            <option> Mechanic</option>
+                            <option> Driver</option>
+                        </select>
+
+                        <input type="text" name="fname" id="fname" placeholder="First Name">
+                        <input type="text" name="lname" id="lname" placeholder="Last Name">
+                        <select name="gender" id="gender">
+                            <option>--GENDER--</option>
+                            <option> Male</option>
+                            <option> Female</option>
+                        </select>
+                        <input type="text" name="address" id="address" placeholder="Address">
+                        <input type="number" name="salary" id="salary" placeholder="Salary">
+
+                        <button type="button" id="emp-sub"> Submit</button>
+                    </form>
+                    <div class="remove">
+                        <input type="number" name="remID" id="remID" placeholder="Enter Employee ID">
+                        <button type="button" id="emp-rem"> Remove</button>
+                    </div>
+                </div>
+
+                <div class="stationdiv hide" id="stationdiv">
+                    <form action="" name="addstation" class="stationform" id="stationform">
+
+                        <input type="text" name="slocation" id="slocation" placeholder="Location">
+                        <button type="button" id="sta-sub"> Submit</button>
+                    </form>
+                    <div class="remove">
+                        <input type="number" name="remID" id="remstation" placeholder="Enter Station ID">
+                        <button type="button" id="sta-rem"> Remove</button>
+                    </div>
+                </div>
+
+                <div class="vehiclediv hide" id="vehiclediv">
+                    <form action="" name="addvehicle" class="vehicleform" id="vehicleform">
+                        <input type="text" name="model" id="model" placeholder="Model">
+                        <input type="text" name="type" id="vehicletype" placeholder="Vehicle Type">
+                        <input type="number" name="no_passenger" id="no_pass" placeholder="Number of Passengers">
+                        <input type="number" name="trip-id" id="trip-id" placeholder="Trip ID">
+                        <input type="number" name="station-id" id="station-id" placeholder="Station ID">
+                        <input type="number" name="driver-id" id="driver-id" placeholder="Driver ID">
+                        <button type="button" id="vehicle-sub"> Submit</button>
+                    </form>
+                    <div class="remove">
+                        <input type="number" name="remID" id="remvehID" placeholder="Enter Vehicle ID">
+                        <button type="button" id="vehicle-rem"> Remove</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script type="application/x-javascript" src="js/main.js"></script>
+</body>
+
 </html>

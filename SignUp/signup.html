@@ -30,8 +30,32 @@
 </head>
 
 <body class="text-center container-fluid">
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">BusYater</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link" href="../HomePage/home.html">Home</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" aria-current="page" href="../LogIn/signin.html">Sign in</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../SignUp/signup.html">sign up</a>
+          </li>
+
+        </ul>
+
+      </div>
+    </div>
+  </nav>
   <div class="form-signin">
-    <form>
+    <form id="form">
       <img class="mb-4" src="bus.svg" alt="" width="72" height="57" />
       <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
       <label for="inputfirstname" class="visually-hidden">Firstname</label>
@@ -51,11 +75,7 @@
       <label for="inputPassword" class="visually-hidden">Password</label>
       <input type="password" id="inputPassword" class="form-control" placeholder="Password" required />
 
-      <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me" /> Remember me
-        </label>
-      </div>
+
       <input type="button" class="w-100 btn btn-lg btn-primary" id="SumbitButton" value="Sign Up" />
       <p>
         Already have an account? <a href="..\\LogIn\\signin.html">sign in</a>
@@ -127,6 +147,13 @@
       if (dataToSend.firstName == "" || dataToSend.lastName == "" || dataToSend.gender == "" || dataToSend.phone ==
         "" || dataToSend.userName == "" || dataToSend.userpassword == "") {
         alert('please enter all data!')
+      } else if (dataToSend.gender != "Male" || dataToSend.gender != "male" || dataToSend.gender != "M" || dataToSend
+        .gender != "m" || dataToSend.gender != "Female" || dataToSend.gender != "female" || dataToSend.gender !=
+        "F" ||
+        dataToSend.gender != "f") {
+        alert('please enter male or female in gender')
+      } else if (dataToSend.phone.length < 11) {
+        alert('please enter a complete phone number')
       } else {
         let response = await fetch("http://saadsqlserve.loca.lt//SignUp", {
           method: "POST",
@@ -137,13 +164,12 @@
         });
         try {
           let resivedData = await response.json();
-                        if (resivedData.error) {
-                            alert('an error occurred');
-                            return;
-                        }
-                        else {
-                            
-                        }
+          if (resivedData.error) {
+            alert('an error occurred');
+            return;
+          } else {
+
+          }
         } catch {}
         console.log(fn);
         console.log(ph);
